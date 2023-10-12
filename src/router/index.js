@@ -5,6 +5,7 @@ import LoginView from '../components/LoginView.vue'
 import RegisterView from '../components/RegisterView.vue'
 import HomePage from '../views/HomePage.vue'
 import NotFound from '../views/NotFound.vue'
+import ExcerciseCard from '@/components/ExcerciseCard.vue'
 
 const routes = [
 
@@ -20,6 +21,10 @@ const routes = [
   {
     path: '/',
     component: HomePage
+  },
+  {
+    path: '/createExcercise',
+    component: ExcerciseCard
   },
 
   {

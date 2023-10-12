@@ -2,6 +2,10 @@
     <div class="globalDiv">
         <div>
         <h1 class="title">GYMHELPER.COM</h1>
+        <!--
+        <h6 v-if="loginStore.loggedIn">You are logged in</h6>
+        <h6 v-else>You are not logged in.</h6>
+    -->
         <v-sheet width="600" class="mx-auto">
             <v-form   @submit.prevent>         
                     <div>
@@ -37,6 +41,7 @@
 </template>
 
 <script>
+
     export default{
         data: ()=>({
             valid: false,
@@ -97,5 +102,7 @@
     }
     .globalDiv{
         background-image: url('background.jpg');
+        height: 100vh;
+        background-size: cover;
     }
 </style>

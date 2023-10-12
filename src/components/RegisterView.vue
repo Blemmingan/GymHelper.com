@@ -94,5 +94,8 @@
     }
     .globalDiv{
         background-image: url('background.jpg');
+        height: 100vh;
+        background-size: cover;
     }
+    
 </style>
