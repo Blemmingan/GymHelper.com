@@ -2,25 +2,19 @@
      <v-col>
                 <v-card class="card">
                     <v-row>
-                        <v-col>
+                        <v-col cols="7">
                             <v-card-item>
                                  <div>
                                      <div class="card-text">
-                                       <p>Tiempo Aprox</p>
+                                       <p>Tiempo</p>
+                                       <p>NOMBRE</p>
+                                       <p>Desc</p>
                                       </div>
-                                      <div class="card-text">
-                                         <p>NOMBRE</p>
-                                      </div>
-                                       <div class="card-text">
-                                          <p>Descripcion</p>
-                                       </div>
                                    </div>
                             </v-card-item>
                         </v-col>
-                        <v-col class="buttonCol">
-                            <v-container class="buttonCont">
-                            <v-btn class="goButton">¡A ENTRENAR!</v-btn>
-                            </v-container>
+                        <v-col class="buttonCol" cols="5"  >
+                            <v-btn class="goButton" icon="mdi-play"></v-btn>
                         </v-col>
                     </v-row>
                     
@@ -34,19 +28,18 @@
     .card-text{
         text-align: left;
     }
-    .buttonCont{
-        text-align: right;
-        
-        
-    }
     .goButton{
-        max-height: max-content;
+        height: 100%;
+        width: 100%;
+        border-radius: 25px;
+        background-color: green;
     }
     .card{
         border: 3px solid green;
         border-radius: 25px;
     }
     .buttonCol{
-        align-items: right;
+        
+        border: 6px solid black;
     }
 </style>
