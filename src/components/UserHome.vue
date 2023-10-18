@@ -6,8 +6,8 @@
         <v-col>
         <v-sheet>
             <h1>TUS RUTINAS</h1>
-            <generic-ex/>
-            <generic-ex/>
+            <generic-routine-card/>
+            <generic-routine-card/>
           </v-sheet>
         </v-col>
         <v-col>
@@ -27,7 +27,7 @@
 
 <script setup>
 import router from '@/router';
-import GenericEx from './GenericEx.vue';
+import GenericRoutineCard from './GenericRoutineCard.vue';
     function goToWarmup(){
         router.push('/warmup')
     }

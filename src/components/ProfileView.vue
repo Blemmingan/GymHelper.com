@@ -27,7 +27,7 @@
             <v-col>
                 <p>Tu rutina mejor puntuada: </p>
             </v-col>
-           <generic-ex></generic-ex>
+           <generic-routine-card/>
         </v-row>
         
     </v-container>
@@ -39,7 +39,7 @@
 </template>
 
 <script setup>
-import GenericEx from './GenericEx.vue';
+import GenericRoutineCard from './GenericRoutineCard.vue';
 </script>
 
 <style scoped>
