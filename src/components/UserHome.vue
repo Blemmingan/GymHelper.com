@@ -16,8 +16,8 @@
         <v-col>
             <v-sheet>
             <h1>RUTINAS POPULARES</h1>
-            <generic-ex></generic-ex>
-            <generic-ex></generic-ex>
+            <generic-routine-card/>
+            <generic-routine-card/>
             <img src="src\assets\logo.png" alt="logo">
             </v-sheet>
         </v-col>
