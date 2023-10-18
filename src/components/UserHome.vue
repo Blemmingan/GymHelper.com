@@ -6,34 +6,8 @@
         <v-col>
         <v-sheet>
             <h1>TUS RUTINAS</h1>
-            <v-card prepend-icon="mdi-home">
-                    <v-card-item>
-                     <div>
-                      <div class="text-overline mb-1">
-                        Tiempo Aprox
-                    </div>
-                    <div class="text-h6 mb-1">
-                        NOMBRE
-                     </div>
-                     <div class="text-caption">Description</div>
-                     </div>
-                     
-                     </v-card-item>
-                </v-card>
-                <v-card prepend-icon="mdi-home">
-                    <v-card-item>
-                     <div>
-                      <div class="text-overline mb-1">
-                        Tiempo Aprox
-                    </div>
-                    <div class="text-h6 mb-1">
-                        NOMBRE
-                     </div>
-                     <div class="text-caption">Description</div>
-                     </div>
-                     
-                     </v-card-item>
-                </v-card>
+            <generic-ex/>
+            <generic-ex/>
           </v-sheet>
         </v-col>
         <v-col>
@@ -42,35 +16,9 @@
         <v-col>
             <v-sheet>
             <h1>RUTINAS POPULARES</h1>
-            <v-card prepend-icon="mdi-home">
-                    <v-card-item>
-                     <div>
-                      <div class="text-overline mb-1">
-                        Tiempo Aprox
-                    </div>
-                    <div class="text-h6 mb-1">
-                        NOMBRE
-                     </div>
-                     <div class="text-caption">Description</div>
-                     </div>
-                     
-                     </v-card-item>
-                </v-card>
-                <v-card prepend-icon="mdi-home">
-                    <v-card-item>
-                     <div>
-                      <div class="text-overline mb-1">
-                        Tiempo Aprox
-                    </div>
-                    <div class="text-h6 mb-1">
-                        NOMBRE
-                     </div>
-                     <div class="text-caption">Description</div>
-                     </div>
-                     
-                     </v-card-item>
-                </v-card>
-                <img src="src\assets\logo.png" alt="logo">
+            <generic-ex></generic-ex>
+            <generic-ex></generic-ex>
+            <img src="src\assets\logo.png" alt="logo">
             </v-sheet>
         </v-col>
       </v-row>
@@ -79,7 +27,7 @@
 
 <script setup>
 import router from '@/router';
-
+import GenericEx from './GenericEx.vue';
     function goToWarmup(){
         router.push('/warmup')
     }

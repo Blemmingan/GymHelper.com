@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <v-icon icon="$vuetify"></v-icon>
+    <div class="container">
+        <v-icon icon="$vuetify" class="avatar"></v-icon>
         <h1>NOMBRE DE USUARIO</h1>
         <h2>EMAIL DE USUARIO</h2>
         
@@ -23,29 +23,11 @@
     </v-container>
 
     <v-container>
-        <v-row
-        align="center"
-        no-gutters
-        style="height: 150px;">
+        <v-row>
             <v-col>
                 <p>Tu rutina mejor puntuada: </p>
             </v-col>
-            <v-col>
-                <v-card prepend-icon="mdi-home">
-                    <v-card-item>
-                     <div>
-                      <div class="text-overline mb-1">
-                        Tiempo Aprox
-                    </div>
-                    <div class="text-h6 mb-1">
-                        NOMBRE
-                     </div>
-                     <div class="text-caption">Description</div>
-                     </div>
-                     
-                     </v-card-item>
-                </v-card>
-            </v-col>
+           <generic-ex></generic-ex>
         </v-row>
         
     </v-container>
@@ -56,4 +38,34 @@
 
 </template>
 
-<script setup></script>
+<script setup>
+import GenericEx from './GenericEx.vue';
+</script>
+
+<style scoped>
+    .container{
+        text-align: center;
+    }
+    .avatar{
+        size: 100px;
+        border-radius: 10px;
+    }
+    .card-text{
+        text-align: left;
+    }
+    .buttonCont{
+        text-align: right;
+        
+        
+    }
+    .goButton{
+        max-height: max-content;
+    }
+    .card{
+        border: 3px solid green;
+        border-radius: 25px;
+    }
+    .buttonCol{
+        align-items: right;
+    }
+</style>
