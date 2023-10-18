@@ -31,7 +31,7 @@ class UserApi {
         return await Api.get(UserApi.gerUrl('current'), true)
     }
 
-    static async modifyCurrentUser(userData){
+    static async modifyUserData(userData){
         return await Api.put(UserApi.getUrl('current'), true, userData)
     }
 

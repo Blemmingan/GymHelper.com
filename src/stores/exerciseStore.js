@@ -1,7 +1,7 @@
 import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 
-export const useRutinaStore = defineStore('rutina', () => { 
+export const useExerciseStore = defineStore('exercise', () => { 
   //  estado
   
 
