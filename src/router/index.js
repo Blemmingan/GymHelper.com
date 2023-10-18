@@ -6,6 +6,10 @@ import RegisterView from '../components/RegisterView.vue'
 import HomePage from '../views/HomePage.vue'
 import NotFound from '../views/NotFound.vue'
 import ExcerciseCard from '@/components/ExcerciseCard.vue'
+import ProfileView from '@/components/ProfileView.vue'
+import UserHome from '@/components/UserHome.vue'
+import RoutineWarmup from '@/components/RoutineWarmup.vue'
+import AddExcercise from '@/components/AddExcercise.vue'
 
 const routes = [
 
@@ -25,6 +29,26 @@ const routes = [
   {
     path: '/createExcercise',
     component: ExcerciseCard
+  },
+
+  {
+    path: '/profile',
+    component: ProfileView
+  },
+
+  {
+    path: '/home',
+    component: UserHome
+  },
+
+  {
+    path: '/warmup',
+    component: RoutineWarmup
+  },
+
+  {
+    path: '/excercise',
+    component: AddExcercise
   },
 
   {

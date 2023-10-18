@@ -40,17 +40,6 @@
                              ></v-radio>
                          </v-radio-group>
                     </div>
-
-                    <div class="text-center">
-                     <v-select v-model="icons" :items="icons" label="Icono"></v-select>
-                        <v-menu :location="icons">
-                        <v-list>
-                           <v-list-item v-for="(icons, index) in items" :key="index">
-                            <v-icon>{{ icons }}</v-icon>
-                           </v-list-item>
-                        </v-list>
-                        </v-menu>
-                    </div>
                 <v-btn type="submit" class="mt-2">Crear</v-btn>
         </v-form>
         </v-sheet>
