@@ -33,13 +33,16 @@
         width: 100%;
         border-radius: 25px;
         background-color: green;
+        border-top-left-radius: 0px;
+        border-bottom-left-radius: 0px;        
     }
     .card{
         border: 3px solid green;
         border-radius: 25px;
     }
     .buttonCol{
-        
+        margin: 0%;
+        padding: 0%;
         border: 6px solid black;
     }
 </style>
