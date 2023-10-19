@@ -9,6 +9,7 @@ export const useUserStore = defineStore('user', () => {
   //  estado
   const token = ref(null)
   const user = ref(null)
+  const email = ref(null)
 
   //  getters
   const isLoggedIn = computed(() => {
@@ -64,12 +65,16 @@ export const useUserStore = defineStore('user', () => {
     await UserApi.register(registrationData)
   }
 
-  async function verify_email(emailData){
-    await UserApi.verify_email(emailData)
+  async function verify_email(code){
+    if (email.value){
+      await UserApi.verify_email(new EmailData(email.value, code))
+    }
   }
 
-  async function resendVerificationEmail(email){
-    await UserApi.resendVerificationEmail(email)
+  async function resendVerificationEmail(){
+    if (email.value){
+      await UserApi.resendVerificationEmail(email)
+    }
   }
 
   async function changeUserData(userData){
@@ -82,7 +87,7 @@ export const useUserStore = defineStore('user', () => {
   }
 
   async function getUserRoutines(){
-    return UserApi.getCurrentUserRoutines()
+    return await UserApi.getCurrentUserRoutines()
   }
 
 
