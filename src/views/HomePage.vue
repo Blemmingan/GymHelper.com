@@ -9,10 +9,11 @@
     <v-btn @click="goToRegister()">Registrarse</v-btn>
     <v-btn @click="goToLogin()">Login</v-btn>
     <p>DEBUG</p>
-    <a href="./createExcercise">Crear Ejercicio</a>
-    <a href="./profile">Perfil</a>
-    <a href="./home">User Home</a>
-    <a href="./excercise">AddExcercise</a>
+    <a href="./createExcercise">Crear Ejercicio </a>
+    <a href="./profile">Perfil </a>
+    <a href="./home">User Home </a>
+    <a href="./excercise">AddExcercise </a>
+    <a href="./warmup">Calentamiento</a>
   </div>
 </template>
 
