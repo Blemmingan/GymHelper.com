@@ -1,32 +1,8 @@
 <template>
     <h1>Seleccione ejercicios para la entrada en calor.</h1>
     <v-row align="start" no-gutters>
-        <v-sheet>
-            <v-col>
-            <input type="text" v-model="input" placeholder="Busca uno de tus ejercicios..." />
-            <v-card>
-                <v-card-item>
-                    <p>Nombre Ej.</p>
-                </v-card-item>
-                <v-card-item>
-                    <p>Nombre Ej.</p>
-                </v-card-item>
-            </v-card>
-        </v-col>
-        </v-sheet>
-        <v-sheet>
-            <v-col>
-                <h2>Ejercicios populares...</h2>
-                <v-card>
-                <v-card-item>
-                    <p>Nombre Ej.</p>
-                </v-card-item>
-                <v-card-item>
-                    <p>Nombre Ej.</p>
-                </v-card-item>
-            </v-card>
-            </v-col>
-        </v-sheet>
+        <excercise-search-bar></excercise-search-bar>
+        <popular-excercises-mini-card></popular-excercises-mini-card>
         
     </v-row>
     <div>
@@ -40,4 +16,6 @@
 </template>
 
 <script setup>
+import ExcerciseSearchBar from './ExcerciseSearchBar.vue';
+import PopularExcercisesMiniCard from './PopularExcercisesMiniCard.vue'
 </script>
