@@ -27,7 +27,7 @@ export const useUserStore = defineStore('user', () => {
   }
   
   function setToken(newToken) {
-    token = newToken
+    token.value = newToken
     Api.token = newToken
   }
 

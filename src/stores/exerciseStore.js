@@ -4,28 +4,28 @@ import { ExerciseApi } from '@/api/exercise'
 
 export const useExerciseStore = defineStore('exercise', () => { 
   //  estado
-  const items =  ref([])
+  const items = ref([])
 
   //  getters
   const findIndex = computed((exercise) => {
-      return items.findIndex(item => item.id === exercise.id)
+      return items.value.findIndex(item => item.id === exercise.id)
   })
   
   //  actions
   function push(exercise) {
-    items.push(exercise);
+    items.value.push(exercise);
   }
 
   function replace(index, exercise) {
-    items[index] = exercise;
+    items.value[index] = exercise;
   }
 
   function splice(index) {
-    items.splice(index, 1);  
+    items.value.splice(index, 1);  
   }
 
   function replaceAll(exercises) {
-    items = exercises;
+    items.value = exercises;
   }
 
   async function create(exercise) {
@@ -53,7 +53,7 @@ export const useExerciseStore = defineStore('exercise', () => {
   async function get(exercise) {
     const index = findIndex(exercise);
     if (index >= 0)
-        return items[index];
+        return items.value[index];
 
     const result = await ExerciseApi.getExercise();
     push(result);

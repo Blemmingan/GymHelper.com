@@ -4,28 +4,28 @@ import { RoutineApi } from '@/api/routine'
 
 export const useroutineStore = defineStore('routine', () => { 
   //  estado
-  const items =  ref([])
+  const items = ref([])
 
   //  getters
   const findIndex = computed((routine) => {
-      return items.findIndex(item => item.id === routine.id)
+      return items.value.findIndex(item => item.id === routine.id)
   })
   
   //  actions
   function push(routine) {
-    items.push(routine);
+    items.value.push(routine);
   }
 
   function replace(index, routine) {
-    items[index] = routine;
+    items.value[index] = routine;
   }
 
   function splice(index) {
-    items.splice(index, 1);  
+    items.value.splice(index, 1);  
   }
 
   function replaceAll(routines) {
-    items = routines;
+    items.value = routines;
   }
 
   async function createRoutine(routine) {
@@ -53,7 +53,7 @@ export const useroutineStore = defineStore('routine', () => {
   async function getRoutine(routine) {
     const index = findIndex(routine);
     if (index >= 0)
-        return items[index];
+        return items.value[index];
 
     const result = await RoutineApi.getRoutine();
     push(result);
