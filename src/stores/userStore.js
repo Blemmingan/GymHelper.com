@@ -2,6 +2,7 @@ import { ref, computed } from 'vue'
 import { defineStore } from 'pinia'
 import { UserApi } from "@/api/user";
 import { Api } from "@/api/api";
+import { FavouriteApi } from '@/api/favourite';
 
 const SECURITY_TOKEN_KEY = "security-token";
 
@@ -85,6 +86,18 @@ export const useUserStore = defineStore('user', () => {
     return UserApi.getCurrentUserRoutines()
   }
 
+  async function getFavouriteRoutines(){
+    return await FavouriteApi.getFavourites()
+  }
+
+  async function markAsFavourite(routineId){
+    await FavouriteApi.markAsFavourite(routineId)
+  }
+
+  async function unmarkAsFavourite(routineId){
+    await FavouriteApi.unmarkAsFavourite(routineId)
+  }
+
 
   return {
     isLoggedIn,
@@ -97,6 +110,9 @@ export const useUserStore = defineStore('user', () => {
     resendVerificationEmail,
     changeUserData,
     deleteUser,
-    getUserRoutines
+    getUserRoutines,
+    getFavouriteRoutines,
+    markAsFavourite,
+    unmarkAsFavourite
   }
 })

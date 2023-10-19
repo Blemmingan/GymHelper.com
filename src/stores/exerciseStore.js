@@ -4,28 +4,28 @@ import { ExerciseApi } from '@/api/exercise'
 
 export const useExerciseStore = defineStore('exercise', () => { 
   //  estado
-  const items = ref([])
+  const exercises = ref([])
 
   //  getters
   const findIndex = computed((exercise) => {
-      return items.value.findIndex(item => item.id === exercise.id)
+      return exercises.value.findIndex(item => item.id === exercise.id)
   })
   
   //  actions
   function push(exercise) {
-    items.value.push(exercise);
+    exercises.value.push(exercise);
   }
 
   function replace(index, exercise) {
-    items.value[index] = exercise;
+    exercises.value[index] = exercise;
   }
 
   function splice(index) {
-    items.value.splice(index, 1);  
+    exercises.value.splice(index, 1);  
   }
 
   function replaceAll(exercises) {
-    items.value = exercises;
+    exercises.value = exercises;
   }
 
   async function create(exercise) {
@@ -53,7 +53,7 @@ export const useExerciseStore = defineStore('exercise', () => {
   async function get(exercise) {
     const index = findIndex(exercise);
     if (index >= 0)
-        return items.value[index];
+        return exercises.value[index];
 
     const result = await ExerciseApi.getExercise();
     push(result);
@@ -90,7 +90,7 @@ export const useExerciseStore = defineStore('exercise', () => {
   }
 
   async function addExerciseVideo(exerciseId, exerciseVideo){
-    return await ExerciseApi.addExerciseVideo(exerciseId, exerciseVideo)
+    await ExerciseApi.addExerciseVideo(exerciseId, exerciseVideo)
   }
 
   async function getExerciseVideo(exerciseId, videoId){
@@ -98,11 +98,11 @@ export const useExerciseStore = defineStore('exercise', () => {
   }
 
   async function modifyExerciseVideo(exerciseId, videoId, exerciseVideo){
-    return await ExerciseApi.modifyExercise(exerciseId, videoId, exerciseVideo)
+    await ExerciseApi.modifyExercise(exerciseId, videoId, exerciseVideo)
   }
 
   async function deleteExerciseVideo(exerciseId, videoId){
-    return await ExerciseApi.deleteExerciseVideo(exerciseId, videoId)
+    await ExerciseApi.deleteExerciseVideo(exerciseId, videoId)
   }
   
 
