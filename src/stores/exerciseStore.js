@@ -43,7 +43,7 @@ export const useExerciseStore = defineStore('exercise', () => {
     return result;
   }
 
-  async function delete(exercise) {
+  async function remove(exercise) {
     await ExerciseApi.deleteExercise(exercise.id);
     const index = findIndex(exercise);
     if (index >= 0)
@@ -64,14 +64,64 @@ export const useExerciseStore = defineStore('exercise', () => {
     const result = await ExerciseApi.getAllExercises(controller);
     return result;
   }
+
+  async function getAllExerciseImages(exerciseId){
+    return await ExerciseApi.getAllExerciseImages(exerciseId)
+  }
+
+  async function addExerciseImage(exerciseId, exerciseImage){
+    await ExerciseApi.addExerciseImage(exerciseId, exerciseImage)
+  }
+
+  async function getExerciseImage(exerciseId, imageId){
+    return await ExerciseApi.getExerciseImage(exerciseId, imageId)
+  }
+
+  async function modifyExerciseImage(exerciseId, imageId, exerciseImage){
+    await ExerciseApi.modifyExerciseImage(exerciseId, imageId, exerciseImage)
+  }
+
+  async function deleteExerciseImage(exerciseId, imageId){
+    await ExerciseApi.deleteExerciseImage(exerciseId, imageId)
+  }
+
+  async function getAllExerciseVideos(exerciseId){
+    return await ExerciseApi.getAllExerciseVideos(exerciseId)
+  }
+
+  async function addExerciseVideo(exerciseId, exerciseVideo){
+    return await ExerciseApi.addExerciseVideo(exerciseId, exerciseVideo)
+  }
+
+  async function getExerciseVideo(exerciseId, videoId){
+    return await ExerciseApi.getExerciseVideo(exerciseId, videoId)
+  }
+
+  async function modifyExerciseVideo(exerciseId, videoId, exerciseVideo){
+    return await ExerciseApi.modifyExercise(exerciseId, videoId, exerciseVideo)
+  }
+
+  async function deleteExerciseVideo(exerciseId, videoId){
+    return await ExerciseApi.deleteExerciseVideo(exerciseId, videoId)
+  }
   
 
   return {
       findIndex,
       create,
       modify,
-      delete,
+      remove,
       get,
-      getAll
+      getAll,
+      getAllExerciseImages,
+      addExerciseImage,
+      getExerciseImage,
+      modifyExerciseImage,
+      deleteExerciseImage,
+      getAllExerciseVideos,
+      addExerciseVideo,
+      getExerciseVideo,
+      modifyExerciseVideo,
+      deleteExerciseVideo
    }
 })

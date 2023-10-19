@@ -28,14 +28,14 @@ export const useroutineStore = defineStore('routine', () => {
     items.value = routines;
   }
 
-  async function createRoutine(routine) {
+  async function create(routine) {
     const result = await RoutineApi.addRoutine(routine);
     if (!findIndex(result))
         push(result);
     return result;
   }
 
-  async function modifyRoutine(routine) {
+  async function modify(routine) {
     const result = await RoutineApi.modifyRoutine(routine);
     const index = findIndex(result);
     if (index >= 0)
@@ -43,14 +43,14 @@ export const useroutineStore = defineStore('routine', () => {
     return result;
   }
 
-  async function deleteRoutine(routine) {
+  async function remove(routine) {
     await RoutineApi.removeRoutine(routine.id);
     const index = findIndex(routine);
     if (index >= 0)
         splice(index);
   }
 
-  async function getRoutine(routine) {
+  async function get(routine) {
     const index = findIndex(routine);
     if (index >= 0)
         return items.value[index];
@@ -60,7 +60,7 @@ export const useroutineStore = defineStore('routine', () => {
     return result;
   }
 
-  async function getAllRoutines(controller) {
+  async function getAll(controller) {
     const result = await RoutineApi.getAllRoutines(controller);
     return result;
   }
@@ -71,7 +71,7 @@ export const useroutineStore = defineStore('routine', () => {
     findIndex,
     create,
     modify,
-    delete,
+    remove,
     get,
     getAll
    }
