@@ -13,7 +13,10 @@
     <a href="./profile">Perfil </a>
     <a href="./home">User Home </a>
     <a href="./excercise">AddExcercise </a>
-    <a href="./warmup">Calentamiento</a>
+    <a href="./warmup">Calentamiento </a>
+    <a href="./core">Ciclos </a>
+    <a href="./cooldown">Enfiramiento </a>
+    <a href="./nameRoutine">Name Routine </a>
   </div>
 </template>
 
