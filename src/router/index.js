@@ -10,7 +10,9 @@ import ProfileView from '@/components/ProfileView.vue'
 import UserHome from '@/components/UserHome.vue'
 import RoutineWarmup from '@/components/RoutineWarmup.vue'
 import AddExcercise from '@/components/AddExcercise.vue'
-
+import RoutineCore from '@/components/RoutineCore.vue'
+import RoutineCooldown from '@/components/RoutineCooldown.vue'
+import NameRoutineField from '@/components/NameRoutineField.vue'
 const routes = [
 
   {
@@ -47,8 +49,23 @@ const routes = [
   },
 
   {
+    path: '/core',
+    component: RoutineCore
+  },
+
+  {
+    path: '/cooldown',
+    component: RoutineCooldown
+  },
+
+  {
     path: '/excercise',
     component: AddExcercise
+  },
+
+  {
+    path: '/nameRoutine',
+    component: NameRoutineField
   },
 
   {
