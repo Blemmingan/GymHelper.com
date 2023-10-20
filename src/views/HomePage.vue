@@ -18,6 +18,7 @@
     <a href="./cooldown">Enfiramiento </a>
     <a href="./nameRoutine">Name Routine </a>
     <a href="./runRoutineWarmup">Run Warmup. </a>
+    <a href="./routineCore">Run Core. </a>
   </div>
 </template>
 

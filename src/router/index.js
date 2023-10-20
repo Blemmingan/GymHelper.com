@@ -14,6 +14,7 @@ import RoutineCore from '@/components/RoutineCore.vue'
 import RoutineCooldown from '@/components/RoutineCooldown.vue'
 import NameRoutineField from '@/components/NameRoutineField.vue'
 import DoingWarmup from '@/components/DoingWarmup.vue'
+import DoingCoreCycles from '@/components/DoingCoreCycles.vue'
 const routes = [
 
   {
@@ -72,6 +73,11 @@ const routes = [
   {
     path: '/runRoutineWarmup',
     component: DoingWarmup
+  },
+
+  {
+    path: '/routineCore',
+    component: DoingCoreCycles
   },
 
   {
