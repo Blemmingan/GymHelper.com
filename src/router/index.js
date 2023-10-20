@@ -13,6 +13,7 @@ import AddExcercise from '@/components/AddExcercise.vue'
 import RoutineCore from '@/components/RoutineCore.vue'
 import RoutineCooldown from '@/components/RoutineCooldown.vue'
 import NameRoutineField from '@/components/NameRoutineField.vue'
+import DoingWarmup from '@/components/DoingWarmup.vue'
 const routes = [
 
   {
@@ -66,6 +67,11 @@ const routes = [
   {
     path: '/nameRoutine',
     component: NameRoutineField
+  },
+
+  {
+    path: '/runRoutineWarmup',
+    component: DoingWarmup
   },
 
   {
