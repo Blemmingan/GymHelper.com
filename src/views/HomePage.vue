@@ -19,6 +19,7 @@
     <a href="./nameRoutine">Name Routine </a>
     <a href="./runRoutineWarmup">Run Warmup. </a>
     <a href="./routineCore">Run Core. </a>
+    <a href="routineCooldown">Run Cooldown</a>
   </div>
 </template>
 
