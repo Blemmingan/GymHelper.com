@@ -7,11 +7,11 @@ class ReviewApi{
         return `${Api.baseUrl}/reviews${slug ? `/${slug}`:''}`
     }
 
-    static async getRoutineReviews(routineId){
+    static async getAll(routineId){
         return await Api.get(ReviewApi.getUrl(routineId), false)
     }
 
-    static async addRoutineReview(routineId, review){
+    static async post(routineId, review){
         return await Api.post(ReviewApi.getUrl(routineId), true, review)
     }
 }

@@ -15,7 +15,7 @@ class UserApi {
         return await Api.post(UserApi.getUrl('resend_verification'), false, {email: email})
     }
 
-    static async verify_email(emailData){
+    static async verifyEmail(emailData){
         return await Api.post(UserApi.getUrl('verify_email'), false, emailData)   
     }
 
@@ -27,19 +27,19 @@ class UserApi {
         return await Api.post(UserApi.getUrl('logout'), true)
     }
 
-    static async retrieveCurrentUser(){
+    static async get(){
         return await Api.get(UserApi.gerUrl('current'), true)
     }
 
-    static async modifyUserData(userData){
+    static async put(userData){
         return await Api.put(UserApi.getUrl('current'), true, userData)
     }
 
-    static async removeCurrentUser(){
+    static async delete(){
         return await Api.delete(UserApi.getUrl('current'), true)
     }
 
-    static async getCurrentUserRoutines(){
+    static async getRoutines(){
         return await Api.get(UserApi.getUrl('current/routines'), true)
     }
 
@@ -56,17 +56,10 @@ class Credentials {
 }
 
 class RegistrationData {
-    constructor(username, password, firstName, lastName, gender, birthdate, email, phone, avatarUrl, metadata){
+    constructor(username, password, email){
         this.username = username
         this.password = password
-        this.firstName = firstName
-        this.lastName = lastName
-        this.gender = gender
-        this.birthdate = birthdate
         this.email = email
-        this.phone = phone
-        this.avatarUrl = avatarUrl
-        this.metadata = metadata
     }
 }
 

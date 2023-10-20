@@ -1,86 +1,31 @@
 import {Api} from '@/api/api.js'
 
-export {ExerciseApi, Exercise, ExerciseVisual}
+export {ExerciseApi, Exercise}
 
 class ExerciseApi{
     static getUrl(slug){
         return `${Api.baseUrl}/exercises${slug ? `/${slug}`:''}`
     }
 
-    //Exercises
-
-    static async getAllExercises(){
+    static async getAll(){
         return await Api.get(ExerciseApi.getUrl(), true)
     }
 
-    static async addExercise(exercise){
+    static async post(exercise){
         return await Api.post(ExerciseApi.getUrl(), true, exercise)
     }
 
-    static async getExercise(exerciseId){
+    static async get(exerciseId){
         return await Api.get(ExerciseApi.getUrl(exerciseId), true)
     }
 
-    static async modifyExercise(exerciseId, exercise){
+    static async put(exerciseId, exercise){
         return await Api.put(ExerciseApi.getUrl(exerciseId), true, exercise)
     }
 
-    static async deleteExercise(exerciseId){
+    static async delete(exerciseId){
         return await Api.delete(ExerciseApi.getUrl(exerciseId), true)
     }
-
-    //Exercises Images
-
-    static getImagesUrl(exerciseId, slug){
-        return `${ExerciseApi.getUrl(exerciseId)}/images${slug ? `/${slug}`:''}`
-    }
-
-    static async getAllExerciseImages(exerciseId){
-        return await Api.get(ExerciseApi.getImagesUrl(exerciseId), true)
-    }
-
-    static async addExerciseImage(exerciseId, exerciseImage){
-        return await Api.add(ExerciseApi.getImagesUrl(exerciseId), true, exerciseImage)
-    }
-
-    static async getExerciseImage(exerciseId, imageId){
-        return await Api.get(ExerciseApi.getImagesUrl(exerciseId, imageId), true)
-    }
-
-    static async modifyExerciseImage(exerciseId, imageId, exerciseImage){
-        return await Api.put(ExerciseApi.getImagesUrl(exerciseId, imageId), true, exerciseImage)
-    }
-    
-    static async deleteExerciseImage(exerciseId, imageId){
-        return await Api.delete(ExerciseApi.getImagesUrl(exerciseId, imageId), true)
-    }
-
-    //Exercises Videos
-
-    static getVideosUrl(exerciseId, slug){
-        return `${ExerciseApi.getUrl(exerciseId)}/videos${slug ? `/${slug}`:''}`
-    }
-
-    static async getAllExerciseVideos(exerciseId){
-        return await Api.get(ExerciseApi.getVideosUrl(exerciseId), true)
-    }
-
-    static async addExerciseVideo(exerciseId, exerciseVideo){
-        return await Api.add(ExerciseApi.getVideosUrl(exerciseId), true, exerciseVideo)
-    }
-
-    static async getExerciseVideo(exerciseId, videoId){
-        return await Api.get(ExerciseApi.getVideosUrl(exerciseId, videoId), true)
-    }
-
-    static async modifyExerciseVideo(exerciseId, videoId, exerciseVideo){
-        return await Api.put(ExerciseApi.getVideosUrl(exerciseId, videoId), true, exerciseVideo)
-    }
-    
-    static async deleteExerciseVideo(exerciseId, videoId){
-        return await Api.delete(ExerciseApi.getVideosUrl(exerciseId, videoId), true)
-    }
-
 }
 
 class Exercise{
@@ -92,9 +37,3 @@ class Exercise{
     }
 }
 
-class ExerciseVisual{
-    constructor(number, url){
-        this.number = number
-        this.url = url
-    }
-}

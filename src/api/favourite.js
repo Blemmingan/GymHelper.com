@@ -7,16 +7,16 @@ class FavouriteApi{
         return `${Api.baseUrl}/favourites${slug ? `/${slug}`: ''}`
     }
 
-    static async getFavourites(){
+    static async getAll(){
         return await Api.get(FavouriteApi.getUrl(), true)
     }
 
-    static async markAsFavourite(routineId){
-        return await Api.post(FavouriteApi.getUrl(routineId))
+    static async post(routineId){
+        return await Api.post(FavouriteApi.getUrl(routineId), true, routineId)
     }
 
-    static async unmarkAsFavourite(routineId){
-        return await Api.post(FavouriteApi.getUrl(routineId))
+    static async delete(routineId){
+        return await Api.delete(FavouriteApi.getUrl(routineId), true)
     }
 
 }

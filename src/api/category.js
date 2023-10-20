@@ -7,24 +7,24 @@ class CategoryApi{
         return `${Api.baseUrl}/categories${slug ? `/${slug}`:''}`
     }
 
-    static async getAllCategories(){
+    static async getAll(){
         return await Api.get(CategoryApi.getUrl(), false)
     }
 
-    static async addCategory(category){
+    static async post(category){
         return await Api.post(CategoryApi.getUrl(), true, category)
     }
 
-    static async retrieveCategory(categoryId){
+    static async get(categoryId){
         return await Api.get(CategoryApi.getUrl(categoryId), true)
     }
 
-    static async modifyCategory(categoryId, category){
+    static async put(categoryId, category){
         return await Api.put(CategoryApi.getUrl(categoryId), true, category)
     }
 
-    static async removeCategory(categoryId){
-        return await Api.delete(CategoryApi.getUrl(categoryId))
+    static async delete(categoryId){
+        return await Api.delete(CategoryApi.getUrl(categoryId), true)
     }
 }
 
