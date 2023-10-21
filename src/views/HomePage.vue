@@ -19,6 +19,7 @@
     <a href="./routineCore">Run Core. </a>
     <a href="./routineCooldown">Run Cooldown</a>
     <a href="./rate">Rate</a>
+    <a href="./viewRoutine">View Routine</a>
 
   </div>
 </template>

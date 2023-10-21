@@ -18,6 +18,6 @@
     
     var rating = ref(0)
     function returnHome(){
-       router.push("/")
+       router.push("/home")
     }
 </script>

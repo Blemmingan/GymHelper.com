@@ -36,6 +36,7 @@
     </div>
     <div class="container"> 
         <v-btn class="mt-2 bg-secondary text-black">ELIMINAR CUENTA</v-btn>
+        <v-btn class="mt-2 bg-secondary text-black">EDITAR PERFIL</v-btn>
     </div>
 
 </template>

@@ -6,10 +6,10 @@
         
     </v-row>
     <div>
-        <v-btn>
+        <v-btn @click="goBack">
             Volver
         </v-btn>
-        <v-btn>
+        <v-btn @click="next">
             Finalizar entrada en calor.
         </v-btn>
     </div>
@@ -18,6 +18,14 @@
 <script setup>
 import ExcerciseSearchBar from './ExcerciseSearchBar.vue';
 import PopularExcercisesMiniCard from './PopularExcercisesMiniCard.vue'
+import { useRouter } from 'vue-router';
+const router = useRouter()
+function next(){
+    router.push('/core')
+}
+function goBack(){
+    router.push(-1)
+}
 </script>
 
 <style scoped>
