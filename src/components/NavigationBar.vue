@@ -32,7 +32,6 @@
 </template>
 
 <script setup>
-    import {computed} from 'vue'
     import { useUserStore } from '@/stores/UserStore'
     import {useRouter} from 'vue-router'
 

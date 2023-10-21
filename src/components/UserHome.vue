@@ -1,5 +1,5 @@
 <template>
-   <v-container>
+   <v-container class="container">
       <v-row
         align="start"
         no-gutters>
@@ -32,3 +32,9 @@ import GenericRoutineCard from './GenericRoutineCard.vue';
         router.push('/warmup')
     }
 </script>
+
+<style scoped>
+  .container{
+    margin-top: 100px;
+  }
+</style>

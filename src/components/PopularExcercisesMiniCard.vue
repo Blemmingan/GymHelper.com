@@ -1,7 +1,7 @@
 <template>
-    <v-sheet>
+    <v-sheet class="container">
             <v-col>
-                <h2>Ejercicios populares...</h2>
+                <h4>Ejercicios populares...</h4>
                 <v-card>
                 <v-card-item>
                     <p>Nombre Ej.</p>
@@ -16,3 +16,7 @@
 
 <script setup>
 </script>
+
+<style scoped>
+
+</style>

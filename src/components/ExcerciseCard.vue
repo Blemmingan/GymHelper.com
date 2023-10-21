@@ -1,14 +1,13 @@
 <template>
     <div>
         <v-sheet width="600" class="mx-auto">
-            <h1 class="title">Crear un nuevo ejercicio.   </h1>
-            <v-form   @submit.prevent class="form">         
+            <h1 class="title">Crear un nuevo ejercicio.</h1>
+            <v-form class="form" validate-on="submit">         
                     <div>
                         <v-text-field
                         v-model="excerciseName"
-                        :rules="nameRules"
-                        :counter="30"
-                        label="Excercise Name: "
+                        :rules="ExNameRules"
+                        label="Nombre: "
                         required 
                         
                         />
@@ -17,30 +16,37 @@
                     <div>
                         <v-text-field
                         v-model="excerciseDescription"
-                        :rules="descriptionRules"
-                        :counter="60"
-                        label="Description: "
+                        :rules="ExDescriptionRules"
+                        label="Descripcion: "
                         required
                             />
                     </div> 
                     
                     <div>
                         <v-radio-group
-                         v-model="inline"
+                         v-model="choice"
                          inline 
-                         required
-                         :rules="radioRules">
+                         required>
                             <v-radio
                               label="Tiempo"
                               value="Tiempo"
+                              v-model="timeChosen"
+                              @click="chooseTime()"
                             ></v-radio>
                              <v-radio
                               label="Repeticiones"
                               value="Repeticiones"
+                              v-model="repsChosen"
+                              @click="chooseReps()"
                              ></v-radio>
                          </v-radio-group>
                     </div>
-                <v-btn type="submit" class="mt-2">Crear</v-btn>
+                    <div>
+                        <v-text-field v-if="timeChosen && !repsChosen" label="Minutos..."></v-text-field>
+                        <v-text-field v-else-if="repsChosen && !timeChosen" label="Repeticiones..."></v-text-field>
+                        <v-text-field v-else label="Seleccione una modalidad" disabled=""></v-text-field>
+                    </div>
+                <v-btn type="submit" class="mt-2 bg-secondary text-black">Crear</v-btn>
         </v-form>
         </v-sheet>
 
@@ -48,50 +54,33 @@
     </div>
 </template>
 
-<script>
-    export default{
-        data: ()=>({
-            inline: null,
-            valid: false,
-            excerciseName: '',
-            nameRules: [
-                value => {
-                    if(value) return true
-                    return 'Name is required.'
-                },
-                value => {
-                    if(value?.length <= 30) return true
-                    return 'Name must be less than 30 characters.'
-                },
-            ],
-            excerciseDescription: '',
-            descriptionRules: [
-                value =>{
-                    if(value) return true
-                    return 'Description required'
-                },
-                value=>{
-                    if(value?.length <= 60) return true
-                    return 'Description must be less than 60 characters'
-                },
-            ],
-            radioRules: [
-                value => {
-                    if(value) return true
-                    return 'A selection is required.'
-                },
-            ],
+<script setup>
+import { ref } from 'vue';
+const excerciseName = ref('')
+const excerciseDescription = ref('')
+const choice = ref(false)
+const timeChosen = ref(false)
+const repsChosen = ref(false)
+    const ExNameRules = [
+    value => Boolean(value) || 'Debe ingresar un nombre de ejercicio',
+    value => value.length <= 50 || 'El nombre de ejercicio no puede superar los 50 carácteres'
+]       
+const ExDescriptionRules = [
+        value => Boolean(value) || 'Debe ingresar una descripcion.',
+        value => value.length <= 50 || 'La descripción no puede superar los 50 caracteres',
+        value => value.length >= 2 || 'La descripción debe superar los 2 caracteres'
+]
+function chooseTime(){
+   timeChosen.value = true
+   repsChosen.value = false
+    
+}
 
-            
+function chooseReps(){
+    timeChosen.value = false
+    repsChosen.value = true
+}
 
-                icons: [
-                    "image1",
-                    "image2",
-                    "image3"
-                ]
-        
-        }),
-    }
 
 </script>
 

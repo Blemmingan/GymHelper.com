@@ -34,7 +34,9 @@
             
         
     </div>
-    
+    <div class="container"> 
+        <v-btn class="mt-2 bg-secondary text-black">ELIMINAR CUENTA</v-btn>
+    </div>
 
 </template>
 
@@ -45,27 +47,12 @@ import GenericRoutineCard from './GenericRoutineCard.vue';
 <style scoped>
     .container{
         text-align: center;
+        margin-top: 100px;
     }
     .avatar{
         size: 100px;
         border-radius: 10px;
     }
-    .card-text{
-        text-align: left;
-    }
-    .buttonCont{
-        text-align: right;
-        
-        
-    }
-    .goButton{
-        max-height: max-content;
-    }
-    .card{
-        border: 3px solid green;
-        border-radius: 25px;
-    }
-    .buttonCol{
-        align-items: right;
-    }
+
+ 
 </style>
