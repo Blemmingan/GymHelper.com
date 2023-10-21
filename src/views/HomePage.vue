@@ -1,7 +1,6 @@
 <template>
   <div>
-    <h1 class="title">GYMHELPER.COM</h1>
-    <h3>Nuestra aplicacion usa un tramontina malvado para unirse a su cerebro</h3>
+    <h3>Entrenar nunca fue tan facil!</h3>
     <p>Para proceder es necesaria una cuenta.</p>
     <p>Si ya tiene una cuenta, haga clic en el boton de login.</p>
     <p>Si no, haga clic en el boton de registro.</p>
