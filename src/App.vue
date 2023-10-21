@@ -35,6 +35,8 @@ import {useBackgroundStore} from '@/stores/BackgroundStore'
 import {useAlertStore} from '@/stores/AlertStore'
 
 const backgroundStore = useBackgroundStore()
+
+  
 const alertStore = useAlertStore()
 
 const background = computed(()=>{
@@ -50,14 +52,14 @@ const notification = computed (() => {
 })
 
 
-
-
 onBeforeMount(() => {
   const userStore = useUserStore()
   const backgroundStore = useBackgroundStore()
   userStore.initialize()
-  backgroundStore.setBackground('../background.jpg')
-
+  if (!userStore.isLoggedIn){
+    backgroundStore.setBackground('../background.jpg')
+  }
+  
 })
 
 </script>
