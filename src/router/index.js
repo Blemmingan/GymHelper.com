@@ -21,8 +21,10 @@ import DoingWarmup from '@/components/DoingWarmup.vue'
 import DoingCoreCycles from '@/components/DoingCoreCycles.vue'
 import DoingCooldownCycle from '@/components/DoingCooldownCycle.vue'
 import RateRoutine from '@/components/RateRoutine.vue'
-const routes = [
+import { useUserStore } from '@/stores/UserStore'
 
+
+const routes = [
   {
     path: '/login',
     name: 'Login',
@@ -55,7 +57,8 @@ const routes = [
 
   {
     path: '/profile',
-    component: ProfileView
+    component: ProfileView,
+    meta: {requiresAuth: true}
   },
 
   {
@@ -118,6 +121,21 @@ const routes = [
 const router = createRouter({
   history: createWebHistory(process.env.BASE_URL),
   routes,
+})
+
+
+router.beforeEach((to, from, next) => {
+
+  const userStore = useUserStore()
+  if (to.matched.some(route => route.meta.requiresAuth)){
+    if (userStore.isLoggedIn){
+      next()
+    } else {
+      next({name: "Login"})
+    }
+  } else {
+    next()
+  }
 })
 
 export default router
