@@ -5,7 +5,7 @@ import { ExerciseImageApi } from "@/api/exerciseImage.js"
 import { ExerciseVideoApi } from "@/api/exerciseVideo.js"
 
 
-export const UseExerciseStore = defineStore('exercise', ()=>{
+export const useExerciseStore = defineStore('exercise', ()=>{
 
     const items = ref([])
 

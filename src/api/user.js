@@ -28,7 +28,7 @@ class UserApi {
     }
 
     static async get(){
-        return await Api.get(UserApi.gerUrl('current'), true)
+        return await Api.get(UserApi.getUrl('current'), true)
     }
 
     static async put(userData){

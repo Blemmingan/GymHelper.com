@@ -1,8 +1,12 @@
 // Composables
 
 import { createRouter, createWebHistory } from 'vue-router'
-import LoginView from '../components/LoginView.vue'
-import RegisterView from '../components/RegisterView.vue'
+
+import Login from '@/views/Login.vue'
+import Register from '@/views/Register.vue'
+import ValidateEmail from '@/views/ValidateEmail.vue'
+import ResendEmail from '@/views/ResendEmail.vue'
+
 import HomePage from '../views/HomePage.vue'
 import NotFound from '../views/NotFound.vue'
 import ExcerciseCard from '@/components/ExcerciseCard.vue'
@@ -21,15 +25,27 @@ const routes = [
 
   {
     path: '/login',
-    component: LoginView
+    name: 'Login',
+    component: Login
   },
   {
     path: '/register',
-    component: RegisterView
+    name: 'Register',
+    component: Register
   },
-
+  {
+    path: '/validate',
+    name: 'Validate',
+    component: ValidateEmail
+  },
+  {
+    path: '/resend',
+    name: 'Resend',
+    component: ResendEmail
+  },
   {
     path: '/',
+    name: 'Home',
     component: HomePage
   },
   {
@@ -94,6 +110,7 @@ const routes = [
 
   {
     path: '/:pathMatch(.*)*',
+    name: 'Not Found',
     component: NotFound
   }
 ]

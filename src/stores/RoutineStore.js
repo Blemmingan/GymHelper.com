@@ -7,7 +7,7 @@ import { FavouriteApi } from "@/api/favourite.js"
 import { ReviewApi } from "@/api/review.js"
 
 
-export const UseRoutineApi = defineStore('routine', ()=>{
+export const useRoutineStore = defineStore('routine', ()=>{
 
     async function getAll(){
         return await RoutineApi.getAll()

@@ -28,6 +28,7 @@ export const useUserStore = defineStore('security', ()=>{
     }
 
     function updateToken(token, rememberMe){
+
         if (rememberMe){
             localStorage.setItem(SECURITY_TOKEN_KEY, token)
         }
@@ -51,13 +52,12 @@ export const useUserStore = defineStore('security', ()=>{
     }
 
     async function resendVerificationEmail(used_email){
+        email.value = used_email
         await UserApi.resendVerificationEmail(used_email)
     }
 
     async function verifyEmail(code){
-        if (email.value){
-            await UserApi.verifyEmail(new EmailData(email.value, code))
-        }
+        await UserApi.verifyEmail(new EmailData(email.value, code))
     }
     
     async function getCurrentUser(){

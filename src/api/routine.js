@@ -1,4 +1,4 @@
-import {Api} from '@api/api.js'
+import { Api } from "./api"
 
 export {RoutineApi, Routine}
 
