@@ -1,15 +1,54 @@
 <template>
     <v-main>
         <v-card elevation="10" class="formBox">
-            <h1 class="mb-2">TODO</h1>
-            
+            <v-btn @click="router.push('/validate')" icon="mdi-arrow-left" class="ma-2 d-flex justify-left" color="secondary"/>
+            <h1 class="mb-2">Reenviar código</h1>
+            <p>Ingrese el correo con el que se registró. Le reenviaremos el código de verificación.</p>
+            <v-divider></v-divider>
+            <v-form validate-on="input" v-model="validForm">
+                <v-text-field v-model="email" :rules="emailRules" label="Correo electrónico"></v-text-field>
+            </v-form>
+            <v-card-actions class="d-flex justify-center text-center">
+                <v-btn 
+                    :disabled="!validForm"
+                    @click="submit()"
+                    type="submit" 
+                    block 
+                    class="mt-2 bg-secondary text-black">      
+                    Enviar
+                </v-btn>
+            </v-card-actions>
         </v-card>
     </v-main>
 </template>
 
 <script setup>
+import {useRouter} from 'vue-router'
+import {ref, computed} from 'vue'
+import { useUserStore } from '@/stores/UserStore';
 
+const router = useRouter()
+const userStore = useUserStore()
+
+const email = ref(null)
+const validForm = ref(false)
+
+const emailRules = [
+    value => !!value || 'Debe ingresar un correo electrónico',
+    value => value.length <= 100 || 'La dirección de correo electrónico no puede superar los 100 carácteres',
+    value => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value) || 'Ingrese una dirección de correo electrónico válida'
+]
+
+async function submit(){
+    try {
+        await userStore.resendVerificationEmail(email.value)
+        router.push('/validate')
+    } catch(e){
+        //todo
+    }
+}
 </script>
+
 
 <style scoped>
 div{
