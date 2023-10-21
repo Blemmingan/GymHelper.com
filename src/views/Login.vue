@@ -38,13 +38,14 @@
 import { ref } from 'vue';
 import { useUserStore } from '@/stores/UserStore';
 import { Credentials } from '@/api/user';
-import { useRouter } from 'vue-router';
+import { useRoute, useRouter } from 'vue-router';
 import { useAlertStore } from '@/stores/AlertStore';
 
 
 const userStore = useUserStore()
 const alertStore = useAlertStore()
 const router = useRouter()
+const route = useRoute()
 
 const username = ref(null)
 const password = ref(null)
@@ -70,7 +71,9 @@ async function submit(){
     const credentials = new Credentials(username.value, password.value)
     try{
         await userStore.login(credentials, rememberMe.value)
-        router.push('/')
+        const redirectURL = route.query.redirect || '/'
+        router.push(redirectURL)
+
     } catch (e){
         if (e.code==4){
             alertStore.sendNotification("Usuario o contraseña incorrectos. Intentelo de nuevo")
