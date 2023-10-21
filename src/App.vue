@@ -5,6 +5,21 @@
       <v-container fluid>
         <RouterView/>
       </v-container>
+      <v-btn color="secondary" @click="sendTestNotification()">Test notificacion</v-btn>
+      <v-snackbar 
+        v-model="notification.show" 
+        color="accent" 
+        dark 
+        :timeout="notification.timeout"
+        elevation="10"
+        class="ma-2"
+        max-width="80%"
+        >
+        <div class="notification">{{ notification.message }}</div>
+        <template v-slot:actions>
+          <v-btn @click="alertStore.sendNotification(null)" icon="mdi-close" color="secondary"></v-btn>
+        </template>
+      </v-snackbar>
     </v-app>
   </div>
 </template>
@@ -13,19 +28,34 @@
 </style>
 
 <script setup>
-import { computed, onBeforeMount} from 'vue'
+import {computed, onBeforeMount} from 'vue'
 import { useUserStore } from '@/stores/UserStore'
 import NavigationBar from './components/NavigationBar.vue'
 import { RouterView} from 'vue-router'
 import {useBackgroundStore} from '@/stores/BackgroundStore'
+import {useAlertStore} from '@/stores/AlertStore'
 
 const backgroundStore = useBackgroundStore()
+const alertStore = useAlertStore()
 
 const background = computed(()=>{
   return backgroundStore.getBackground()
 })
 
-const noNavBar = ['login', 'register', 'verify']
+const notification = computed (() => {
+  const result =  alertStore.getNotification()
+  if (result){
+    return result
+  }
+  return {show: false, timeout: 0, message: 'nothing to show'}
+})
+
+
+function sendTestNotification(){
+  alertStore.sendNotification("Alerta: se ha enviado una notificación")
+  showSnackbar.value = true
+}
+
 
 onBeforeMount(() => {
   const userStore = useUserStore()
@@ -46,5 +76,10 @@ onBeforeMount(() => {
       background-size: cover;
       height: 100%;
   }
+
+  .notification{
+    font-size: large;
+  }
+
 </style>
 
