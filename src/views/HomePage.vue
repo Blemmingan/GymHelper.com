@@ -1,12 +1,11 @@
 <template>
   <div>
-    <h3>Entrenar nunca fue tan facil!</h3>
-    <p>Para proceder es necesaria una cuenta.</p>
-    <p>Si ya tiene una cuenta, haga clic en el boton de login.</p>
-    <p>Si no, haga clic en el boton de registro.</p>
-    
-    <v-btn @click="goToRegister()">Registrarse</v-btn>
-    <v-btn @click="goToLogin()">Login</v-btn>
+    <v-card class="background-card">
+      <v-container>
+        <h1 class="slogan">ENTRENAR NUNCA FUE TAN FACIL!</h1>
+      </v-container>
+    </v-card>
+
     <p>DEBUG</p>
     <a href="./createExcercise">Crear Ejercicio </a>
     <a href="./profile">Perfil </a>
@@ -34,3 +33,29 @@ import router from '@/router';
     router.push('./login');
   }
 </script>
+
+<style scoped>
+.slogan {
+  font-size: 2rem;
+  color: #4CAF50; /* Green color */
+  text-align: right;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+  margin-top: 50%px;
+  margin-right: 2%;
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adding a subtle shadow */
+}
+
+.background-card {
+  width: 100%;
+  min-width: 1100px;
+  height: 300px; /* Adjust the height based on your preference */
+  background: url('pedalling-hard.jpg') center top;
+  background-size: cover;
+  background-position: top;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+</style>
