@@ -50,7 +50,6 @@ import { ref, computed } from 'vue';
 import {useUserStore} from '@/stores/UserStore'
 import router from '@/router';
 import { useAlertStore } from '@/stores/AlertStore';
-import Login from './Login.vue';
 
 const userStore = useUserStore()
 const alertStore = useAlertStore()

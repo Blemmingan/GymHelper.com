@@ -47,8 +47,12 @@ export const useUserStore = defineStore('security', ()=>{
     }
 
     async function register(registrationData){
-        await UserApi.register(registrationData)
-        email.value = registrationData.email
+        try {
+            await UserApi.register(registrationData)
+            email.value = registrationData.email
+        } catch (e){
+            throw e
+        }
     }
 
     async function resendVerificationEmail(used_email){

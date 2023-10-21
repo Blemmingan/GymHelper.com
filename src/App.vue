@@ -7,7 +7,7 @@
       </v-container>
       <v-snackbar 
         v-model="notification.show" 
-        color="accent" 
+        color="black" 
         dark 
         :timeout="notification.timeout"
         elevation="10"
