@@ -133,14 +133,13 @@ async function submit(){
         border: 3px solid green;
         border-radius: 25px;
         background-color: whitesmoke;
-        margin-top: auto;
-        margin-bottom: auto;
-        margin: 0;
-        position: absolute;
-        top: 50%;
-        left: 50%;
-        -ms-transform: translate(-50%, -50%);
-        transform: translate(-50%, -50%);
+        
+        
+        display: block;
+        margin-left: auto;
+        margin-right: auto ;
+        
+       
         width: 40%;
 
     }

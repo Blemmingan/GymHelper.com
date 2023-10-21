@@ -21,6 +21,7 @@ import DoingWarmup from '@/components/DoingWarmup.vue'
 import DoingCoreCycles from '@/components/DoingCoreCycles.vue'
 import DoingCooldownCycle from '@/components/DoingCooldownCycle.vue'
 import RateRoutine from '@/components/RateRoutine.vue'
+import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
 import { useUserStore } from '@/stores/UserStore'
 
 
@@ -109,6 +110,11 @@ const routes = [
   {
     path: '/rate',
     component: RateRoutine
+  },
+
+  {
+    path: '/viewRoutine',
+    component: RoutineDetailedView
   },
 
   {

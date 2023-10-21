@@ -11,17 +11,29 @@
                                        <p>Desc</p>
                                       </div>
                                    </div>
+                                   <v-card-actions>
+                                        <v-btn block @click="goToView">Ver</v-btn>
+                                    </v-card-actions>
                             </v-card-item>
                         </v-col>
                         <v-col class="buttonCol" cols="5"  >
                             <v-btn class="goButton" icon="mdi-play"></v-btn>
                         </v-col>
+                        
                     </v-row>
                     
                         
                 </v-card>
             </v-col>
 </template>
+
+<script setup>
+import { useRouter } from 'vue-router';
+const router = useRouter()
+function goToView(){
+    router.push('./viewRoutine')
+}
+</script>
 
 <style scoped>
     
