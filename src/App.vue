@@ -2,7 +2,7 @@
   <div class="global" :style="`background-image: url(${background});`">
     <v-app style="background: rgba(0,0,0,0);">
      <NavigationBar/>
-      <v-container fluid>
+      <v-container class="main" fluid>
         <RouterView/>
       </v-container>
       <v-snackbar 
@@ -75,6 +75,10 @@ onBeforeMount(() => {
   .notification{
     font-size: large;
   }
+
+  .main {
+  margin-top: 64px;
+}
 
 </style>
 
