@@ -40,10 +40,13 @@ import { useUserStore } from '@/stores/UserStore';
 import { Credentials } from '@/api/user';
 import { useRoute, useRouter } from 'vue-router';
 import { useAlertStore } from '@/stores/AlertStore';
+import { useBackgroundStore } from '@/stores/BackgroundStore';
 
 
 const userStore = useUserStore()
 const alertStore = useAlertStore()
+const backgroundStore = useBackgroundStore()
+
 const router = useRouter()
 const route = useRoute()
 
@@ -71,6 +74,7 @@ async function submit(){
     const credentials = new Credentials(username.value, password.value)
     try{
         await userStore.login(credentials, rememberMe.value)
+        backgroundStore.setBackground(null)
         const redirectURL = route.query.redirect || '/'
         router.push(redirectURL)
 
