@@ -5,7 +5,6 @@
       <v-container fluid>
         <RouterView/>
       </v-container>
-      <v-btn color="secondary" @click="sendTestNotification()">Test notificacion</v-btn>
       <v-snackbar 
         v-model="notification.show" 
         color="accent" 
@@ -51,10 +50,6 @@ const notification = computed (() => {
 })
 
 
-function sendTestNotification(){
-  alertStore.sendNotification("Alerta: se ha enviado una notificación")
-  showSnackbar.value = true
-}
 
 
 onBeforeMount(() => {

@@ -26,7 +26,8 @@
                 </v-form>
                 <v-card-actions class="d-flex justify-center">
                     <v-btn 
-                        :disabled="!validForm"
+                        :disabled="!validForm || processing"
+                        :loading="processing"
                         @click="submit()"
                         type="submit" 
                         block 
@@ -35,7 +36,8 @@
                     </v-btn>
                 </v-card-actions>
                 <v-card-text class="d-flex flex-column justify-center text-center">
-                    ¿Ya tienes cuenta? <RouterLink to="/login">Inicia sesión</RouterLink>
+                    <div>¿Ya tienes cuenta? <RouterLink to="/login">Inicia sesión</RouterLink></div>
+                    <div>¿Quieres validar una cuenta? <RouterLink to="/validate">Ingresa el código</RouterLink></div>
                 </v-card-text>
             </v-card>
     </v-main>
@@ -43,11 +45,13 @@
 
 <script setup>
 import { RegistrationData } from '@/api/user';
+import { useAlertStore } from '@/stores/AlertStore';
 import { useUserStore } from '@/stores/UserStore'
 import {ref} from 'vue'
 import { useRouter } from 'vue-router';
 
 const userStore = useUserStore()
+const alertStore = useAlertStore()
 const router = useRouter()
 
 const password = ref(null)
@@ -55,6 +59,7 @@ const confirmPassword = ref(null)
 const email = ref(null)
 const username = ref(null)
 const validForm = ref(false)
+const processing = ref(false)
 
 const emailRules = [
     value => !!value || 'Debe ingresar un correo electrónico',
@@ -83,21 +88,29 @@ const hideConfirmPassword = ref(true)
 
 
 
-function submit(){
+async function submit(){
+    processing.value = true
     const registrationData = new RegistrationData(username.value, password.value, email.value)
     try {
-        userStore.register(registrationData)
+        await userStore.register(registrationData)
         router.push('/validate')
-
     } catch (e) {
-            if (e.code===1){
-                alert("Los datos introducidos son invalidos. Por favor, intentelo de nuevo")
-            } else if (e.code==2){
-                alert("El nombre de usuario ya existe. Por favor, intente con otro")
+        if (e.code===1){
+            alertStore.sendNotification("Los datos introducidos son invalidos. Intentelo de nuevo")
+        } else if (e.code==2){
+            if (e.details[0].includes('email')){
+                alertStore.sendNotification('Ya existe una cuenta asociada al email ingresado. Intentelo de nuevo')
             } else {
-                alert("Ocurrio un error desconocido. Por favor, intente de nuevo")
+                alertStore.sendNotification('Ya existe una cuenta con el nombre de usuario ingresado. Intentelo de nuevo')
             }
+    
+        } else {
+            alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")
+        }
+    } finally{
+        processing.value = false
     }
+    
 }
 
 

@@ -47,8 +47,8 @@ export const useUserStore = defineStore('security', ()=>{
     }
 
     async function register(registrationData){
-        email.value = registrationData.email
         await UserApi.register(registrationData)
+        email.value = registrationData.email
     }
 
     async function resendVerificationEmail(used_email){
@@ -56,8 +56,12 @@ export const useUserStore = defineStore('security', ()=>{
         await UserApi.resendVerificationEmail(used_email)
     }
 
-    async function verifyEmail(code){
+    async function verifyEmail(code, inputEmail){
+        if (inputEmail){
+            await UserApi.verifyEmail(new EmailData(inputEmail, code))
+        } else {
         await UserApi.verifyEmail(new EmailData(email.value, code))
+        }
     }
     
     async function getCurrentUser(){
@@ -83,6 +87,7 @@ export const useUserStore = defineStore('security', ()=>{
 
     return {
         isLoggedIn, 
+        email,
         initialize, 
         login, 
         logout, 

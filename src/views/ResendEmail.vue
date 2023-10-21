@@ -10,7 +10,8 @@
             </v-form>
             <v-card-actions class="d-flex justify-center text-center">
                 <v-btn 
-                    :disabled="!validForm"
+                    :disabled="!validForm || processing"
+                    :loading="processing"
                     @click="submit()"
                     type="submit" 
                     block 
@@ -26,12 +27,16 @@
 import {useRouter} from 'vue-router'
 import {ref, computed} from 'vue'
 import { useUserStore } from '@/stores/UserStore';
+import { useAlertStore } from '@/stores/AlertStore';
 
 const router = useRouter()
 const userStore = useUserStore()
+const alertStore = useAlertStore()
+
 
 const email = ref(null)
 const validForm = ref(false)
+const processing = ref(false)
 
 const emailRules = [
     value => !!value || 'Debe ingresar un correo electrónico',
@@ -40,11 +45,18 @@ const emailRules = [
 ]
 
 async function submit(){
+    processing.value = true
     try {
         await userStore.resendVerificationEmail(email.value)
         router.push('/validate')
     } catch(e){
-        //todo
+        if (e.code==3){
+            alertStore.sendNotification("No se intentó crear una cuenta con esta dirección de correo. Intentelo de nuevo")
+        } else {
+            alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")
+        }
+    } finally {
+        processing.value = false
     }
 }
 </script>

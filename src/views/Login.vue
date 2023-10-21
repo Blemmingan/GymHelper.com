@@ -17,7 +17,8 @@
                     </v-form>
                     <v-card-actions class="d-flex justify-center text-center">
                         <v-btn 
-                            :disabled="!validForm"
+                            :disabled="!validForm || processing"
+                            :loading="processing"
                             @click="submit()"
                             type="submit" 
                             block 
@@ -38,8 +39,11 @@ import { ref } from 'vue';
 import { useUserStore } from '@/stores/UserStore';
 import { Credentials } from '@/api/user';
 import { useRouter } from 'vue-router';
+import { useAlertStore } from '@/stores/AlertStore';
+
 
 const userStore = useUserStore()
+const alertStore = useAlertStore()
 const router = useRouter()
 
 const username = ref(null)
@@ -47,6 +51,7 @@ const password = ref(null)
 const rememberMe = ref(false)
 const hidePassword = ref(true)
 const validForm = ref(false)
+const processing = ref(false)
 
 const usernameRules = [
     value => Boolean(value) || 'Debe ingresar un nombre de usuario',
@@ -58,17 +63,23 @@ const passwordRules = [
     value => value.length <= 50 || 'La contraseña no puede superar los 50 carácteres'
 ] 
 
+
+
 async function submit(){
+    processing.value = true
     const credentials = new Credentials(username.value, password.value)
     try{
         await userStore.login(credentials, rememberMe.value)
         router.push('/')
     } catch (e){
-        if (e.code){
-            alert("Usuario o contraseña incorrectos. Intentelo de nuevo")
+        if (e.code==4){
+            alertStore.sendNotification("Usuario o contraseña incorrectos. Intentelo de nuevo")
         } else {
-            alert("Ha ocurrido un error con los servidores. Por favor, intente de nuevo mas tarde")
+            alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")
         }
+
+    } finally {
+        processing.value = false
     }
     
 }

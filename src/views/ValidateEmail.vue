@@ -13,11 +13,13 @@
         <v-divider></v-divider>
         <span v-if="!done">
         <v-form validate-on="input" v-model="validForm">
+            <v-text-field v-if="!userStore.email" v-model="email" :rules="emailRules" label="Correo electrónico"></v-text-field>
             <v-text-field v-model="code" :rules="codeRules" label="Código de verificación" @keypress="isAlphaNumerical($event)"></v-text-field>
         </v-form>
         <v-card-actions class="d-flex justify-center text-center">
         <v-btn 
-            :disabled="!validForm"
+            :disabled="!validForm || processing"
+            :loading="processing"
             @click="submit()"
             type="submit" 
             block 
@@ -47,17 +49,28 @@
 import { ref, computed } from 'vue';
 import {useUserStore} from '@/stores/UserStore'
 import router from '@/router';
+import { useAlertStore } from '@/stores/AlertStore';
+import Login from './Login.vue';
 
 const userStore = useUserStore()
+const alertStore = useAlertStore()
 
 const code = ref(null)
 const validForm = ref(false)
 const verified = ref(false)
+const processing = ref(false)
+const email = ref(null)
+
 
 const done = computed(()=>{
     return verified.value
 })
 
+const emailRules = [
+    value => !!value || 'Debe ingresar un correo electrónico',
+    value => value.length <= 100 || 'La dirección de correo electrónico no puede superar los 100 carácteres',
+    value => /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/.test(value) || 'Ingrese una dirección de correo electrónico válida'
+]
 
 const codeRules = [
     value => !!value || "Ingrese el código de verificación",
@@ -71,11 +84,22 @@ function isAlphaNumerical(e){
 }
 
 async function submit(){
+    processing.value = true
     try{
-    await userStore.verifyEmail(code.value)
+        if(userStore.email){
+            await userStore.verifyEmail(code.value)
+        } else {
+            await userStore.verifyEmail(code.value, email.value)
+        }
     verified.value = true
     } catch (e) {
-        console.log('err')
+        if (e.code==8){
+            alertStore.sendNotification('El codigo ingresado es incorrecto. Intentelo de nuevo')
+        } else {
+            alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")
+        }
+    } finally{
+        processing.value = false
     }
 }
 
