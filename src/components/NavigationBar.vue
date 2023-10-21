@@ -1,9 +1,9 @@
 <template>
 <div>
     <v-app-bar color="primary" app>
-            <v-app-bar-nav-icon class="logo" @click="router.push('/')">
-                <v-img src="/weightlifter.png" />
-            </v-app-bar-nav-icon>
+            
+            <v-btn icon="mdi-weight-lifter"></v-btn>
+          
             <v-app-bar-title class="logo" @click="router.push('/')">GymHelper.com</v-app-bar-title> 
             <v-tabs v-if="userStore.isLoggedIn">
                 <v-spacer></v-spacer>
