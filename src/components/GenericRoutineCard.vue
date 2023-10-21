@@ -17,7 +17,7 @@
                             </v-card-item>
                         </v-col>
                         <v-col class="buttonCol" cols="5"  >
-                            <v-btn class="goButton" icon="mdi-play"></v-btn>
+                            <v-btn class="goButton" icon="mdi-play" @click="startRoutine"></v-btn>
                         </v-col>
                         
                     </v-row>
@@ -32,6 +32,9 @@ import { useRouter } from 'vue-router';
 const router = useRouter()
 function goToView(){
     router.push('./viewRoutine')
+}
+function startRoutine(){
+    router.push('/runRoutineWarmup')
 }
 </script>
 

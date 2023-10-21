@@ -7,8 +7,8 @@
         </v-row>
     </div>
     <div>
-        <v-btn>Volver</v-btn>
-        <v-btn>Finalizar Rutina</v-btn>
+        <v-btn @click="goBack">Volver</v-btn>
+        <v-btn @click="next">Finalizar Rutina</v-btn>
         
     </div>
 </template>
@@ -16,4 +16,12 @@
 <script setup>
      import ExcerciseSearchBar from './ExcerciseSearchBar.vue';
 import PopularExcercisesMiniCard from './PopularExcercisesMiniCard.vue'
+import { useRouter } from 'vue-router';
+const router = useRouter()
+function next(){
+    router.push('/nameRoutine')
+}
+function goBack(){
+    router.push(-1)
+}
 </script>

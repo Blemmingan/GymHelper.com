@@ -9,7 +9,7 @@
             label="Rutina Rutinera..."
             required 
             />
-            <v-btn class="mt-2 bg-secondary text-black" block type="submit">Crear</v-btn>
+            <v-btn class="mt-2 bg-secondary text-black" block type="submit" @click="goHome">Crear</v-btn>
         </v-form>
         
         
@@ -21,12 +21,17 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useRouter } from 'vue-router';
+const router = useRouter()
 const routineName = ref('')
 const routineNameRules = [
     value => Boolean(value) || 'Debe ingresar un nombre de rutina',
     value => value.length <= 50 || 'El nombre de la rutina no puede superar los 50 carácteres',
     value => value.length >= 3 || 'El nombre de la rutina debe tener mas de 2 caracteres'
 ] 
+function goHome(){
+    router.push('/home')
+}
 </script>
 
 <style scoped>
