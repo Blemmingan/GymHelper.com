@@ -23,6 +23,8 @@ import DoingCooldownCycle from '@/components/DoingCooldownCycle.vue'
 import RateRoutine from '@/components/RateRoutine.vue'
 import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
 import { useUserStore } from '@/stores/UserStore'
+import MyExercises from '@/components/MyExercises.vue'
+import editExercise from '@/components/editExercise.vue'
 
 import UserProfile from '@/views/UserProfile.vue'
 
@@ -54,6 +56,7 @@ const routes = [
   },
   {
     path: '/createExcercise',
+    name: 'createExercise',
     component: ExcerciseCard
   },
 
@@ -115,8 +118,20 @@ const routes = [
   },
 
   {
+    path: '/myExercises',
+    name: 'myExercises',
+    component: MyExercises
+  },
+
+  {
     path: '/viewRoutine',
     component: RoutineDetailedView
+  },
+
+  {
+    path: '/editExercise',
+    name: 'editExercise',
+    component: editExercise
   },
 
   {

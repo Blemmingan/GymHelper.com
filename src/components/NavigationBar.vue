@@ -7,8 +7,8 @@
             <v-tabs v-if="userStore.isLoggedIn">
                 <v-spacer></v-spacer>
                 <v-tab to="/">Home</v-tab>
+                <v-tab to="myExercises">Mis ejercicios</v-tab>
                 <v-tab>Mis rutinas</v-tab>
-                <v-tab>Otro tab</v-tab>
             </v-tabs>
             <v-spacer></v-spacer>
             <div class='right-section' v-if="!userStore.isLoggedIn">
@@ -29,8 +29,8 @@
                     </template>
                     <v-list>
                         <v-list-item @click="router.push('profile')">Mi perfil</v-list-item>
-                        <v-list-item @click="router.push('myroutines')">Mis rutinas</v-list-item>
-                        <v-list-item @click="router.push('myexercises')">Mis ejercicios</v-list-item>
+                        <v-list-item @click="router.push('myExercises')">Mis ejercicios</v-list-item>
+                        <v-list-item @click="router.push('myRoutines')">Mis rutinas</v-list-item>
                         <v-divider ></v-divider>  
                         <v-list-item @click="logout()" :disabled="logoutLoading" :loading="logoutLoading">Cerrar Sesión</v-list-item>     
                     </v-list>
