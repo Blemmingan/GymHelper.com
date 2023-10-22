@@ -1,6 +1,5 @@
 <template>
     <v-card elevation="10" class="infoBox">
-        {{ newBirthdate }}
         <v-card-actions v-if="!editing" class="d-flex justify-right">
             <v-spacer></v-spacer>
             <v-btn class="mt-2 bg-secondary text-black" @click="editing=!editing" :disabled="disableButtons">
@@ -144,6 +143,7 @@ async function updateProfile(){
                                                             newGender.value,
                                                             newBirthdate.value,
                                                             newPhone.value,
+                                                            newImageUrl.value
                                                             ))
         user.value = await userStore.getCurrentUser()
         endProfileUpdate()
