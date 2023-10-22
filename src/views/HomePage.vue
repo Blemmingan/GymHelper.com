@@ -1,13 +1,23 @@
 <template>
   <div>
+
+    <div v-if="!userStore.isLoggedIn">
+      <v-container class="notLogged">
+        <h1 class="slogan">ENTRENAR NUNCA FUE TAN FACIL!</h1>
+        <h3 class="texto">Registrese o inicie sesión para empezar a entrenar!</h3>
+      </v-container>
+    </div>
+
+    <div v-if="userStore.isLoggedIn">
     <v-card class="background-card">
       <v-container>
         <h1 class="slogan">ENTRENAR NUNCA FUE TAN FACIL!</h1>
-        <h3 class="texto" v-if="!userStore.isLoggedIn">Registrese o inicie sesión para empezar a entrenar!</h3>
       </v-container>
     </v-card>
 
-    <UserHome v-if="userStore.isLoggedIn"/>
+    <UserHome/>
+    </div>
+
 
     <p>DEBUG</p>
     <a href="./createExcercise">Crear Ejercicio </a>
@@ -28,18 +38,27 @@
 </template>
 
 <script setup>
-import router from '@/router';
+import { onBeforeMount } from 'vue'
 import { useUserStore } from '@/stores/UserStore'
-import UserHome from '@/components/UserHome.vue';
+import UserHome from '@/components/UserHome.vue'
+import { useBackgroundStore } from '@/stores/BackgroundStore';
 
 const userStore = useUserStore()
+const backgroundStore = useBackgroundStore()
 
-  function goToRegister(){
-    router.push('./register');
+
+  function setBackground(background){
+    backgroundStore.setBackground(background)
   }
-  function goToLogin(){
-    router.push('./login');
-  }
+
+  onBeforeMount(() => {
+  if(userStore.isLoggedIn)
+    setBackground('white');
+  else
+    setBackground('women-plank-pose.jpg')
+  })
+
+
 </script>
 
 <style scoped>
@@ -75,6 +94,14 @@ const userStore = useUserStore()
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.notLogged {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start; /* Align content at the top */
+  height: 100%; /* Use full viewport height */
 }
 
 </style>
