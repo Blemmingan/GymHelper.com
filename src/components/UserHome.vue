@@ -10,7 +10,7 @@
             <generic-routine-card/>
             <div class="containerEx">
               <h1>TUS EJERCICIOS</h1>
-              <v-btn>VER</v-btn>  
+              <v-btn @click="goToMyExc">VER</v-btn>  
             </div>
           </v-sheet>
         </v-col>
@@ -34,6 +34,9 @@ import router from '@/router';
 import GenericRoutineCard from './GenericRoutineCard.vue';
     function goToWarmup(){
         router.push('/warmup')
+    }
+    function goToMyExc(){
+      router.push('./MyExercises')
     }
 </script>
 

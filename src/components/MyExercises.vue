@@ -1,5 +1,5 @@
 <template>
-  <v-container>
+  <v-container class="container">
     <div class="title-container">
       <h1 class="title">Mis Ejercicios</h1>
       <v-btn @click="addExercise()" color="primary">
@@ -7,7 +7,7 @@
       </v-btn>
     </div>
 
-    <v-row>
+    <v-row v-if="excercises != null">
       <v-col v-for="exercise in exercises" :key="exercise.name" cols="12" sm="6" md="4">
         <v-card>
           <!-- Image -->
@@ -29,6 +29,9 @@
           </v-card-actions>
         </v-card>
       </v-col>
+    </v-row>
+    <v-row v-else class="error-msg">
+      <p>Parece que no tienes ningun ejercicio. Clickea el + para crear uno.</p>
     </v-row>
   </v-container>
 </template>
@@ -73,6 +76,18 @@ function editExercise(exercise){
 .title {
   font-size: 24px;
   font-weight: bold;
+}
+
+.container{
+  border: 3px solid green;
+  border-radius: 25px;
+  background-color: whitesmoke;
+}
+.error-msg{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-left: auto;
 }
 
 </style>
