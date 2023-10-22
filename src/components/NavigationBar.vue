@@ -1,10 +1,9 @@
 <template>
 <div>
     <v-app-bar color="primary" app>
-            <v-app-bar-nav-icon class="logo" @click="router.push('/')">
-                <v-btn icon="mdi-weight-lifter"></v-btn>
-            </v-app-bar-nav-icon>
-            <v-app-bar-title class="logo" @click="router.push('/')">GymHelper.com</v-app-bar-title> 
+            <v-app-bar-title class="logo" @click="router.push('/')">
+                <v-icon>mdi-weight-lifter</v-icon>GymHelper.com
+            </v-app-bar-title> 
             <v-tabs v-if="userStore.isLoggedIn">
                 <v-spacer></v-spacer>
                 <v-tab to="/">Home</v-tab>
@@ -19,13 +18,23 @@
             <div class='right-section' v-else>
                 <v-menu transition="slide-y-transition">
                     <template v-slot:activator="{props}">
-                        <v-btn v-bind="props">logged </v-btn> <!--Aca quiero que salga el username + su foto de perfil-->
+                        <v-btn v-bind="props">
+                            <div class="user">
+                                {{user.username}}
+                            </div> 
+                            <v-avatar class="user">
+                                <v-img alt="profile-picture" :src="getProfilePicture()"></v-img>
+                            </v-avatar>
+                        </v-btn>
                     </template>
-                    <v-btn>Perfil</v-btn>
-                    <v-btn>Mis rutinas</v-btn>
-                    <v-btn>Mis ejercicios</v-btn>
-                    <v-divider thickness="1px"></v-divider>
-                    <v-btn @click="logout()" :disabled="logoutLoading" :loading="logoutLoading">Cerrar Sesión</v-btn>
+                    <v-list>
+                        <v-list-item @click="router.push('/profile')">Mi perfil</v-list-item>
+                        <v-list-item @click="router.push('/myroutines')">Mis rutinas</v-list-item>
+                        <v-list-item @click="router.push('/myexercises')">Mis ejercicios</v-list-item>
+                        <v-divider ></v-divider>  
+                        <v-list-item @click="logout()" :disabled="logoutLoading" :loading="logoutLoading">Cerrar Sesión</v-list-item>     
+                    </v-list>
+                    
                 </v-menu>
                 
             </div>
@@ -38,10 +47,12 @@
     import { useUserStore } from '@/stores/UserStore'
     import {useRouter} from 'vue-router'
     import {ref} from 'vue'
-    
+
     const userStore = useUserStore()
     const alertStore = useAlertStore()
     const router = useRouter()
+
+    const user = await userStore.getCurrentUser()
     
     const logoutLoading = ref(false)
     
@@ -57,15 +68,27 @@
         }
         
     }
+
+    function getProfilePicture(){
+        if (user.avatarUrl){
+           return user.avatarUrl
+        }
+        return toImageUrl('../../defaultAvatar.jpg')
+    }
+
+    function toImageUrl(path){
+    return new URL(path, import.meta.url).href
+    }
+
+
 </script>
 
 <style scoped>
     .logo {
         cursor: pointer;
+        font-weight: bold;
     }
-
-    .right-section {
-        margin-right: 10px;
+    .user {
+        margin-right: 10px
     }
-
 </style>

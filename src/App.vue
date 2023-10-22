@@ -1,12 +1,14 @@
 <template>
   <div class="global" :style="`background-image: url(${background});`">
     <v-app style="background: rgba(0,0,0,0);">
-     <NavigationBar/>
-     <suspense>
-      <v-container class="main" fluid>
-        <RouterView/>
-      </v-container>
-</suspense>
+      <suspense>
+        <NavigationBar/>
+      </suspense>
+      <suspense>
+        <v-container class="main" fluid>
+          <RouterView/>
+        </v-container>
+      </suspense>
       <v-snackbar 
         v-model="notification.show" 
         color="black" 

@@ -89,6 +89,7 @@ const newLastName = ref(user.value.lastName)
 const newGender = ref(user.value.gender)
 const newBirthdate = ref(null)
 const newPhone = ref(user.value.phone)
+const newImageUrl = ref(null)
 
 const editing = ref(false)
 
@@ -103,7 +104,7 @@ const disableButtons = computed(()=>{
 })
 
 function getProfilePicture(){
-    return (user.valueavatarUrl)? user.value.avatarUrl : '../../defaultAvatar.jpg'
+    return (user.value.avatarUrl)? user.value.avatarUrl : toImageUrl('../../defaultAvatar.jpg')
 }
 
 function toImageUrl(path){
@@ -134,6 +135,9 @@ async function updateProfile(){
             newBirthdate.value = new Date(newBirthdate.value.replace(/-/,'/')).getTime()
         } else {
             newBirthdate.value = user.value.birthdate
+        }
+        if (!newImageUrl.value){
+            newImageUrl.value = user.value.imageUrl
         }
         await userStore.modifyCurrentUserData(new UserData( newFirstName.value,
                                                             newLastName.value,
