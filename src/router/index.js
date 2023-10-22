@@ -56,7 +56,8 @@ const routes = [
   {
     path: '/createExcercise',
     name: 'createExercise',
-    component: ExcerciseCard
+    component: ExcerciseCard,
+    meta: {requiresAuth: true}
   },
 
   {
@@ -68,69 +69,82 @@ const routes = [
 
   {
     path: '/home',
-    component: UserHome
+    component: UserHome,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/warmup',
-    component: RoutineWarmup
+    component: RoutineWarmup,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/core',
-    component: RoutineCore
+    component: RoutineCore,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/cooldown',
-    component: RoutineCooldown
+    component: RoutineCooldown,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/excercise',
-    component: AddExcercise
+    component: AddExcercise,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/nameRoutine',
-    component: NameRoutineField
+    component: NameRoutineField,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/runRoutineWarmup',
-    component: DoingWarmup
+    component: DoingWarmup,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/routineCore',
-    component: DoingCoreCycles
+    component: DoingCoreCycles,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/routineCooldown',
-    component: DoingCooldownCycle
+    component: DoingCooldownCycle,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/rate',
-    component: RateRoutine
+    component: RateRoutine,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/myExercises',
     name: 'myExercises',
-    component: MyExercises
+    component: MyExercises,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/viewRoutine',
-    component: RoutineDetailedView
+    component: RoutineDetailedView,
+    meta: {requiresAuth: true}
   },
 
   {
     path: '/editExercise',
     name: 'editExercise',
-    component: editExercise
+    component: editExercise,
+    meta: {requiresAuth: true}
   },
 
   {
