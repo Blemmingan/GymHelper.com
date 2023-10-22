@@ -1,18 +1,17 @@
 <template>
      <v-col>
-                <v-card class="card">
+            <v-card class="card">
                     <v-row>
                         <v-col cols="7">
                             <v-card-item>
                                  <div>
                                      <div class="card-text">
-                                       <p>Tiempo</p>
-                                       <p>NOMBRE</p>
-                                       <p>Desc</p>
+                                       <h2>{{ routine.name }}</h2>
+                                       <p>{{ routine.detail }}</p>
                                       </div>
                                    </div>
                                    <v-card-actions>
-                                        <v-btn block @click="goToView">Ver</v-btn>
+                                        <v-btn block @click="goToView(routine)">Ver</v-btn>
                                     </v-card-actions>
                             </v-card-item>
                         </v-col>
@@ -29,13 +28,21 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
+import {defineProps} from 'vue';
+import { useAlertStore } from '@/stores/AlertStore';
+
+const {routine} = defineProps(['routine'])
+
+const alertStore = useAlertStore()
 const router = useRouter()
+
 function goToView(){
-    router.push('./viewRoutine')
+    alertStore.sendNotification("No implementado!")
 }
 function startRoutine(){
-    router.push('/runRoutineWarmup')
+    alertStore.sendNotification("No implementado!")
 }
+
 </script>
 
 <style scoped>

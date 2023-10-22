@@ -24,6 +24,7 @@ import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
 import { useUserStore } from '@/stores/UserStore'
 import MyExercises from '@/components/MyExercises.vue'
 import editExercise from '@/components/editExercise.vue'
+import MyRoutines from '@/views/MyRoutines.vue'
 
 import UserProfile from '@/views/UserProfile.vue'
 
@@ -121,7 +122,12 @@ const routes = [
     name: 'myExercises',
     component: MyExercises
   },
-
+  {
+    path: '/myRoutines',
+    name: 'myRoutines',
+    component: MyRoutines,
+    meta: {requiresAuth: true}
+  },
   {
     path: '/viewRoutine',
     component: RoutineDetailedView
