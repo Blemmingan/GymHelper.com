@@ -15,9 +15,18 @@
                 <ExMiniCard/>
             </v-col>
     </v-row>
-    <v-btn @click="back">
-        Volver
-    </v-btn>
+    <v-row>
+        <v-col>
+            <v-btn @click="back">
+                Volver
+            </v-btn>
+        </v-col>
+        <v-col></v-col>
+        <v-col>
+            <v-btn class="deleteButton">Borrar</v-btn>
+        </v-col>
+    </v-row>
+    
     </div>
     
 </template>
@@ -41,5 +50,9 @@ function back(){
     }
     .rowCont{
         margin-bottom: 1%;
+    }
+    .deleteButton{
+        color: white;
+        background-color: red;
     }
 </style>
