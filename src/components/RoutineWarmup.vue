@@ -1,18 +1,25 @@
 <template>
-    <h1>Seleccione ejercicios para la entrada en calor.</h1>
-    <v-row align="start" no-gutters class="container">
-        <excercise-search-bar></excercise-search-bar>
-        <popular-excercises-mini-card></popular-excercises-mini-card>
-        
-    </v-row>
-    <div>
-        <v-btn @click="goBack">
-            Volver
-        </v-btn>
-        <v-btn @click="next">
-            Finalizar entrada en calor.
-        </v-btn>
+    <div class="container">
+        <h1>Seleccione ejercicios para la entrada en calor.</h1>
+        <v-row no-gutters class="cards">
+            <excercise-search-bar></excercise-search-bar>
+            <popular-excercises-mini-card></popular-excercises-mini-card>
+        </v-row>
+        <v-row class="buttonsCont">
+            <v-col cols="2">
+                <v-btn @click="goBack">
+                Volver
+                </v-btn>
+            </v-col>
+            <v-col cols="5"></v-col>
+            <v-col cols="5">
+                <v-btn @click="next">
+                Finalizar entrada en calor.
+                </v-btn>
+            </v-col>
+        </v-row>   
     </div>
+    
 </template>
 
 <script setup>
@@ -32,6 +39,16 @@ function goBack(){
 .container{
     text-align: center;
     align-items: center;
-    
+    background-color: whitesmoke;
+    border: 3px solid green;
+    border-radius: 25px;
+    width: 50%;
+    margin-left: 25%;
+    padding: 1%;
+}
+.cards{
+    margin-left: 25%;
+    margin-top: 1%;
+    margin-bottom: 1%;
 }
 </style>

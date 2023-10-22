@@ -50,7 +50,7 @@ function getImageUrl(exercise){
 }
 
 function addExercise(){
-    router.push("createExercise")
+    router.push("./createExcercise")
 }
 
 function deleteExercise(exercise){

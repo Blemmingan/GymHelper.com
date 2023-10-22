@@ -1,15 +1,25 @@
 <template>
-    <div>
+     <div class="container">
         <h1>Seleccione ejercicios para el ciclo de enfriamiento.</h1>
-        <v-row align="start" no-gutters>
+        <v-row no-gutters class="cards">
             <excercise-search-bar></excercise-search-bar>
             <popular-excercises-mini-card></popular-excercises-mini-card>
         </v-row>
-    </div>
-    <div>
-        <v-btn @click="goBack">Volver</v-btn>
-        <v-btn @click="next">Finalizar Rutina</v-btn>
-        
+        <v-row class="buttonsCont">
+            <v-col cols="2">
+                <v-btn @click="goBack">
+                Volver
+                </v-btn>
+            </v-col>
+            <v-col cols="7">
+                
+            </v-col>
+            <v-col cols="3">
+                <v-btn @click="next">
+                Finalizar Rutina
+                </v-btn>
+            </v-col>
+        </v-row>   
     </div>
 </template>
 
@@ -25,3 +35,21 @@ function goBack(){
     router.push(-1)
 }
 </script>
+
+<style scoped>
+    .container{
+    text-align: center;
+    align-items: center;
+    background-color: whitesmoke;
+    border: 3px solid green;
+    border-radius: 25px;
+    width: 50%;
+    margin-left: 25%;
+    padding: 1%;
+}
+.cards{
+    margin-left: 25%;
+    margin-top: 1%;
+    margin-bottom: 1%;
+}
+</style>

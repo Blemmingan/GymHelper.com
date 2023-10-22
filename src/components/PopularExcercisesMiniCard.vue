@@ -1,5 +1,5 @@
 <template>
-    <v-sheet class="container">
+    <v-sheet>
             <v-col>
                 <h4>Ejercicios populares...</h4>
                 <v-card>
