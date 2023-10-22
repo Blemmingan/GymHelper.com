@@ -45,30 +45,30 @@ const userStore = useUserStore()
 <style scoped>
 .slogan {
   font-size: 2rem;
-  color: #4CAF50; /* Green color */
+  color: #4CAF50;
   text-align: right;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   margin-top: 50%px;
   margin-right: 2%;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adding a subtle shadow */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
 }
 
 .texto {
   font-size: 1.25rem;
-  color: #000000; /* Green color */
+  color: #000000;
   text-align: right;
   font-family: 'Montserrat', sans-serif;
   font-weight: bold;
   margin-top: 50%px;
   margin-right: 2%;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); /* Adding a subtle shadow */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3); 
 }
 
 .background-card {
   width: 100%;
   min-width: 1100px;
-  height: 300px; /* Adjust the height based on your preference */
+  height: 300px; 
   background: url('pedalling-hard.jpg') center top;
   background-size: cover;
   background-position: top;

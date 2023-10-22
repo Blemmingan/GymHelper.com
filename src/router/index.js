@@ -24,6 +24,7 @@ import RateRoutine from '@/components/RateRoutine.vue'
 import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
 import { useUserStore } from '@/stores/UserStore'
 
+import UserProfile from '@/views/UserProfile.vue'
 
 const routes = [
   {
@@ -58,7 +59,7 @@ const routes = [
 
   {
     path: '/profile',
-    component: ProfileView,
+    component: UserProfile,
     meta: {requiresAuth: true}
   },
 

@@ -25,7 +25,7 @@
                     <v-btn>Mis rutinas</v-btn>
                     <v-btn>Mis ejercicios</v-btn>
                     <v-divider thickness="1px"></v-divider>
-                    <v-btn @click="logout()">Cerrar Sesión</v-btn>
+                    <v-btn @click="logout()" :disabled="logoutLoading" :loading="logoutLoading">Cerrar Sesión</v-btn>
                 </v-menu>
                 
             </div>
@@ -34,15 +34,28 @@
 </template>
 
 <script setup>
+    import { useAlertStore } from '@/stores/AlertStore';
     import { useUserStore } from '@/stores/UserStore'
     import {useRouter} from 'vue-router'
-
+    import {ref} from 'vue'
+    
     const userStore = useUserStore()
+    const alertStore = useAlertStore()
     const router = useRouter()
-
+    
+    const logoutLoading = ref(false)
     
     async function logout(){
-        await userStore.logout()
+        logoutLoading.value = true 
+        try{
+            await userStore.logout()
+            router.push('/')
+        } catch(e){
+            alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")
+        } finally{
+            logoutLoading.value = false
+        }
+        
     }
 </script>
 

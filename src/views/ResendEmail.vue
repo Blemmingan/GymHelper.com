@@ -75,7 +75,7 @@ div{
 
 }
 .formBox{
-    border: 3px solid green;
+    border: 3px solid #4CAF50;
     border-radius: 25px;
     background-color: whitesmoke;
     margin-top: auto;
