@@ -23,30 +23,14 @@
                     </div> 
                     
                     <div>
-                        <v-radio-group
-                         v-model="choice"
-                         inline 
-                         required>
-                            <v-radio
-                              label="Tiempo"
-                              value="Tiempo"
-                              v-model="timeChosen"
-                              @click="chooseTime()"
-                            ></v-radio>
-                             <v-radio
-                              label="Repeticiones"
-                              value="Repeticiones"
-                              v-model="repsChosen"
-                              @click="chooseReps()"
-                             ></v-radio>
-                         </v-radio-group>
-                    </div>
-                    <div>
-                        <v-text-field v-if="timeChosen && !repsChosen" label="Minutos..."></v-text-field>
-                        <v-text-field v-else-if="repsChosen && !timeChosen" label="Repeticiones..."></v-text-field>
-                        <v-text-field v-else label="Seleccione una modalidad" disabled=""></v-text-field>
-                    </div>
-                <v-btn type="submit" class="mt-2 bg-secondary text-black">Crear</v-btn>
+                        <v-text-field
+                        v-model="excerciseType"
+                        :rules="ExTypeRules"
+                        label="Tipo: "
+                        required
+                            />
+                    </div> 
+                <v-btn @click="saveExercise()" class="mt-2 bg-secondary text-black">Crear</v-btn>
         </v-form>
         </v-sheet>
 
@@ -56,32 +40,36 @@
 
 <script setup>
 import { ref } from 'vue';
+import { useExerciseStore } from '@/stores/ExerciseStore';
+import { Exercise } from '@/api/exercise';
 
 const excerciseName = ref('')
 const excerciseDescription = ref('')
-const choice = ref(false)
-const timeChosen = ref(false)
-const repsChosen = ref(false)
+const exerciseType = ref('')
+const exerciseStore = useExerciseStore()
 
 const ExNameRules = [
     value => Boolean(value) || 'Debe ingresar un nombre de ejercicio',
     value => value.length <= 50 || 'El nombre de ejercicio no puede superar los 50 carácteres'
-]       
+]   
+
 const ExDescriptionRules = [
         value => Boolean(value) || 'Debe ingresar una descripcion.',
         value => value.length <= 50 || 'La descripción no puede superar los 50 caracteres',
         value => value.length >= 2 || 'La descripción debe superar los 2 caracteres'
 ]
 
-function chooseTime(){
-   timeChosen.value = true
-   repsChosen.value = false
-    
-}
+const ExTypeRules = [
+    value => Boolean(value) || 'Debe ingresar un nombre de ejercicio',
+    value => value.length <= 50 || 'El nombre de ejercicio no puede superar los 50 carácteres'
+]   
 
-function chooseReps(){
-    timeChosen.value = false
-    repsChosen.value = true
+function saveExercise(){
+    exerciseStore.add(new Exercise(
+        excerciseName.value,
+        excerciseDescription.value,
+        "exercise"
+    ))
 }
 
 </script>
