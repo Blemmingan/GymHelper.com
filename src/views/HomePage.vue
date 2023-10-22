@@ -12,7 +12,7 @@
     <v-card class="background-card">
       <v-container>
         <h1 class="slogan">ENTRENAR NUNCA FUE TAN FACIL!</h1>
-        <h3 class="text">Te damos la bienvenida a GymHelper!</h3>
+        <h3 class="texto">Te damos la bienvenida a GymHelper!</h3>
       </v-container>
     </v-card>
 
@@ -95,6 +95,9 @@ const backgroundStore = useBackgroundStore()
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: whitesmoke;
+  border-radius: 25px;
+  border: 3px solid green;
 }
 
 .notLogged {

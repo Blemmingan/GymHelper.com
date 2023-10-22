@@ -7,10 +7,11 @@
       </v-btn>
     </div>
 
-    <v-row>
-      <v-col v-for="exercise in exerciseStore.items" :key="exercise.id" cols="12" sm="6" md="4">
+    <v-row v-if="items.length != 0">
+      <v-col  v-for="exercise in exerciseStore.items" :key="exercise.id" cols="12" sm="6" md="4">
         <v-card>
           <!-- Image -->
+          
           <v-img :src="getImageUrl(exercise)" height="200"></v-img>
 
           <!-- Title -->
@@ -30,9 +31,9 @@
         </v-card>
       </v-col>
     </v-row>
-    <!-- <v-row v-else class="error-msg">
+    <v-row v-else class="error-msg">
       <p>Parece que no tienes ningun ejercicio. Clickea el + para crear uno.</p>
-    </v-row> -->
+    </v-row> 
   </v-container>
 </template>
 
@@ -44,6 +45,7 @@ import { useRouter } from 'vue-router'
 const router = useRouter()
 const exerciseStore = useExerciseStore()
 console.log(exerciseStore.items)
+const items = exerciseStore.items
 
 function getImageUrl(exercise){
     return exerciseStore.getImage(exercise.id).url
