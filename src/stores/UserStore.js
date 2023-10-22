@@ -69,7 +69,7 @@ export const useUserStore = defineStore('security', ()=>{
     }
     
     async function getCurrentUser(){
-        if(!isLoggedIn){
+        if(!isLoggedIn.value){
             return null
         }
         if (user.value){

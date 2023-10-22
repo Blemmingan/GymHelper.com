@@ -27,13 +27,11 @@
 </template>
 
 <script setup>
-import { useRouter } from 'vue-router';
 import { useAlertStore } from '@/stores/AlertStore';
 
 const {routine} = defineProps(['routine'])
 
 const alertStore = useAlertStore()
-const router = useRouter()
 
 function goToView(){
     alertStore.sendNotification("No implementado!")
