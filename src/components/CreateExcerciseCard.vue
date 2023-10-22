@@ -45,7 +45,7 @@ import { Exercise } from '@/api/exercise';
 
 const excerciseName = ref('')
 const excerciseDescription = ref('')
-const exerciseType = ref('')
+const excerciseType = ref('')
 const exerciseStore = useExerciseStore()
 
 const ExNameRules = [
@@ -68,7 +68,7 @@ function saveExercise(){
     exerciseStore.add(new Exercise(
         excerciseName.value,
         excerciseDescription.value,
-        "exercise"
+        excerciseType.value
     ))
 }
 

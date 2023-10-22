@@ -42,6 +42,7 @@ export const useExerciseStore = defineStore('exercise', ()=>{
 
     async function getAll(){
         const result = await ExerciseApi.getAll()
+        items.value = result
         return result
     }
 
@@ -99,6 +100,7 @@ export const useExerciseStore = defineStore('exercise', ()=>{
     }
 
     return {
+        items,
         add,
         modify,
         remove,
