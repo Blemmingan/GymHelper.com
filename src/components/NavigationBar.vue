@@ -23,7 +23,7 @@
                                 {{userStore.getCurrentUser().username}}
                             </div> 
                             <v-avatar class="user">
-                                <v-img alt="profile-picture" :src="getProfilePicture()"></v-img>
+                                <v-img alt="profile-picture" :src="getProfilePicture()"></v-img> <!--no funciona-->
                             </v-avatar>
                         </v-btn>
                     </template>
@@ -46,10 +46,12 @@
     import { useAlertStore } from '@/stores/AlertStore';
     import { useUserStore } from '@/stores/UserStore'
     import {useRouter} from 'vue-router'
+    import { useBackgroundStore } from '@/stores/BackgroundStore';
     import {ref} from 'vue'
 
     const userStore = useUserStore()
     const alertStore = useAlertStore()
+    const backgroundStore = useBackgroundStore()
     const router = useRouter()
 
     
@@ -60,6 +62,7 @@
         logoutLoading.value = true 
         try{
             await userStore.logout()
+            backgroundStore.setBackground('../../background.jpg')
             router.push('/')
         } catch(e){
             alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")

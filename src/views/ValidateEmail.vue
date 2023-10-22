@@ -1,6 +1,6 @@
 <template>
 <v-main>
-    <v-card elevation="10" class="formBox">
+    <v-card elevation="10" class="formBox" height="60%">
         <span v-if="!done">
             <v-btn @click="router.push('/register')" icon="mdi-arrow-left" class="ma-2 d-flex justify-left" color="secondary"/>
             <h1 class="mb-2">¡Ya casi!</h1>
@@ -118,19 +118,19 @@ div{
 
 }
 .formBox{
-    border: 3px solid #4CAF50;
-    border-radius: 25px;
-    background-color: whitesmoke;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin: 0;
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    -ms-transform: translate(-50%, -50%);
-    transform: translate(-50%, -50%);
-    width: 40%;
-}
+        border: 3px solid #4CAF50;
 
+        background-color: whitesmoke;
+        margin-top: auto;
+        margin-bottom: auto;
+        margin: 0;
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        -ms-transform: translate(-50%, -50%);
+        transform: translate(-50%, -50%);
+        width: 40%;
+        overflow-y: scroll;
+    }
 
 </style>

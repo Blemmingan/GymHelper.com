@@ -75,6 +75,7 @@
 <script setup>
 import { UserData } from '@/api/user';
 import { useAlertStore } from '@/stores/AlertStore';
+import { useBackgroundStore } from '@/stores/BackgroundStore';
 import { useUserStore } from '@/stores/UserStore';
 import {ref, computed} from 'vue';
 import {useRouter} from 'vue-router'
@@ -82,6 +83,7 @@ import {useRouter} from 'vue-router'
 const router = useRouter()
 const userStore = useUserStore()
 const alertStore = useAlertStore()
+const backgroundStore = useBackgroundStore()
 
 const user = ref(await userStore.getCurrentUser())
 
@@ -160,6 +162,7 @@ async function logout(){
         logoutLoading.value = true 
         try{
             await userStore.logout()
+            backgroundStore.setBackground('../../background.jpg')
             router.push('/')
         } catch(e){
             alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")
@@ -194,14 +197,11 @@ function toImageUrl(path){
 
 .infoBox{
         border: 3px solid #4CAF50;
-        border-radius: 25px;
         background-color: whitesmoke;
         
         
         display: block;
         margin-left: auto;
         margin-right: auto ;
-        
-
     }
 </style>

@@ -54,9 +54,9 @@ const backgroundStore = useBackgroundStore()
 
   onBeforeMount(() => {
   if(userStore.isLoggedIn)
-    setBackground('white');
+    setBackground(null);
   else
-    setBackground('women-plank-pose.jpg')
+    setBackground('background.jpg')
   })
 
 

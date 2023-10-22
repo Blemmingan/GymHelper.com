@@ -1,6 +1,6 @@
 <template>
     <v-main>
-                <v-card elevation="10" class="formBox">
+                <v-card elevation="10" class="formBox" height="60%">
                     <h1 class="mb-2">Iniciar sesión en GymHelper</h1>
                     <v-divider></v-divider>
                     <v-form validate-on="input" v-model="validForm" >
@@ -106,7 +106,7 @@ async function submit(){
     }
     .formBox{
         border: 3px solid #4CAF50;
-        border-radius: 25px;
+
         background-color: whitesmoke;
         margin-top: auto;
         margin-bottom: auto;
@@ -117,6 +117,7 @@ async function submit(){
         -ms-transform: translate(-50%, -50%);
         transform: translate(-50%, -50%);
         width: 40%;
+        overflow-y: scroll;
     }
 
 </style>
