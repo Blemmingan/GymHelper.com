@@ -20,7 +20,7 @@
                     <template v-slot:activator="{props}">
                         <v-btn v-bind="props">
                             <div class="user">
-                                {{user.username}}
+                                {{userStore.getCurrentUser().username}}
                             </div> 
                             <v-avatar class="user">
                                 <v-img alt="profile-picture" :src="getProfilePicture()"></v-img>
@@ -28,9 +28,9 @@
                         </v-btn>
                     </template>
                     <v-list>
-                        <v-list-item @click="router.push('/profile')">Mi perfil</v-list-item>
-                        <v-list-item @click="router.push('/myroutines')">Mis rutinas</v-list-item>
-                        <v-list-item @click="router.push('/myexercises')">Mis ejercicios</v-list-item>
+                        <v-list-item @click="router.push('profile')">Mi perfil</v-list-item>
+                        <v-list-item @click="router.push('myroutines')">Mis rutinas</v-list-item>
+                        <v-list-item @click="router.push('myexercises')">Mis ejercicios</v-list-item>
                         <v-divider ></v-divider>  
                         <v-list-item @click="logout()" :disabled="logoutLoading" :loading="logoutLoading">Cerrar Sesión</v-list-item>     
                     </v-list>
@@ -52,7 +52,7 @@
     const alertStore = useAlertStore()
     const router = useRouter()
 
-    const user = await userStore.getCurrentUser()
+    
     
     const logoutLoading = ref(false)
     
@@ -69,7 +69,8 @@
         
     }
 
-    function getProfilePicture(){
+    async function getProfilePicture(){
+        const user = await userStore.getCurrentUser()
         if (user.avatarUrl){
            return user.avatarUrl
         }

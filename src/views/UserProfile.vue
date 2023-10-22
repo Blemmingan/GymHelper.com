@@ -115,7 +115,7 @@ function getBirthdate(){
     if (user.value.birthdate){
         return new Date(user.value.birthdate)
     }
-    return null
+    return new Date(null)
 }
 
 function endProfileUpdate(){
