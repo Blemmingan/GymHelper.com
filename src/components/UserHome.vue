@@ -3,22 +3,22 @@
       <v-row
         align="start"
         no-gutters>
-        <v-col>
-        <v-sheet>
+        <v-col cols="5">
+        <v-sheet class="sheet">
             <h1>TUS RUTINAS</h1>
             <generic-routine-card/>
             <generic-routine-card/>
-            <h1>TUS EJERCICIOS</h1>
-            <v-btn>Nuevo  </v-btn>
-            <ex-mini-card></ex-mini-card>
+            <div class="containerEx">
+              <h1>TUS EJERCICIOS</h1>
+              <v-btn>VER</v-btn>  
+            </div>
           </v-sheet>
         </v-col>
         <v-col>
             <v-btn icon="mdi-plus" @click="goToWarmup()"></v-btn>
-            
         </v-col>
-        <v-col>
-            <v-sheet>
+        <v-col cols="6">
+            <v-sheet class="sheet">
             <h1>RUTINAS POPULARES</h1>
             <generic-routine-card/>
             <generic-routine-card/>
@@ -32,7 +32,6 @@
 <script setup>
 import router from '@/router';
 import GenericRoutineCard from './GenericRoutineCard.vue';
-import ExMiniCard from './ExMiniCard.vue';
     function goToWarmup(){
         router.push('/warmup')
     }
@@ -41,5 +40,15 @@ import ExMiniCard from './ExMiniCard.vue';
 <style scoped>
   .container{
     margin-top: 100px;
+    border: 3px solid green;
+    border-radius: 25px;
+    background-color: whitesmoke;
+  }
+  .sheet{
+    text-align: center;
+    background-color: whitesmoke;
+  }
+  .containerEx{
+    margin-top: 10%;
   }
 </style>
