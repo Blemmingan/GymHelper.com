@@ -56,12 +56,14 @@
 
 <script setup>
 import { ref } from 'vue';
+
 const excerciseName = ref('')
 const excerciseDescription = ref('')
 const choice = ref(false)
 const timeChosen = ref(false)
 const repsChosen = ref(false)
-    const ExNameRules = [
+
+const ExNameRules = [
     value => Boolean(value) || 'Debe ingresar un nombre de ejercicio',
     value => value.length <= 50 || 'El nombre de ejercicio no puede superar los 50 carácteres'
 ]       
@@ -70,6 +72,7 @@ const ExDescriptionRules = [
         value => value.length <= 50 || 'La descripción no puede superar los 50 caracteres',
         value => value.length >= 2 || 'La descripción debe superar los 2 caracteres'
 ]
+
 function chooseTime(){
    timeChosen.value = true
    repsChosen.value = false
@@ -80,7 +83,6 @@ function chooseReps(){
     timeChosen.value = false
     repsChosen.value = true
 }
-
 
 </script>
 
