@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="component-background">
 
     <div v-if="!userStore.isLoggedIn">
       <v-container class="notLogged">
@@ -12,6 +12,7 @@
     <v-card class="background-card">
       <v-container>
         <h1 class="slogan">ENTRENAR NUNCA FUE TAN FACIL!</h1>
+        <h3 class="text">Te damos la bienvenida a GymHelper!</h3>
       </v-container>
     </v-card>
 
@@ -102,6 +103,12 @@ const backgroundStore = useBackgroundStore()
   align-items: center;
   justify-content: flex-start; /* Align content at the top */
   height: 100%; /* Use full viewport height */
+}
+
+.component-background{
+  background-color: whitesmoke;
+  border-radius: 25px;
+  border: 3px solid green;
 }
 
 </style>

@@ -6,9 +6,14 @@
             <v-text-field
             v-model="routineName"
             :rules="routineNameRules"
-            label="Rutina Rutinera..."
+            label="Nombre..."
             required 
             />
+            <v-text-field
+            v-model="routineDesc"
+            :rules="descRules"
+            label="Descripcion..."
+            required/>
             <v-btn class="mt-2 bg-secondary text-black" block type="submit" @click="goHome">Crear</v-btn>
         </v-form>
         
