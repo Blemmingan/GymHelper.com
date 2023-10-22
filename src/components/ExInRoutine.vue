@@ -1,7 +1,7 @@
 <template>
     <v-card>
             <v-row>
-            <v-col cols="11">
+            <v-col cols="10">
                 <v-card-item>
                     <div class="card-text">
                         <p>Tiempo</p>
@@ -10,7 +10,7 @@
                     </div>
                 </v-card-item>
             </v-col>
-            <v-col class="buttonCol" cols="1"  >
+            <v-col class="buttonCol" cols="2">
                 <v-btn  @click="changeBackgroundColor = !changeBackgroundColor" 
                 :style="{
                     backgroundColor: changeBackgroundColor ? 'green' : 'whitesmoke',
@@ -41,6 +41,10 @@
         background-color: whitesmoke;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;  
-        
+        border-bottom-right-radius: 0px;
+        border-top-right-radius: 0px;
+    }
+    .card-text{
+        text-align: left;
     }
 </style>

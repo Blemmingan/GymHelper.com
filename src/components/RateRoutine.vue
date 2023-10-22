@@ -1,14 +1,16 @@
 <template>
-    <h1>Puntua la Rutina</h1>
-    <v-rating
-      v-model="rating"
-      color="orange-lighten-1"
-      active-color="blue"
-    ></v-rating>
-    <div>
-        <v-btn @click="returnHome()">Enviar</v-btn>
-
+    <div class="container">
+        <h1>Puntua la Rutina</h1>
+        <v-rating
+        v-model="rating"
+        color="orange-lighten-1"
+        active-color="blue"
+        ></v-rating>
+        <div>
+            <v-btn @click="returnHome()">Enviar</v-btn>
+        </div>
     </div>
+    
 </template>
 
 <script setup>
@@ -18,6 +20,20 @@
     
     var rating = ref(0)
     function returnHome(){
-       router.push("/home")
+        if(rating.value != 0){
+            router.push("/home")
+        }
     }
 </script>
+
+<style scoped>
+ .container{
+        text-align: center;
+        align-items: center;
+        width: 30%;
+        border: 3px solid green;
+        background-color: whitesmoke;
+        margin-left: 35%;
+        padding: 1%;
+    }
+</style>

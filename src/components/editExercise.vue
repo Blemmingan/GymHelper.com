@@ -33,12 +33,15 @@ import { useRoute } from 'vue-router'
 import { useExerciseStore } from '@/stores/ExerciseStore';
 import { Exercise } from '@/api/exercise.js'
 
+
 const route = useRoute()
 const exerciseStore = useExerciseStore()
 
 const newName = ref(route.params.exercise.name)
 const newDetail = ref(route.params.exercise.detail)
 const newType = ref(route.params.exercise.type)
+
+const user = ref('')
 
 
 function endExerciseUpdate(){
