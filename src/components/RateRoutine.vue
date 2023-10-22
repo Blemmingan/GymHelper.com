@@ -21,7 +21,7 @@
     var rating = ref(0)
     function returnHome(){
         if(rating.value != 0){
-            router.push("/home")
+            router.push('/')
         }
     }
 </script>
