@@ -9,7 +9,7 @@
         </v-card-actions>
         <v-card-item class="d-flex justify-center text-center" >
         <v-avatar size="100">
-            <v-img alt="Foto de perfil" contain="true" class="avatar" :src="getProfilePicture()" aspect-ratio="1/1">
+            <v-img alt="Foto de perfil" contain="true" class="avatar" :src="getProfilePicture()">
             </v-img>
         </v-avatar>
         </v-card-item>
@@ -50,6 +50,8 @@
                 <v-text-field v-model="newGender" label="Género"></v-text-field>
                 <v-text-field v-model="newBirthdate" label="Cumpleaños" type="date"></v-text-field>
                 <v-text-field v-model="newPhone" label="Telefono"></v-text-field>
+                <v-text-field v-model="newAvatarUrl" label="Avatar"></v-text-field>
+                <v-file-input v-model="newAvatar" label="Avatar" accept="image/*"  prepend-icon="" append-inner-icon="mdi-camera"/>
             </v-form>
         </v-card-actions>
         <v-divider></v-divider>
@@ -88,7 +90,8 @@ const newLastName = ref(user.value.lastName)
 const newGender = ref(user.value.gender)
 const newBirthdate = ref(null)
 const newPhone = ref(user.value.phone)
-const newImageUrl = ref(null)
+const newAvatar = ref(null)
+const newAvatarUrl = ref(null)
 
 const editing = ref(false)
 
@@ -106,10 +109,6 @@ function getProfilePicture(){
     return (user.value.avatarUrl)? user.value.avatarUrl : toImageUrl('../../defaultAvatar.jpg')
 }
 
-function toImageUrl(path){
-    return new URL(path, import.meta.url).href
-}
-
 
 function getBirthdate(){
     if (user.value.birthdate){
@@ -125,6 +124,7 @@ function endProfileUpdate(){
     newGender.value = user.value.gender
     newBirthdate.value = null
     newPhone.value = user.value.phone
+    newAvatarUrl = null
 }
 
 async function updateProfile(){
@@ -135,15 +135,15 @@ async function updateProfile(){
         } else {
             newBirthdate.value = user.value.birthdate
         }
-        if (!newImageUrl.value){
-            newImageUrl.value = user.value.imageUrl
+        if (!newAvatarUrl.value){
+            newAvatarUrl.value = user.value.avatarUrl
         }
         await userStore.modifyCurrentUserData(new UserData( newFirstName.value,
                                                             newLastName.value,
                                                             newGender.value,
                                                             newBirthdate.value,
                                                             newPhone.value,
-                                                            newImageUrl.value
+                                                            newAvatarUrl.value
                                                             ))
         user.value = await userStore.getCurrentUser()
         endProfileUpdate()
@@ -182,6 +182,10 @@ async function deleteAccount(){
     }
 }
 
+
+function toImageUrl(path){
+    return new URL(path, import.meta.url).href
+}
 
 
 </script>
