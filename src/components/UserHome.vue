@@ -6,8 +6,8 @@
         <v-col cols="5">
         <v-sheet class="sheet">
             <h1>TUS RUTINAS</h1>
-            <generic-routine-card/>
-            <generic-routine-card/>
+           <!-- <generic-routine-card/>
+            <generic-routine-card/>-->
             <div class="containerEx">
               <h1>TUS EJERCICIOS</h1>
               <v-btn @click="goToMyExc">VER</v-btn>  
@@ -20,7 +20,7 @@
         <v-col cols="6">
             <v-sheet class="sheet">
             <h1>RUTINAS POPULARES</h1>
-            <generic-routine-card/>
+          <!---->  <generic-routine-card/>
             <generic-routine-card/>
             <img src="src\assets\logo.png" alt="logo">
             </v-sheet>
@@ -43,7 +43,7 @@ import GenericRoutineCard from './GenericRoutineCard.vue';
 <style scoped>
   .container{
     margin-top: 100px;
-    border: 3px solid green;
+    border: 3px solid #4CAF50;
     border-radius: 25px;
     background-color: whitesmoke;
   }

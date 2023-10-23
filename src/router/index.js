@@ -1,6 +1,9 @@
 // Composables
 
 import { createRouter, createWebHistory } from 'vue-router'
+import {watch} from 'vue'
+import { useUserStore } from '@/stores/UserStore'
+import { useRoutineStore } from '@/stores/RoutineStore'
 
 import Login from '@/views/Login.vue'
 import Register from '@/views/Register.vue'
@@ -21,7 +24,7 @@ import DoingCoreCycles from '@/components/DoingCoreCycles.vue'
 import DoingCooldownCycle from '@/components/DoingCooldownCycle.vue'
 import RateRoutine from '@/components/RateRoutine.vue'
 import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
-import { useUserStore } from '@/stores/UserStore'
+
 import MyExercises from '@/components/MyExercises.vue'
 import editExercise from '@/components/editExercise.vue'
 import MyRoutines from '@/views/MyRoutines.vue'
@@ -141,8 +144,10 @@ const routes = [
     meta: {requiresAuth: true}
   },
   {
-    path: '/viewRoutine',
+    path: '/routine/:id',
+    name: 'routine',
     component: RoutineDetailedView,
+    props: true,
     meta: {requiresAuth: true}
   },
 
@@ -155,7 +160,7 @@ const routes = [
 
   {
     path: '/:pathMatch(.*)*',
-    name: 'Not Found',
+    name: 'NotFound',
     component: NotFound
   }
 ]
@@ -179,5 +184,6 @@ router.beforeEach((to, from, next) => {
     next()
   }
 })
+
 
 export default router

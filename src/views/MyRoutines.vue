@@ -2,7 +2,7 @@
         <h1>MIS RUTINAS</h1>
         <v-divider></v-divider>
             <div v-if="routines.length>0" v-for="routine in routines" :key="routine.id">
-                <GenericRoutineCard :routine="routine"></GenericRoutineCard>
+                <GenericRoutineCard :routine="routine" @delete="onDelete"></GenericRoutineCard>
             </div>
             <div v-else>
                 <v-card>
@@ -30,6 +30,14 @@ const routines = computed(()=>{
     return routinesData.value.content
 })
 
+const onDelete = (id) => {
+    const index = routinesData.value.content.findIndex(e => e.id==id)
+    console.log(id)
+    console.log(index)
+    if (index>=0){
+        routinesData.value.content.splice(index, 1)
+    }
+}
 
 function goToView(){
     alertStore.sendNotification("No implementado!")
@@ -49,16 +57,8 @@ function startRoutine(){
     .card-text{
         text-align: left;
     }
-    .goButton{
-        height: 100%;
-        width: 100%;
-        border-radius: 25px;
-        background-color: green;
-        border-top-left-radius: 0px;
-        border-bottom-left-radius: 0px;        
-    }
     .card{
-        border: 3px solid green;
+        border: 3px solid #4CAF50;
         border-radius: 25px;
     }
     .buttonCol{

@@ -6,11 +6,10 @@ export const useCategoryStore = defineStore('category', ()=>{
 
     const items = ref([])
 
-    const findIndex = computed(()=>{
-        return (id) => {
-            return items.value.findIndex(item => item.id === id)
-        }
-    })
+    function findIndex(id){
+        return items.value.findIndex(item => item.id === id)
+    }
+
 
     async function getAll(){
         const result = await CategoryApi.getAll()

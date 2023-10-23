@@ -9,11 +9,9 @@ export const useExerciseStore = defineStore('exercise', ()=>{
 
     const items = ref([])
 
-    const findIndex = computed(() => {
-        return (id) => {
-            return items.value.findIndex(item => item.id === id)
-        }
-    })
+    function findIndex(id){
+        return items.value.findIndex(item => item.id === id)
+    }
 
     async function add(exercise){
         const result = await ExerciseApi.post(exercise)

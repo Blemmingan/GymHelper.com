@@ -1,24 +1,30 @@
 <template>
-    <v-card>
-                
-                <v-row>
-                    <v-col cols="4">
-                        <v-card-item>
-                            <p>Nombre Ej.</p>
-                            <p>Descripcion</p>
-                        </v-card-item>
-                    </v-col>
-                    <v-col cols="6"></v-col>
-                    <v-col cols="2">
-                        <v-card-actions>
-                            <v-btn icon="mdi-trash-can-outline"></v-btn>
-                        </v-card-actions>
-                    </v-col>
-                </v-row>
-                
-            </v-card>
+    <v-card  v-if="exercises.length>0" v-for="exercise in exercises">
+        <v-card-text>
+            <h2>Ejercicio {{ exercise.order }}: {{ exercise.exercise.name }}</h2>
+            <h3>Descripción: {{ exercise.exercise.detail }}</h3>
+            <h3>Duración: {{ exercise.duration }}</h3>
+            <h3>Repeticiones: {{ exercise.repetitions }}</h3>
+        </v-card-text>          
+    </v-card>
+    <v-text-field v-else>
+        <h3>La rutina no especifica ejercicios</h3>
+    </v-text-field>
 </template>
 
-<style scoped>
-    
-</style>
+<script setup>
+
+import { useRoutineStore } from '@/stores/RoutineStore';
+import {ref, computed, defineProps} from 'vue'
+
+const routineStore = useRoutineStore()
+
+const {id} = defineProps(['id'])
+
+const exercises = ref(await getExercises())
+
+async function getExercises(){
+    const result = await routineStore.getAllCycleExercises(id)
+    return result.content.sort(function(a,b){return a.order-b.order})
+}
+</script>
