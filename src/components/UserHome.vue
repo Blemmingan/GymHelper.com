@@ -10,12 +10,12 @@
               <GenericRoutineCard :routine="routine" noDelete="true"/>
               </span>
         </v-sheet>
-        <v-sheet v-else>
+        <v-sheet v-else class="d-flex flex-column justify-center text-center">
         <h3>Aún no has creado ninguna rutina. Cuando las crees, apareceran aqui</h3>
         </v-sheet>
-
-          <v-btn class="mt-2 bg-accent text-black" @click="router.push('/myRoutines')">Ver Todas</v-btn> 
-
+          <span class="d-flex justify-center text-center">
+            <v-btn class="mt-2 bg-secondary text-black" @click="router.push('/myRoutines')">Ver Todas</v-btn> 
+          </span>
         <v-sheet class="sheet">
             <div class="containerEx">
               <h1>TUS EJERCICIOS</h1>
@@ -31,8 +31,6 @@
         <v-col cols="6">
             <v-sheet class="sheet">
             <h1>RUTINAS POPULARES</h1>
-          <!--  <generic-routine-card/>
-            <generic-routine-card/>-->
             <img src="src\assets\logo.png" alt="logo">
             </v-sheet>
         </v-col>
@@ -69,7 +67,7 @@ import {ref} from 'vue'
 
 <style scoped>
   .container{
-    margin-top: 100px;
+    margin-top: 25px;
 
   }
   .sheet{

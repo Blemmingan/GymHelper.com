@@ -3,8 +3,9 @@
         <v-card-text>
             <h2>Ejercicio {{ exercise.order }}: {{ exercise.exercise.name }}</h2>
             <h3>Descripción: {{ exercise.exercise.detail }}</h3>
+            <h3>Tipo: {{ toSpanish(exercise.exercise.type) }}</h3>
             <h3>Duración: {{ exercise.duration }}</h3>
-            <h3>Repeticiones: {{ exercise.repetitions }}</h3>
+            <h3 v-if="exercise.exercise.type==='exercise'">Repeticiones: {{ exercise.repetitions }}</h3>
         </v-card-text>          
     </v-card>
     <v-text-field v-else>
@@ -22,6 +23,14 @@ const routineStore = useRoutineStore()
 const {id} = defineProps(['id'])
 
 const exercises = ref(await getExercises())
+
+function toSpanish(type){
+    if (type==='exercise'){
+        return 'Ejercicio'
+    } else if (type==='rest'){
+        return 'Descanso'
+    }
+}
 
 async function getExercises(){
     const result = await routineStore.getAllCycleExercises(id)

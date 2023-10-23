@@ -155,7 +155,7 @@ async function updateProfile(){
         endProfileUpdate()
     } catch (e){
         if (e.code){
-
+            alertStore.sendNotification("Ha ocurrido un error inesperado. Intentelo de nuevo mas tarde")
         }
     } finally{
         editLoading.value = false

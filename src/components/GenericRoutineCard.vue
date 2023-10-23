@@ -2,7 +2,7 @@
     <v-col>
            <v-card class="card">
                    <v-row>
-                       <v-col cols="7">
+                       <v-col cols="9">
                            <v-card-item>
                                 <div>
                                     <div class="card-text">
@@ -13,11 +13,11 @@
                                   <v-card-actions>
                                     <v-spacer></v-spacer>
                                         <v-btn class="mt-2 bg-secondary text-black" @click="goToView()">Mas información</v-btn>
-                                        <v-btn v-if="noDelete" class="mt-2 bg-accent text-black" @click="deleteRoutine"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
+                                        <v-btn v-if="!noDelete" class="mt-2 bg-accent text-black" @click="deleteRoutine"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
                                    </v-card-actions>
                            </v-card-item>
                        </v-col>
-                       <v-col class="buttonCol" cols="5"  >
+                       <v-col class="buttonCol" cols="3"  >
                            <v-btn class="goButton" icon="mdi-play" @click="startRoutine"></v-btn>
                        </v-col>
                        
@@ -54,6 +54,7 @@ async function deleteRoutine(){
         await routineStore.remove(routine.id)
         emit('delete', routine.id)
     } catch(e){
+        console.log(e)
         alertStore.sendNotification("Ha ocurrido un error borrando la rutina. Intente de nuevo más tarde")
     }
 }
@@ -68,12 +69,12 @@ async function deleteRoutine(){
         height: 100%;
         width: 100%;
         border-radius: 25px;
-        background-color: green;
+        background-color: #4CAF50;
         border-top-left-radius: 0px;
         border-bottom-left-radius: 0px;        
     }
     .card{
-        border: 3px solid green;
+        border: 3px solid #4CAF50;
         border-radius: 25px;
     }
     .buttonCol{

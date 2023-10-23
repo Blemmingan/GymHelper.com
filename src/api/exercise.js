@@ -3,12 +3,12 @@ import {Api} from '@/api/api.js'
 export {ExerciseApi, Exercise}
 
 class ExerciseApi{
-    static getUrl(slug){
-        return `${Api.baseUrl}/exercises${slug ? `/${slug}`:''}`
+    static getUrl(slug, params){
+        return `${Api.baseUrl}/exercises${params? '':'/'}${slug ? `${slug}`:''}`
     }
 
-    static async getAll(){
-        return await Api.get(ExerciseApi.getUrl(), true)
+    static async getAll(params){
+        return await Api.get(ExerciseApi.getUrl(params, true), true)
     }
 
     static async post(exercise){

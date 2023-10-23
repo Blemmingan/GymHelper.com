@@ -1,11 +1,11 @@
 <template>
     <div>
         <v-sheet elevation="10" class="formBox" height="70%">
-            <h1 class="title">Crear un nuevo ejercicio</h1>
+            <h1 class="title">Modificar un ejercicio</h1>
             <v-form class="form" validate-on="input" v-model="validForm">         
                     <div>
                         <v-text-field
-                        v-model="excerciseName"
+                        v-model="newExcerciseName"
                         :rules="ExNameRules"
                         label="Nombre"
                         
@@ -14,7 +14,7 @@
                     
                     <div>
                         <v-text-field
-                        v-model="excerciseDescription"
+                        v-model="newExcerciseDescription"
                         :rules="ExDescriptionRules"
                         label="Descripcion"
                             />
@@ -22,23 +22,22 @@
                     
                     <div>
                         <v-radio-group
-                        v-model="excerciseType"
+                        v-model="newExcerciseType"
                         label="Tipo"
                             >
                             <v-radio label="ejercicio" value="exercise"></v-radio>
                             <v-radio label="descanso" value="rest"></v-radio>
                         </v-radio-group>
                     </div> 
-                <v-card-actions class="d-flex justify-center">
                 <v-btn @click="cancel()" class="mt-2 bg-secondary text-black" :disabled="loading">Cancelar</v-btn>    
-                <v-btn @click="saveExercise()" class="mt-2 bg-secondary text-black" :disabled="!validForm || loading" :loading="loading">Crear</v-btn>
-                </v-card-actions>
+                <v-btn @click="saveExercise()" class="mt-2 bg-secondary text-black" :disabled="!validForm || loading" :loading="loading">Guardar Cambios</v-btn>
         </v-form>
         </v-sheet>
 
         
     </div>
 </template>
+
 
 <script setup>
 import { ref } from 'vue';
@@ -47,12 +46,19 @@ import { Exercise } from '@/api/exercise';
 import {useRouter} from 'vue-router'
 import { useAlertStore } from '@/stores/AlertStore';
 
+const {id} = defineProps(['id'])
+
+const exerciseStore = useExerciseStore()
+const exercise = ref(await exerciseStore.get(id))
+
+
 const alertStore = useAlertStore()
 const router = useRouter()
-const excerciseName = ref('')
-const excerciseDescription = ref('')
-const excerciseType = ref('')
-const exerciseStore = useExerciseStore()
+
+const newExcerciseName = ref(exercise.value.name)
+const newExcerciseDescription = ref(exercise.value.detail)
+const newExcerciseType = ref(exercise.value.type)
+
 const validForm = ref(false)
 const loading = ref(false)
 
@@ -66,12 +72,16 @@ const ExDescriptionRules = [
         value => value.length <= 200 || 'La descripción no puede superar los 200 carácteres',
 ]
 
+function cancel(){
+    router.go(-1)
+}
+
 
 async function saveExercise(){
     loading.value = true
     try{
-        await exerciseStore.add(new Exercise(excerciseName.value, excerciseDescription.value, excerciseType.value)) 
-        router.go(-1)
+        await exerciseStore.modify(id, new Exercise(newExcerciseName.value, newExcerciseDescription.value, newExcerciseType.value)) 
+        router.push('/myExercises')
     } catch (e){
         if (e.code===2){
             alertStore.sendNotification('Ya creó un ejercicio con ese nombre previamente. Intente con otro')
@@ -82,10 +92,6 @@ async function saveExercise(){
         loading.value = false
     }
     
-}
-
-function cancel(){
-    router.go(-1)
 }
 
 </script>

@@ -1,15 +1,18 @@
 <template>
-        <h1>MIS RUTINAS</h1>
+        <div class="title-container">
+        <h1 class="title">Mis Rutinas</h1>
+        <v-btn @click="addRoutine()" color="primary">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
+        </div>
         <v-divider></v-divider>
             <div v-if="routines.length>0" v-for="routine in routines" :key="routine.id">
-                <GenericRoutineCard :routine="routine" noDelete="false" @delete="onDelete"></GenericRoutineCard>
+                <GenericRoutineCard :routine="routine"  @delete="onDelete"></GenericRoutineCard>
             </div>
             <div v-else>
-                <v-card>
-                    <v-card-text class="d-flex flex-column justify-center text-center">
-                        Todavia no tienes rutinas propias. Cuando las crees, podras verlas aquí
-                    </v-card-text>
-                </v-card>
+                <v-card-text class="d-flex flex-column justify-center text-center">
+                        <h3>Todavia no tienes rutinas propias. Cuando las crees, podras verlas aquí</h3>
+                </v-card-text>
             </div>
 </template>
 
@@ -32,27 +35,29 @@ const routines = computed(()=>{
 
 const onDelete = (id) => {
     const index = routinesData.value.content.findIndex(e => e.id==id)
-    console.log(id)
-    console.log(index)
     if (index>=0){
         routinesData.value.content.splice(index, 1)
     }
 }
 
-function goToView(){
+function addRoutine(){
     alertStore.sendNotification("No implementado!")
 }
-function startRoutine(){
-    alertStore.sendNotification("No implementado!")
-}
+
+
 
 </script>
 
 <style scoped>
 
-    h1{
-        text-align: center;
-    }
+.title-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+
 
     .card-text{
         text-align: left;

@@ -7,50 +7,26 @@ import { ExerciseVideoApi } from "@/api/exerciseVideo.js"
 
 export const useExerciseStore = defineStore('exercise', ()=>{
 
-    const items = ref([])
-    const findIndex = computed((id)=>{
-        return items.value.findIndex(item => item.id === id)
-    })
-    
 
     async function add(exercise){
-        const result = await ExerciseApi.post(exercise)
-        if (!findIndex.value(result.id)){
-            items.value.push(result)
-        }
-        return result
+        return await ExerciseApi.post(exercise)
     }
 
     async function modify(exerciseId, exercise){
-        const result = await ExerciseApi.put(exerciseId, exercise)
-        const index = findIndex.value(result.id)
-        if (index>=0){
-            items.value[index] = result
-        }
-        return result
+        return await ExerciseApi.put(exerciseId, exercise)
     }
 
     async function remove(exerciseId){
         await ExerciseApi.delete(exerciseId)
-        const index = findIndex.value(exerciseId)
-        if (index>=0){
-            items.value.splice(index, 1)
-        }
+
     }
 
-    async function getAll(){
-        const result = await ExerciseApi.getAll()
-        items.value = result
-        return result
+    async function getAll(page = '0', pagesize = '10', orderBy = 'id', direction = 'asc', search){
+        return await ExerciseApi.getAll()
     }
 
     async function get(exerciseId){
-        const index = findIndex.value(exerciseId)
-        if (index >=0){
-            return items.value[index]
-        }
         const result =  await ExerciseApi.get(exerciseId)
-        items.value.push(result)
         return result
     }
 
@@ -98,7 +74,6 @@ export const useExerciseStore = defineStore('exercise', ()=>{
     }
 
     return {
-        items,
         add,
         modify,
         remove,

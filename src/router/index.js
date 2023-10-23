@@ -24,9 +24,10 @@ import DoingCoreCycles from '@/components/DoingCoreCycles.vue'
 import DoingCooldownCycle from '@/components/DoingCooldownCycle.vue'
 import RateRoutine from '@/components/RateRoutine.vue'
 import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
+import EditExerciseCard from '@/components/EditExerciseCard.vue'
 
-import MyExercises from '@/components/MyExercises.vue'
-import editExercise from '@/components/editExercise.vue'
+import MyExercises from '@/views/MyExercises.vue'
+
 import MyRoutines from '@/views/MyRoutines.vue'
 
 import UserProfile from '@/views/UserProfile.vue'
@@ -152,9 +153,10 @@ const routes = [
   },
 
   {
-    path: '/editExercise',
+    path: '/editExercise/:id',
     name: 'editExercise',
-    component: editExercise,
+    component: EditExerciseCard,
+    props: true,
     meta: {requiresAuth: true}
   },
 

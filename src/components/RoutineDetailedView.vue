@@ -64,13 +64,14 @@ import { RoutineCycle } from '@/api/routineCycle';
 
 const {id} = defineProps(['id'])
 
+const router = useRouter()
 const routineStore = useRoutineStore()
 const CategoryStore = useCategoryStore()
 
 const alertStore = useAlertStore()
 
 const routine = ref(await getRoutine())
-const category = ref(await CategoryStore.get(routine.value.category.id))
+const category = ref(await CategoryStore.get( routine.value.category.id))
 const cycles = ref(await getCycles())
 
 const disable = ref(false)
@@ -93,9 +94,6 @@ async function getRoutine(){
         router.push('/')
     }
 }
-
-
-const router = useRouter()
 
 
 function back(){
