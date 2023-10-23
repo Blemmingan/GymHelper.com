@@ -1,12 +1,6 @@
 <template>
     <v-card elevation="10" class="infoBox">
-        <v-card-actions v-if="!editing" class="d-flex justify-right">
-            <v-spacer></v-spacer>
-            <v-btn class="mt-2 bg-secondary text-black" @click="editing=!editing" :disabled="disableButtons">
-                <v-icon>mdi-pencil</v-icon>
-                Editar Perfil
-            </v-btn>
-        </v-card-actions>
+        
         <v-card-item class="d-flex justify-center text-center" >
         <v-avatar size="100">
             <v-img alt="Foto de perfil" contain="true" class="avatar" :src="getProfilePicture()">
@@ -32,7 +26,12 @@
         <v-divider></v-divider>
         <v-card-actions   >
         <v-row class="d-flex justify-center text-center">
-        
+   
+            <v-btn class="mt-2 bg-secondary text-black" @click="editing=!editing" :disabled="disableButtons">
+                <v-icon>mdi-pencil</v-icon>
+                Editar Perfil
+            </v-btn>
+   
         <v-btn class="mt-2 bg-secondary text-black" :disabled="disableButtons" @click="logout()" :loading="logoutLoading">Cerrar Sesión</v-btn>
                 <v-btn  @click="dialogue = true" class="mt-2 bg-accent text-black">
                     <v-icon>mdi-delete</v-icon>
