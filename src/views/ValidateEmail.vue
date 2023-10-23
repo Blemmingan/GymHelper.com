@@ -2,7 +2,7 @@
 <v-main>
     <v-card elevation="10" class="formBox" height="60%">
         <span v-if="!done">
-            <v-btn @click="router.push('/register')" icon="mdi-arrow-left" class="ma-2 d-flex justify-left" color="secondary"/>
+
             <h1 class="mb-2">¡Ya casi!</h1>
             <p>Para poder ingresar a GymHelper debes ingresar el código que enviamos a su correo.</p>
         </span>
