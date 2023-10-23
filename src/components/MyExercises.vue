@@ -10,7 +10,7 @@
     <v-row v-if="excercises.length != 0">
       <v-container v-if="!editing">
         <v-col  v-for="exercise in excercises" :key="exercise.id" cols="12" sm="6" md="4">
-        <v-card>
+        <v-card class="card-text">
           <!-- Image -->
           
           <!-- <v-img :src="getImageUrl(exercise)" height="200"></v-img> -->
@@ -19,7 +19,7 @@
           <v-card-title>{{ `${exercise.name}` }}</v-card-title>
 
           <!-- Text Content -->
-          <v-card-text>
+          <v-card-text class="card-text">
             {{ `${exercise.detail}` }}
             {{ `${exercise.type}` }}
           </v-card-text>
@@ -151,5 +151,7 @@ async function updateExercise(){
   align-items: center;
   margin-left: auto;
 }
-
+.card-text{
+  overflow-x: scroll;
+}
 </style>

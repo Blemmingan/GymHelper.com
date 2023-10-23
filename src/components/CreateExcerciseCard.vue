@@ -73,7 +73,7 @@ const ExNameRules = [
 
 const ExDescriptionRules = [
         value => Boolean(value) || 'Debe ingresar una descripcion.',
-        value => value.length <= 200 || 'La descripción no puede superar los 200 carácteres',
+        value => value.length <= 20 || 'La descripción no puede superar los 20 carácteres',
         value => value.length >= 3 || 'La descripcion debe superar los 2 caracteres.']
 
 
