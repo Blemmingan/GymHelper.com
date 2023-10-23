@@ -34,7 +34,9 @@
                             </v-card>
                           </v-container>
               </span>
-              <p v-else>No tienes ningún ejercicio. Clickea el botón de abajo para crear uno.</p>
+              <v-sheet v-else class="d-flex flex-column justify-center text-center">
+              <h3 class="text">Aún no has creado ninguna rutina. Cuando las crees, apareceran aqui</h3>
+               </v-sheet>
               
               <v-btn @click="goToMyExc" class="mt-2 bg-secondary text-black">VER TODOS</v-btn>  
             </div>
