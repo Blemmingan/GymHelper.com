@@ -154,7 +154,6 @@ async function updateProfile(){
         user.value = await userStore.getCurrentUser()
         endProfileUpdate()
     } catch (e){
-        console.log(e)
         if (e.code){
             alertStore.sendNotification("Ha ocurrido un error inesperado. Intentelo de nuevo mas tarde")
         }

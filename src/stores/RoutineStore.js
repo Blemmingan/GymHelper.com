@@ -21,6 +21,9 @@ export const useRoutineStore = defineStore('routine', ()=>{
         return await UserApi.getUserRoutines(userId)
     }
 
+    async function get(id){
+        return await RoutineApi.get(id)
+    }
 
     async function add(routine){
         return await RoutineApi.post(routine)
@@ -99,6 +102,7 @@ export const useRoutineStore = defineStore('routine', ()=>{
         getAll,
         getCurrentUserRoutines,
         getUserRoutines,
+        get,
         add,
         modify,
         remove,

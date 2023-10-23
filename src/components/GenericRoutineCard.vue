@@ -42,8 +42,8 @@ const routineStore = useRoutineStore()
 const router = useRouter()
 
 
-function goToView(){
-    router.push({name: 'routine', params: {id : routine.id}})
+async function goToView(){
+    await router.push({name: 'routine', params: {id : routine.id}})
 }
 function startRoutine(){
     alertStore.sendNotification("No implementado!")

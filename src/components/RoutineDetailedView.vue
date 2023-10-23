@@ -82,17 +82,9 @@ async function getCycles(){
 }
 
 async function getRoutine(){
-    try {
         const result = await routineStore.getCurrentUserRoutines()
         const index = result.content.findIndex((e)=> e.id==id)
-        if (!(index>=0)){
-            throw id
-        }
         return result.content[index]
-    } catch(e){
-        alertStore.sendNotification('No tienes acceso a esta rutina')
-        router.push('/')
-    }
 }
 
 

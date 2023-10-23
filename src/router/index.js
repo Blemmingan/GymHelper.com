@@ -31,6 +31,7 @@ import MyExercises from '@/views/MyExercises.vue'
 import MyRoutines from '@/views/MyRoutines.vue'
 
 import UserProfile from '@/views/UserProfile.vue'
+import { useExerciseStore } from '@/stores/ExerciseStore'
 
 const routes = [
   {
@@ -149,7 +150,15 @@ const routes = [
     name: 'routine',
     component: RoutineDetailedView,
     props: true,
-    meta: {requiresAuth: true}
+    meta: {requiresAuth: true},
+    beforeEnter: async (to, from) => {
+      const routineStore = useRoutineStore()
+      try{
+      const exist = await routineStore.get(to.params.id)
+      } catch (e){
+        return {name : 'NotFound'}
+      }
+    }
   },
 
   {
@@ -157,7 +166,16 @@ const routes = [
     name: 'editExercise',
     component: EditExerciseCard,
     props: true,
-    meta: {requiresAuth: true}
+    meta: {requiresAuth: true},
+    beforeEnter: async (to, from) =>{
+      const exerciseStore = useExerciseStore()
+      try{
+        const exist = await exerciseStore.get(to.params.id)
+        console.log('a')
+      } catch (e) {
+        return {name : 'NotFound'}
+      }
+    }
   },
 
   {
