@@ -15,19 +15,19 @@
         </v-card-item>
         <v-card-text class="d-flex justify-center text-center" >
             <div>
-                <h1><strong>{{user.username}}</strong></h1>
+                <h1 class="text"><strong>{{user.username}}</strong></h1>
                 <h2><strong>{{user.email}}</strong></h2>
             </div>
         </v-card-text>
         <v-divider></v-divider>
-        <span v-if="!editing">
+        <span v-if="!editing" class="textBox">
         <v-card-text>
-          <h2><strong>Información del usuario:</strong></h2>
-          <h3><strong>Nombre: </strong> {{ user.firstName || "No especificado" }}</h3>
-          <h3><strong>Apellido: </strong>{{ user.lastName  || "No especificado"}}</h3>
-          <h3><strong>Género: </strong>{{ toSpanish(user.gender)  || "No especificado"}}</h3>
-          <h3><strong>Cumpleaños: </strong>{{ getBirthdate().toLocaleDateString('en-GB')  || "No especificado"}}</h3>
-          <h3><strong>Telefono: </strong>{{ user.phone  || "No especificado"}}</h3>
+          <h2 class="text"><strong>Información del usuario:</strong></h2>
+          <h3 class="text"><strong>Nombre: </strong> {{ user.firstName || "No especificado" }}</h3>
+          <h3 class="text"><strong>Apellido: </strong>{{ user.lastName  || "No especificado"}}</h3>
+          <h3 class="text"><strong>Género: </strong>{{ toSpanish(user.gender)  || "No especificado"}}</h3>
+          <h3 class="text"><strong>Cumpleaños: </strong>{{ getBirthdate().toLocaleDateString('en-GB')  || "No especificado"}}</h3>
+          <h3 class="text"><strong>Telefono: </strong>{{ user.phone  || "No especificado"}}</h3>
         </v-card-text>
         <v-divider></v-divider>
         <v-card-actions   >
@@ -41,8 +41,8 @@
         </v-row>
         </v-card-actions>
         </span>
-        <span v-else>
-        <v-card-actions>
+        <span v-else class="editActions">
+        <v-card-actions class="editActions">
             <v-form>
                 <h2>Editar información del usuario</h2>
                 <v-text-field v-model="newFirstName" label="Nombre"></v-text-field>
@@ -217,4 +217,14 @@ function toSpanish(gender){
         margin-left: auto;
         margin-right: auto ;
     }
+.textBox{
+    text-align: center;
+}
+.text{
+    margin: 1%;
+}
+.editActions{
+    text-align: center;
+    margin-left: 40%;
+}
 </style>
