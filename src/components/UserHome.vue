@@ -31,7 +31,7 @@
         <v-col cols="6">
             <v-sheet class="sheet">
             <h1>RUTINAS POPULARES</h1>
-            <img src="src\assets\logo.png" alt="logo">
+            <img src="/weightlifter.png" alt="logo">
             </v-sheet>
         </v-col>
       </v-row>

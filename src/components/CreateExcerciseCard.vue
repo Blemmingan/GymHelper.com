@@ -8,7 +8,7 @@
                         v-model="excerciseName"
                         :rules="ExNameRules"
                         label="Nombre"
-                        
+                        required
                         />
                     </div>
                     
@@ -17,6 +17,7 @@
                         v-model="excerciseDescription"
                         :rules="ExDescriptionRules"
                         label="Descripcion"
+                        required
                             />
                     </div> 
                     
@@ -24,9 +25,11 @@
                         <v-radio-group
                         v-model="excerciseType"
                         label="Tipo"
+                        :rules = "radioRules"
+                        required
                             >
-                            <v-radio label="ejercicio" value="exercise"></v-radio>
-                            <v-radio label="descanso" value="rest"></v-radio>
+                            <v-radio label="Ejercicio" value="exercise" v-model="exValue"></v-radio>
+                            <v-radio label="Descanso" value="rest" v-model="restValue"></v-radio>
                         </v-radio-group>
                     </div> 
                 <v-card-actions class="d-flex justify-center">
@@ -55,6 +58,12 @@ const excerciseType = ref('')
 const exerciseStore = useExerciseStore()
 const validForm = ref(false)
 const loading = ref(false)
+const restValue = ref(false)
+const exValue = ref(false)
+
+const radioRules = [
+    value => Boolean(value) || 'Debe ingresar uno.'
+]
 
 const ExNameRules = [
     value => Boolean(value) || 'Debe ingresar un nombre de ejercicio',
