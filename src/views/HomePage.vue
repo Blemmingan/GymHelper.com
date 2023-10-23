@@ -17,21 +17,7 @@
 
    <UserHome/>
     </div>
-
-
-    <p>DEBUG</p>
-    <a href="./createExcercise">Crear Ejercicio </a>
-    <a href="./home">User Home </a>
-    <a href="./excercise">AddExcercise </a>
-    <a href="./warmup">Calentamiento </a>
-    <a href="./core">Ciclos </a>
-    <a href="./cooldown">Enfiramiento </a>
-    <a href="./nameRoutine">Name Routine </a>
-    <a href="./runRoutineWarmup">Run Warmup. </a>
-    <a href="./routineCore">Run Core. </a>
-    <a href="./routineCooldown">Run Cooldown</a>
-    <a href="./rate">Rate</a>
-
+    
   </div>
 </template>
 

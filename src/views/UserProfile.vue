@@ -177,7 +177,6 @@ async function logout(){
     }
 
 async function deleteAccount(){
-    //Agregar un mensaje de confirmación
     deleteLoading.value = true
     try {
         await userStore.removeCurrentUser()
@@ -185,6 +184,7 @@ async function deleteAccount(){
     } catch(e){
         alertStore.sendNotification("Ha ocurrido un error con los servidores. Intentelo de nuevo mas tarde")
     } finally{
+        alertStore.sendNotification("Usuario eliminado con exito")
         deleteLoading.value = false
     }
 }
