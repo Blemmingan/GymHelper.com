@@ -3,20 +3,18 @@
         <v-card-actions>
             <v-form>
                 <h2>Editar ejercicio</h2>
-                <v-text-field v-model="newFirstName" label="Nombre"></v-text-field>
-                <v-text-field v-model="newLastName" label="Apellido"></v-text-field>
-                <v-text-field v-model="newGender" label="Género"></v-text-field>
-                <v-text-field v-model="newBirthdate" label="Cumpleaños" type="date"></v-text-field>
-                <v-text-field v-model="newPhone" label="Telefono"></v-text-field>
+                <v-text-field v-model="newName" label="Nombre">{{ route.params.exercise.name }}</v-text-field>
+                <v-text-field v-model="newDetail" label="Apellido">{{ route.params.exercise.detail }}</v-text-field>
+                <v-text-field v-model="newType" label="Género">{{ route.params.exercise.type }}</v-text-field>
             </v-form>
         </v-card-actions>
         <v-divider></v-divider>
         <v-card-actions>
             <v-row class="d-flex justify-center text-center">
-                <v-btn class="mt-2 bg-secondary text-black" :disabled="disableButtons" @click="endProfileUpdate()">
+                <v-btn class="mt-2 bg-secondary text-black" @click="endExerciseUpdate()">
                     Cancelar
                 </v-btn>
-                <v-btn class="mt-2 bg-secondary text-black" :disabled="disableButtons" :loading="editLoading" @click="updateProfile()">
+                <v-btn class="mt-2 bg-secondary text-black" @click="updateExercise()">
                     Guardar cambios
                 </v-btn>
             </v-row>

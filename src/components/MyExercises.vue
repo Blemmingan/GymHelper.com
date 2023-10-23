@@ -7,19 +7,20 @@
       </v-btn>
     </div>
 
-    <v-row v-if="excercises != null">
-      <v-col v-for="exercise in exercises" :key="exercise.name" cols="12" sm="6" md="4">
+    <v-row v-if="items.length != 0">
+      <v-col  v-for="exercise in items" :key="exercise.id" cols="12" sm="6" md="4">
         <v-card>
           <!-- Image -->
-          <v-img :src="getImageUrl(exercise)" height="200"></v-img>
+          
+          <!-- <v-img :src="getImageUrl(exercise)" height="200"></v-img> -->
 
           <!-- Title -->
-          <v-card-title>{{ exercise.name }}</v-card-title>
+          <v-card-title>{{ `${exercise.name}` }}</v-card-title>
 
           <!-- Text Content -->
           <v-card-text>
-            {{ exercise.detail }}
-            {{ exercise.type }}
+            {{ `${exercise.details}` }}
+            {{ `${exercise.type}` }}
           </v-card-text>
 
           <!-- Pencil Icon for Editing -->
@@ -32,18 +33,21 @@
     </v-row>
     <v-row v-else class="error-msg">
       <p>Parece que no tienes ningun ejercicio. Clickea el + para crear uno.</p>
-    </v-row>
+    </v-row> 
   </v-container>
 </template>
 
 <script setup>
-import { ref } from 'vue'
+import { ref, onBeforeMount } from 'vue'
 import { useExerciseStore } from '@/stores/ExerciseStore'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const exerciseStore = useExerciseStore()
-const exercises = ref(exerciseStore.getAll())
+var items = ref()
+exerciseStore.getAll()
+items = exerciseStore.items
+console.log(items)
 
 function getImageUrl(exercise){
     return exerciseStore.getImage(exercise.id).url
@@ -62,6 +66,10 @@ function deleteExercise(exercise){
 function editExercise(exercise){
     router.push({ name: 'edit', params: { exercise } })
 }
+
+// onBeforeMount(() => {
+//     items = exerciseStore.getAll()
+// })
 
 </script>
 

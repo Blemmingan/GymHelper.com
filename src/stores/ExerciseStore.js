@@ -15,7 +15,7 @@ export const useExerciseStore = defineStore('exercise', ()=>{
 
     async function add(exercise){
         const result = await ExerciseApi.post(exercise)
-        if (!findIndex(result.id)){
+        if (!findIndex.value(result.id)){
             items.value.push(result)
         }
         return result
@@ -23,7 +23,7 @@ export const useExerciseStore = defineStore('exercise', ()=>{
 
     async function modify(exerciseId, exercise){
         const result = await ExerciseApi.put(exerciseId, exercise)
-        const index = findIndex(result.id)
+        const index = findIndex.value(result.id)
         if (index>=0){
             items.value[index] = result
         }
@@ -32,7 +32,7 @@ export const useExerciseStore = defineStore('exercise', ()=>{
 
     async function remove(exerciseId){
         await ExerciseApi.delete(exerciseId)
-        const index = findIndex(exerciseId)
+        const index = findIndex.value(exerciseId)
         if (index>=0){
             items.value.splice(index, 1)
         }
@@ -40,11 +40,12 @@ export const useExerciseStore = defineStore('exercise', ()=>{
 
     async function getAll(){
         const result = await ExerciseApi.getAll()
+        items.value = result
         return result
     }
 
     async function get(exerciseId){
-        const index = findIndex(exerciseId)
+        const index = findIndex.value(exerciseId)
         if (index >=0){
             return items.value[index]
         }
@@ -97,6 +98,7 @@ export const useExerciseStore = defineStore('exercise', ()=>{
     }
 
     return {
+        items,
         add,
         modify,
         remove,

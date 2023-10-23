@@ -1,6 +1,6 @@
 <template>
     <v-main>
-                <v-card elevation="10" class="formBox" height="60%">
+                <v-card elevation="10" class="formBox" height="70%">
                     <h1 class="mb-2">Iniciar sesión en GymHelper</h1>
                     <v-divider></v-divider>
                     <v-form validate-on="input" v-model="validForm" >

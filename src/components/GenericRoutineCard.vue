@@ -6,8 +6,8 @@
                             <v-card-item>
                                  <div>
                                      <div class="card-text">
-                                       <h2>{{ routine.name }}</h2>
-                                       <p>{{ routine.detail }}</p>
+                                       <!-- <h2>{{ routine.name }}</h2>
+                                       <p>{{ routine.detail }}</p> -->
                                       </div>
                                    </div>
                                     <v-card-actions>
@@ -30,7 +30,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import {defineProps, defineEmits} from 'vue';
+import {defineProps} from 'vue';
 import { useAlertStore } from '@/stores/AlertStore';
 import { useRoutineStore } from '@/stores/RoutineStore';
 
@@ -38,9 +38,7 @@ const {routine} = defineProps(['routine'])
 const emit = defineEmits(['delete'])
 
 const alertStore = useAlertStore()
-const routineStore = useRoutineStore()
 const router = useRouter()
-
 
 function goToView(){
     router.push({name: 'routine', params: {id : routine.id}})
