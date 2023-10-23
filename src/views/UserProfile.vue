@@ -34,10 +34,28 @@
         <v-row class="d-flex justify-center text-center">
         
         <v-btn class="mt-2 bg-secondary text-black" :disabled="disableButtons" @click="logout()" :loading="logoutLoading">Cerrar Sesión</v-btn>
-        <v-btn class="mt-2 bg-accent text-black" :disabled="disableButtons" :loading="deleteLoading" @click="deleteAccount()">
-            <v-icon>mdi-delete</v-icon>
-            Eliminar cuenta
-        </v-btn>
+                <v-btn  @click="dialogue = true" class="mt-2 bg-accent text-black">
+                    <v-icon>mdi-delete</v-icon>
+                    Eliminar cuenta</v-btn>
+        <v-dialog elevation="20" v-model="dialogue" persistent>
+          <v-card title="¿Seguro?" class="infoBox">
+            <v-card-text>
+              Esta acción no se puede revertir!
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn class="mt-2 bg-secondary text-black"
+                text="Cancelar"
+                @click="dialogue = false"
+              ></v-btn>
+              <v-btn class="mt-2 bg-accent text-black"
+                text="Borrar"
+                @click="deleteAccount()"
+              ></v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+
         </v-row>
         </v-card-actions>
         </span>
@@ -98,6 +116,8 @@ const newGender = ref(user.value.gender)
 const newBirthdate = ref(null)
 const newPhone = ref(user.value.phone)
 const newAvatarUrl = ref(null)
+
+const dialogue = ref(false)
 
 const editing = ref(false)
 
