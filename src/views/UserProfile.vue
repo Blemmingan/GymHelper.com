@@ -138,22 +138,23 @@ async function updateProfile(){
     try{
         if(newBirthdate.value){
             newBirthdate.value = new Date(newBirthdate.value.replace(/-/,'/')).getTime()
-        } else {
+        } else{
             newBirthdate.value = user.value.birthdate
-        }
+        } 
         if (!newAvatarUrl.value){
             newAvatarUrl.value = user.value.avatarUrl
         }
-        await userStore.modifyCurrentUserData(new UserData( newFirstName.value,
-                                                            newLastName.value,
-                                                            newGender.value,
-                                                            newBirthdate.value,
-                                                            newPhone.value,
-                                                            newAvatarUrl.value
+        await userStore.modifyCurrentUserData(new UserData( newFirstName.value || '',
+                                                            newLastName.value || '',
+                                                            newGender.value || 'other',
+                                                            newBirthdate.value || 0,
+                                                            newPhone.value || '',
+                                                            newAvatarUrl.value || ''
                                                             ))
         user.value = await userStore.getCurrentUser()
         endProfileUpdate()
     } catch (e){
+        console.log(e)
         if (e.code){
             alertStore.sendNotification("Ha ocurrido un error inesperado. Intentelo de nuevo mas tarde")
         }

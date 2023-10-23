@@ -112,7 +112,6 @@ function cancel(){
     }
     .formBox{
         border: 3px solid #4CAF50;
-        border-radius: 25px;
         background-color: whitesmoke;
         margin-top: auto;
         margin-bottom: auto;
