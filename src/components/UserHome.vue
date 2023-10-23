@@ -4,24 +4,35 @@
         align="start"
         no-gutters>
         <v-col cols="5">
+        <h1 class="sheet">TUS RUTINAS</h1>
+        <v-sheet class="sheet" v-if="myRoutines.length>0">
+              <span v-for="routine in myRoutines" :key="routine.id">
+              <GenericRoutineCard :routine="routine" noDelete="true"/>
+              </span>
+        </v-sheet>
+        <v-sheet v-else>
+        <h3>Aún no has creado ninguna rutina. Cuando las crees, apareceran aqui</h3>
+        </v-sheet>
+
+          <v-btn class="mt-2 bg-accent text-black" @click="router.push('/myRoutines')">Ver Todas</v-btn> 
+
         <v-sheet class="sheet">
-            <h1>TUS RUTINAS</h1>
-           <!-- <generic-routine-card/>
-            <generic-routine-card/>-->
             <div class="containerEx">
               <h1>TUS EJERCICIOS</h1>
               <v-btn @click="goToMyExc">VER</v-btn>  
             </div>
-          </v-sheet>
+        </v-sheet>
+          <v-row>
+
+          </v-row>
         </v-col>
         <v-col>
-            <v-btn icon="mdi-plus" @click="goToWarmup()"></v-btn>
         </v-col>
         <v-col cols="6">
             <v-sheet class="sheet">
             <h1>RUTINAS POPULARES</h1>
-          <!---->  <generic-routine-card/>
-            <generic-routine-card/>
+          <!--  <generic-routine-card/>
+            <generic-routine-card/>-->
             <img src="src\assets\logo.png" alt="logo">
             </v-sheet>
         </v-col>
@@ -30,8 +41,24 @@
 </template>
 
 <script setup>
-import router from '@/router';
+import {useRouter} from 'vue-router';
 import GenericRoutineCard from './GenericRoutineCard.vue';
+import { useRoutineStore } from '@/stores/RoutineStore';
+import {ref} from 'vue'
+
+  const router = useRouter()
+  const routineStore = useRoutineStore()
+  const myRoutines = ref(await getMyRoutines())
+
+  async function getMyRoutines(){
+    const result = await routineStore.getCurrentUserRoutines()
+    if (result.content.length <= 5){
+        return result.content
+    }
+    return result.content.splice(5)
+  }
+
+
     function goToWarmup(){
         router.push('/warmup')
     }
@@ -43,13 +70,11 @@ import GenericRoutineCard from './GenericRoutineCard.vue';
 <style scoped>
   .container{
     margin-top: 100px;
-    border: 3px solid #4CAF50;
-    border-radius: 25px;
-    background-color: whitesmoke;
+
   }
   .sheet{
     text-align: center;
-    background-color: whitesmoke;
+
   }
   .containerEx{
     margin-top: 10%;

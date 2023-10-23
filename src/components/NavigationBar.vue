@@ -19,11 +19,11 @@
                 <v-menu transition="slide-y-transition">
                     <template v-slot:activator="{props}">
                         <v-btn v-bind="props">
-                            <div class="user">
+                           <div class="user">
                                 {{userStore.getCurrentUser().username}}
                             </div> 
                             <v-avatar class="user">
-                                <v-img alt="profile-picture" :src="getProfilePicture()"></v-img> <!--no funciona-->
+                                <v-img alt="profile-picture" :src="getProfilePicture()"></v-img> 
                             </v-avatar>
                         </v-btn>
                     </template>

@@ -1,6 +1,5 @@
 <template>
-  <div class="component-background">
-
+  <div>
     <div v-if="!userStore.isLoggedIn">
       <v-container class="notLogged">
         <h1 class="slogan">ENTRENAR NUNCA FUE TAN FACIL!</h1>
@@ -16,13 +15,12 @@
       </v-container>
     </v-card>
 
-    <UserHome/>
+   <UserHome/>
     </div>
 
 
     <p>DEBUG</p>
     <a href="./createExcercise">Crear Ejercicio </a>
-    <a href="./profile">Perfil </a>
     <a href="./home">User Home </a>
     <a href="./excercise">AddExcercise </a>
     <a href="./warmup">Calentamiento </a>
@@ -33,7 +31,6 @@
     <a href="./routineCore">Run Core. </a>
     <a href="./routineCooldown">Run Cooldown</a>
     <a href="./rate">Rate</a>
-    <a href="./viewRoutine">View Routine</a>
 
   </div>
 </template>
@@ -97,21 +94,16 @@ const backgroundStore = useBackgroundStore()
   justify-content: center;
   background-color: whitesmoke;
   border-radius: 25px;
-  border: 3px solid green;
+  border: 3px solid #4CAF50;
 }
 
 .notLogged {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: flex-start; /* Align content at the top */
-  height: 100%; /* Use full viewport height */
+  justify-content: flex-start; 
+  height: 100%; 
 }
 
-.component-background{
-  background-color: whitesmoke;
-  border-radius: 25px;
-  border: 3px solid green;
-}
 
 </style>

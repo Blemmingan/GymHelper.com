@@ -51,7 +51,6 @@
                 <v-text-field v-model="newBirthdate" label="Cumpleaños" type="date"></v-text-field>
                 <v-text-field v-model="newPhone" label="Telefono"></v-text-field>
                 <v-text-field v-model="newAvatarUrl" label="Avatar"></v-text-field>
-                <v-file-input v-model="newAvatar" label="Avatar" accept="image/*"  prepend-icon="" append-inner-icon="mdi-camera"/>
             </v-form>
         </v-card-actions>
         <v-divider></v-divider>

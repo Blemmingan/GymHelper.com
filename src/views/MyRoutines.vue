@@ -2,7 +2,7 @@
         <h1>MIS RUTINAS</h1>
         <v-divider></v-divider>
             <div v-if="routines.length>0" v-for="routine in routines" :key="routine.id">
-                <GenericRoutineCard :routine="routine" @delete="onDelete"></GenericRoutineCard>
+                <GenericRoutineCard :routine="routine" noDelete="false" @delete="onDelete"></GenericRoutineCard>
             </div>
             <div v-else>
                 <v-card>

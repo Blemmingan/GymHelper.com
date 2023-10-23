@@ -13,7 +13,7 @@
                                   <v-card-actions>
                                     <v-spacer></v-spacer>
                                         <v-btn class="mt-2 bg-secondary text-black" @click="goToView()">Mas información</v-btn>
-                                        <v-btn class="mt-2 bg-accent text-black" @click="deleteRoutine"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
+                                        <v-btn v-if="noDelete" class="mt-2 bg-accent text-black" @click="deleteRoutine"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
                                    </v-card-actions>
                            </v-card-item>
                        </v-col>
@@ -34,7 +34,7 @@ import {defineProps, defineEmits} from 'vue';
 import { useAlertStore } from '@/stores/AlertStore';
 import { useRoutineStore } from '@/stores/RoutineStore';
 
-const {routine} = defineProps(['routine'])
+const {routine, noDelete} = defineProps(['routine', 'noDelete'])
 const emit = defineEmits(['delete'])
 
 const alertStore = useAlertStore()
