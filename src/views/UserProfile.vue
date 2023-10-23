@@ -25,7 +25,7 @@
           <h2><strong>Información del usuario:</strong></h2>
           <h3><strong>Nombre: </strong> {{ user.firstName || "No especificado" }}</h3>
           <h3><strong>Apellido: </strong>{{ user.lastName  || "No especificado"}}</h3>
-          <h3><strong>Género: </strong>{{ user.gender  || "No especificado"}}</h3>
+          <h3><strong>Género: </strong>{{ toSpanish(user.gender)  || "No especificado"}}</h3>
           <h3><strong>Cumpleaños: </strong>{{ getBirthdate().toLocaleDateString('en-GB')  || "No especificado"}}</h3>
           <h3><strong>Telefono: </strong>{{ user.phone  || "No especificado"}}</h3>
         </v-card-text>
@@ -47,9 +47,15 @@
                 <h2>Editar información del usuario</h2>
                 <v-text-field v-model="newFirstName" label="Nombre"></v-text-field>
                 <v-text-field v-model="newLastName" label="Apellido"></v-text-field>
-                <v-text-field v-model="newGender" label="Género"></v-text-field>
+                <p>Genero:</p>
+                <v-radio-group v-model="newGender" row>
+                    <v-radio label="Masculino" value="male"></v-radio>
+                    <v-radio label="Femenino" value="female"></v-radio>
+                    <v-radio label="Otro" value="other"></v-radio>
+                </v-radio-group>
                 <v-text-field v-model="newBirthdate" label="Cumpleaños" type="date"></v-text-field>
                 <v-text-field v-model="newPhone" label="Telefono"></v-text-field>
+                <p>Ingrese la direccion url de su avatar:</p>
                 <v-text-field v-model="newAvatarUrl" label="Avatar"></v-text-field>
             </v-form>
         </v-card-actions>
@@ -91,7 +97,6 @@ const newLastName = ref(user.value.lastName)
 const newGender = ref(user.value.gender)
 const newBirthdate = ref(null)
 const newPhone = ref(user.value.phone)
-const newAvatar = ref(null)
 const newAvatarUrl = ref(null)
 
 const editing = ref(false)
@@ -125,7 +130,7 @@ function endProfileUpdate(){
     newGender.value = user.value.gender
     newBirthdate.value = null
     newPhone.value = user.value.phone
-    newAvatarUrl = null
+    newAvatarUrl.value = user.value.newAvatarUrl
 }
 
 async function updateProfile(){
@@ -187,6 +192,15 @@ async function deleteAccount(){
 
 function toImageUrl(path){
     return new URL(path, import.meta.url).href
+}
+
+function toSpanish(gender){
+    if(gender == "male")
+        return "Masculino"
+    if(gender == "female")
+        return "Femenino"
+    if(gender == "other")
+        return "Otro"
 }
 
 
