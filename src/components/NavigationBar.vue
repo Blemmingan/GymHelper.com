@@ -8,7 +8,7 @@
                 <v-spacer></v-spacer>
                 <v-tab to="/">Home</v-tab>
                 <v-tab to="myExercises">Mis ejercicios</v-tab>
-                <v-tab>Mis rutinas</v-tab>
+                <v-tab to="myRoutines">Mis rutinas</v-tab>
             </v-tabs>
             <v-spacer></v-spacer>
             <div class='right-section' v-if="!userStore.isLoggedIn">
@@ -23,7 +23,7 @@
                                 {{userStore.getCurrentUser().username}}
                             </div> 
                             <v-avatar class="user">
-                                <v-img alt="profile-picture" :src="getProfilePicture()"></v-img> 
+                                <v-img alt="profile-picture" :src="profilePicture"></v-img> 
                             </v-avatar>
                         </v-btn>
                     </template>
@@ -47,16 +47,19 @@
     import { useUserStore } from '@/stores/UserStore'
     import {useRouter} from 'vue-router'
     import { useBackgroundStore } from '@/stores/BackgroundStore';
-    import {ref} from 'vue'
+    import {ref, onMounted} from 'vue'
 
     const userStore = useUserStore()
     const alertStore = useAlertStore()
     const backgroundStore = useBackgroundStore()
     const router = useRouter()
-
-    
-    
     const logoutLoading = ref(false)
+
+    const profilePicture = ref('');
+
+    onMounted(async () => {
+        profilePicture.value = await getProfilePicture();
+    });
     
     async function logout(){
         logoutLoading.value = true 
@@ -75,7 +78,7 @@
     async function getProfilePicture(){
         const user = await userStore.getCurrentUser()
         if (user.avatarUrl){
-           return user.avatarUrl
+            return user.avatarUrl
         }
         return toImageUrl('../../defaultAvatar.jpg')
     }
