@@ -19,7 +19,7 @@
 
           <!-- Text Content -->
           <v-card-text>
-            {{ `${exercise.details}` }}
+            {{ `${exercise.detail}` }}
             {{ `${exercise.type}` }}
           </v-card-text>
 
