@@ -1,11 +1,11 @@
 <template>
-    <v-card elevation="10" class="infoBox">
+    <v-card elevation="10" class="infoBox" width="50%">
         <v-card-actions>
             <v-form>
-                <h2>Editar ejercicio</h2>
-                <v-text-field v-model="newName" label="Nombre">{{ route.params.exercise.name }}</v-text-field>
-                <v-text-field v-model="newDetail" label="Apellido">{{ route.params.exercise.detail }}</v-text-field>
-                <v-text-field v-model="newType" label="Género">{{ route.params.exercise.type }}</v-text-field>
+                <h2 class="title">Editar ejercicio</h2>
+                <v-text-field v-model="newName" label="Nombre"></v-text-field>
+                <v-text-field v-model="newDetail" label="Descripcion"></v-text-field>
+                <v-text-field v-model="newType" label="Tipo"></v-text-field>
             </v-form>
         </v-card-actions>
         <v-divider></v-divider>
@@ -35,12 +35,9 @@ import { Exercise } from '@/api/exercise.js'
 const route = useRoute()
 const exerciseStore = useExerciseStore()
 
-const newName = ref(route.params.exercise.name)
-const newDetail = ref(route.params.exercise.detail)
-const newType = ref(route.params.exercise.type)
-
-const user = ref('')
-
+const newName = ref()
+const newDetail = ref()
+const newType = ref()
 
 function endExerciseUpdate(){
     newName.value = route.params.exercise.name
@@ -53,8 +50,6 @@ async function updateExercise(){
                                                             newDetail.value,
                                                             newType.value,
                                                             ))
-    user.value = await userStore.getCurrentUser()
-    endExerciseUpdate()
 }
 
 </script>
@@ -72,5 +67,8 @@ async function updateExercise(){
         margin-right: auto ;
         
 
+    }
+    .title{
+        text-align: ce;
     }
 </style>

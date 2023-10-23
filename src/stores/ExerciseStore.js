@@ -8,10 +8,10 @@ import { ExerciseVideoApi } from "@/api/exerciseVideo.js"
 export const useExerciseStore = defineStore('exercise', ()=>{
 
     const items = ref([])
-
-    function findIndex(id){
+    const findIndex = computed((id)=>{
         return items.value.findIndex(item => item.id === id)
-    }
+    })
+    
 
     async function add(exercise){
         const result = await ExerciseApi.post(exercise)
