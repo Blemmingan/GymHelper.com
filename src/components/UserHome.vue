@@ -5,7 +5,7 @@
         no-gutters
         >
         <v-col cols="5" >
-        <h1 class="sheet">TUS RUTINAS</h1>
+        <h1 class="sheet">Tus Rutinas</h1>
         <v-sheet class="sheet" v-if="myRoutines.length>0">
               <span v-for="routine in myRoutines" :key="routine.id">
               <GenericRoutineCard :routine="routine" noDelete="true"/>
@@ -23,17 +23,19 @@
         <v-col cols="6" >
           <v-sheet class="sheet">
             <div class="containerEx">
-              <h1>TUS EJERCICIOS</h1>
-              <p v-if="excercises.length > 0">Tienes {{ excercises.length }} ejercicios. El primero es: </p>
+              <h1>Tus Ejercicios</h1>
+              <span v-if="exercises.length > 0" v-for="exercise in exercises">
+                  <v-container >
+                            <v-card class="card-text">
+                              <v-card-title>{{ exercise.name }}</v-card-title>
+                                <v-card-text>
+                                  {{ exercise.detail }}
+                                </v-card-text>
+                            </v-card>
+                          </v-container>
+              </span>
               <p v-else>No tienes ningún ejercicio. Clickea el botón de abajo para crear uno.</p>
-              <v-container v-if="getFirstExc() != null">
-                <v-card class="card-text">
-                  <v-card-title>{{ `${getFirstExc().name}` }}</v-card-title>
-                     <v-card-text>
-                      {{ `${getFirstExc().detail}` }}
-                    </v-card-text>
-                 </v-card>
-               </v-container>
+              
               <v-btn @click="goToMyExc" class="mt-2 bg-secondary text-black">VER TODOS</v-btn>  
             </div>
         </v-sheet>
@@ -54,31 +56,28 @@ import {ref, computed} from 'vue'
 import { useExerciseStore } from '@/stores/ExerciseStore';
 
   const router = useRouter()
-  const routineStore = useRoutineStore()
-  const myRoutines = ref(await getMyRoutines())
- 
-
+  const routineStore = useRoutineStore() 
   const exerciseStore = useExerciseStore()
-  const ExData = ref(await exerciseStore.getAll())
-  const excercises = computed(()=>{
-    return ExData.value.content
-  })
+  const myRoutines = ref(await getMyRoutines())
+  const exercises = ref(await getMyExercises())
 
-  function getFirstExc(){
-    if(excercises.value.length > 0){
-      return excercises.value[0]
-    }
-    else{
-      return null
-    }
-  }
+
+
 
   async function getMyRoutines(){
     const result = await routineStore.getCurrentUserRoutines()
-    if (result.content.length <= 5){
+    if (result.content.length <= 2){
         return result.content
     }
-    return result.content.splice(5)
+    return result.content.slice(0,5)
+  }
+
+  async function getMyExercises(){
+    const result = await exerciseStore.getAll()
+    if (result.content.length <=7){
+      return result.content
+    }  
+    return result.content.slice(0,7)
   }
 
 
@@ -98,7 +97,7 @@ import { useExerciseStore } from '@/stores/ExerciseStore';
   }
   .sheet{
     text-align: center;
-
+    background-color: whitesmoke;
   }
   .containerEx{
     background-color: whitesmoke;
@@ -107,7 +106,7 @@ import { useExerciseStore } from '@/stores/ExerciseStore';
   .dataBox{
     margin-top: 25px;
     background-color: whitesmoke;
-    border: 3px solid green;
+    border: 3px solid #4CAF50;
     border-radius: 25px;
   }
   .text{
@@ -115,7 +114,7 @@ import { useExerciseStore } from '@/stores/ExerciseStore';
   }
 
   .card-text{
-    border: 3px solid green;
+    border: 3px solid #4CAF50;
     border-radius: 25px;
     background-color: whitesmoke;
   }
