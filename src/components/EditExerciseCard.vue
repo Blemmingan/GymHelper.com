@@ -81,7 +81,7 @@ async function saveExercise(){
     loading.value = true
     try{
         await exerciseStore.modify(id, new Exercise(newExcerciseName.value, newExcerciseDescription.value, newExcerciseType.value)) 
-        router.push('/myExercises')
+        router.push('/myExercises/0')
     } catch (e){
         if (e.code===2){
             alertStore.sendNotification('Ya creó un ejercicio con ese nombre previamente. Intente con otro')
