@@ -7,8 +7,8 @@
       </v-btn>
     </div>
 
-    <v-row v-if="items.length != 0">
-      <v-col  v-for="exercise in items" :key="exercise.id" cols="12" sm="6" md="4">
+    <v-row v-if="excercises.length != 0">
+      <v-col  v-for="exercise in excercises" :key="exercise.id" cols="12" sm="6" md="4">
         <v-card>
           <!-- Image -->
           
@@ -38,16 +38,16 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue'
+import { ref, onBeforeMount, computed} from 'vue'
 import { useExerciseStore } from '@/stores/ExerciseStore'
 import { useRouter } from 'vue-router'
 
 const router = useRouter()
 const exerciseStore = useExerciseStore()
-var items = ref()
-exerciseStore.getAll()
-items = exerciseStore.items
-console.log(items)
+const ExData = ref(await exerciseStore.getAll())
+const excercises = computed(()=>{
+    return ExData.value.content
+})
 
 function getImageUrl(exercise){
     return exerciseStore.getImage(exercise.id).url
