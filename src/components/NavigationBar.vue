@@ -7,7 +7,8 @@
             <v-tabs v-if="userStore.isLoggedIn">
                 <v-spacer></v-spacer>
                 <v-tab to="/">Inicio</v-tab>
-                <v-tab to="myExercises">Mis ejercicios</v-tab>
+                <v-tab to="/explore" @click=notImplementedError()>Explorar rutinas</v-tab>
+                <v-tab to="/create" @click="notImplementedError()">Crear</v-tab>
 
             </v-tabs>
             <v-spacer></v-spacer>
@@ -20,7 +21,7 @@
                     <template v-slot:activator="{props}">
                         <v-btn v-bind="props">
                            <div class="user">
-                                {{userStore.getCurrentUser().username}}
+                                {{user.username}}
                             </div> 
                             <v-avatar class="user">
                                 <v-img alt="profile-picture" :src="profilePicture"></v-img> 
@@ -29,7 +30,7 @@
                     </template>
                     <v-list>
                         <v-list-item @click="router.push('profile')">Mi perfil</v-list-item>
-                        <v-list-item @click="router.push('myExercises')">Mis ejercicios</v-list-item>
+                        <v-list-item @click="router.push({name:'myExercises', params: {page: 0}})">Mis ejercicios</v-list-item>
                         <v-list-item @click="router.push({name: 'myRoutines', params: {page : 0}})">Mis rutinas</v-list-item>
                         <v-divider ></v-divider>  
                         <v-list-item @click="logout()" :disabled="logoutLoading" :loading="logoutLoading">Cerrar Sesión</v-list-item>     
@@ -55,6 +56,7 @@
     const router = useRouter()
     const logoutLoading = ref(false)
 
+    const user= ref(await userStore.getCurrentUser())
     const profilePicture = ref('');
 
     onMounted(async () => {
@@ -85,6 +87,10 @@
 
     function toImageUrl(path){
     return new URL(path, import.meta.url).href
+    }
+
+    function notImplementedError(){
+        alertStore.sendNotification('No implementado!')
     }
 
 

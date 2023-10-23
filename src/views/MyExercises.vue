@@ -33,27 +33,48 @@
             <h3>Todavia no tienes ejercicios propios. Cuando los crees, podras verlos aquí</h3>
         </v-card-text>
     </div>
+      <v-card-actions class="d-flex justify-center text-center">
+      <v-btn v-if="page>0" @click="lastPage()" class="mt-2 bg-secondary text-black">
+            Anterior 
+        </v-btn>
+        <v-btn v-if="!exercisesData.isLastPage" @click="nextPage()" class="mt-2 bg-secondary text-black">
+            Siguiente 
+        </v-btn>
+    </v-card-actions>
   </div>
   </template>
   
 
   <script setup>
-import { ref, computed} from 'vue'
+import { ref, computed, defineProps} from 'vue'
 import { useExerciseStore } from '@/stores/ExerciseStore'
 import { useRouter } from 'vue-router'
 import { Exercise } from '@/api/exercise.js'
 import GenericExerciseCard from '@/components/GenericExerciseCard.vue'
 import { useAlertStore } from '@/stores/AlertStore'
 
+const {page} = defineProps(['page'])
 
 const alertStore = useAlertStore()
 
 const router = useRouter()
 const exerciseStore = useExerciseStore()
 
-const exercises = ref(await getExercises())
+const exercisesData = ref(await exerciseStore.getAll(`?page=${page}`))
+const exercises = computed(()=> {return exercisesData.value.content})
 const reload = ref(false)
+const key = ref(parseInt(page))
 
+function nextPage(){
+
+    router.push({name: 'myExercises', params: {page : key.value+1}})
+    
+}
+
+function lastPage(){
+    router.push({name: 'myExercises', params: {page : key.value-1}})
+    
+}
 
 const onDelete = (id) =>{
   const index = exercises.value.findIndex(e => e.id==id)
@@ -62,15 +83,12 @@ const onDelete = (id) =>{
   }
 }
 
-async function getExercises(){
-    const result = await exerciseStore.getAll()
-    return result.content
-}
+
 
 
 
 function addExercise(){
-    router.push("./createExcercise")
+    router.push("/createExcercise")
 }
 
 </script>

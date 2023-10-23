@@ -74,10 +74,24 @@ const routes = [
 
 
   {
-    path: '/myExercises',
+    path: '/myExercises/:page',
     name: 'myExercises',
     component: MyExercises,
-    meta: {requiresAuth: true}
+    meta: {requiresAuth: true},
+    props: true,
+    beforeEnter: async (to, from) => {
+      const exerciseStore = useExerciseStore()
+      try {
+        console.log(to.params.page)
+        const query = `?page=${to.params.page}`
+        const exist = await exerciseStore.getAll(query)
+        if (exist.content.length==0 && exist.page>0){
+          throw error
+        }
+      } catch(e){
+        return {name : 'NotFound'}
+      }
+    }
   },
   {
     path: '/myRoutines/:page',

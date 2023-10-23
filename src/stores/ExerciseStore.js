@@ -21,8 +21,8 @@ export const useExerciseStore = defineStore('exercise', ()=>{
 
     }
 
-    async function getAll(page = '0', pagesize = '10', orderBy = 'id', direction = 'asc', search){
-        return await ExerciseApi.getAll()
+    async function getAll(page = '?page=0'){
+        return await ExerciseApi.getAll(page)
     }
 
     async function get(exerciseId){

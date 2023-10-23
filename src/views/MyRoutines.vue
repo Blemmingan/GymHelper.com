@@ -58,13 +58,12 @@ function addRoutine(){
 }
 
 function nextPage(){
-    router.push({name: 'myRoutines', params: {page : key.value+1}})
-    key.value = key.value+1
+    router.push({name: 'myRoutines', params: {page : key.value-1}})
+    
 }
 
 function lastPage(){
-    router.push({name: 'myRoutines', params: {page : key.value-1}})
-    key.value = key.value-1
+    router.push({name: 'myRoutines', params: {page : key.value+1}})
 }
 </script>
 

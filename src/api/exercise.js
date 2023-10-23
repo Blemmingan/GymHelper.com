@@ -4,11 +4,15 @@ export {ExerciseApi, Exercise}
 
 class ExerciseApi{
     static getUrl(slug, params){
-        return `${Api.baseUrl}/exercises${params? '':'/'}${slug ? `${slug}`:''}`
+        if (params){
+            return `${Api.baseUrl}/exercises${slug}`
+        } else{
+            return `${Api.baseUrl}/exercises${slug ? `/${slug}`:''}`
+        }
     }
 
-    static async getAll(params){
-        return await Api.get(ExerciseApi.getUrl(params, true), true)
+    static async getAll(page){
+        return await Api.get(ExerciseApi.getUrl(page, true), true)
     }
 
     static async post(exercise){

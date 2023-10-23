@@ -82,7 +82,7 @@ async function saveExercise(){
     loading.value = true
     try{
         await exerciseStore.add(new Exercise(excerciseName.value, excerciseDescription.value, excerciseType.value)) 
-        router.go(-1)
+        router.push({name: 'myExercises', params: {page : 0}})
     } catch (e){
         if (e.code===2){
             alertStore.sendNotification('Ya creó un ejercicio con ese nombre previamente. Intente con otro')
@@ -96,7 +96,7 @@ async function saveExercise(){
 }
 
 function cancel(){
-    router.go(-1)
+    router.push({name: 'myExercises', params: {page : 0}})
 }
 
 </script>

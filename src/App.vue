@@ -2,7 +2,7 @@
   <div class="global" :style="`background-image: url(${background});`">
     <v-app style="background: rgba(0,0,0,0);">
       <suspense>
-        <NavigationBar/>
+        <NavigationBar :key="isLoggedIn"/>
       </suspense>
       <suspense>
         <v-container class="main" fluid>
@@ -38,6 +38,8 @@ import { RouterView, useRoute} from 'vue-router'
 import {useBackgroundStore} from '@/stores/BackgroundStore'
 import {useAlertStore} from '@/stores/AlertStore'
 
+const userStore = useUserStore()
+
 const backgroundStore = useBackgroundStore()
 const route = useRoute()
   
@@ -53,6 +55,10 @@ const notification = computed (() => {
     return result
   }
   return {show: false, timeout: 0, message: 'nothing to show'}
+})
+
+const isLoggedIn = computed (()=>{
+  return userStore.isLoggedIn
 })
 
 

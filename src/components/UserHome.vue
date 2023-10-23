@@ -87,7 +87,7 @@ import { useExerciseStore } from '@/stores/ExerciseStore';
         router.push('/warmup')
     }
     function goToMyExc(){
-      router.push('./MyExercises')
+      router.push({name:'myExercises', params: {page: 0}})
     }
 </script>
 
