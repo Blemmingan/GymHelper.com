@@ -15,7 +15,7 @@
         <h3 class="text">Aún no has creado ninguna rutina. Cuando las crees, apareceran aqui</h3>
         </v-sheet>
           <span class="d-flex justify-center text-center">
-            <v-btn class="mt-2 bg-secondary text-black" @click="router.push('/myRoutines')">Ver Todas</v-btn> 
+            <v-btn class="mt-2 bg-secondary text-black" @click="router.push({name: 'myRoutines', params: {page: 0}})">Ver Todas</v-btn> 
           </span>
         </v-col>
         <v-col>

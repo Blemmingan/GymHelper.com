@@ -14,15 +14,8 @@ import HomePage from '../views/HomePage.vue'
 import NotFound from '../views/NotFound.vue'
 import ExcerciseCard from '@/components/CreateExcerciseCard.vue'
 import UserHome from '@/components/UserHome.vue'
-import RoutineWarmup from '@/components/RoutineWarmup.vue'
-import AddExcercise from '@/components/AddExcerciseToRoutine.vue'
-import RoutineCore from '@/components/RoutineCore.vue'
-import RoutineCooldown from '@/components/RoutineCooldown.vue'
-import NameRoutineField from '@/components/NameRoutineField.vue'
-import DoingWarmup from '@/components/DoingWarmup.vue'
-import DoingCoreCycles from '@/components/DoingCoreCycles.vue'
-import DoingCooldownCycle from '@/components/DoingCooldownCycle.vue'
-import RateRoutine from '@/components/RateRoutine.vue'
+
+
 import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
 import EditExerciseCard from '@/components/EditExerciseCard.vue'
 
@@ -79,59 +72,6 @@ const routes = [
     meta: {requiresAuth: true}
   },
 
-  {
-    path: '/warmup',
-    component: RoutineWarmup,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/core',
-    component: RoutineCore,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/cooldown',
-    component: RoutineCooldown,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/excercise',
-    component: AddExcercise,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/nameRoutine',
-    component: NameRoutineField,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/runRoutineWarmup',
-    component: DoingWarmup,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/routineCore',
-    component: DoingCoreCycles,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/routineCooldown',
-    component: DoingCooldownCycle,
-    meta: {requiresAuth: true}
-  },
-
-  {
-    path: '/rate',
-    component: RateRoutine,
-    meta: {requiresAuth: true}
-  },
 
   {
     path: '/myExercises',
@@ -140,10 +80,24 @@ const routes = [
     meta: {requiresAuth: true}
   },
   {
-    path: '/myRoutines',
+    path: '/myRoutines/:page',
     name: 'myRoutines',
     component: MyRoutines,
-    meta: {requiresAuth: true}
+    meta: {requiresAuth: true},
+    props: true,
+    beforeEnter: async (to, from) => {
+      const routineStore = useRoutineStore()
+      try {
+      const query = `?page=${to.params.page}`
+      const exist = await routineStore.getCurrentUserRoutines(query)
+      if (exist.content.length==0 && exist.page>0){
+        throw error
+      }
+      } catch (e){       
+        return {name : 'NotFound'}
+      }
+    }
+
   },
   {
     path: '/routine/:id',

@@ -1,4 +1,5 @@
 <template>
+    <div :key="key">
         <div class="title-container">
         <h1 class="title">Mis Rutinas</h1>
         <v-btn @click="addRoutine()" color="primary">
@@ -14,6 +15,15 @@
                         <h3>Todavia no tienes rutinas propias. Cuando las crees, podras verlas aquí</h3>
                 </v-card-text>
             </div>
+        <v-card-actions class="d-flex justify-center text-center">
+        <v-btn v-if="page>0" @click="lastPage()" class="mt-2 bg-secondary text-black">
+            Anterior 
+        </v-btn>
+        <v-btn v-if="!routinesData.isLastPage" @click="nextPage()" class="mt-2 bg-secondary text-black">
+            Siguiente 
+        </v-btn>
+        </v-card-actions>
+    </div>
 </template>
 
 <script setup>
@@ -23,11 +33,14 @@ import { useRoutineStore } from '@/stores/RoutineStore'
 import { useAlertStore } from '@/stores/AlertStore';
 import GenericRoutineCard from '@/components/GenericRoutineCard.vue';
 
+const {page} = defineProps(['page'])
+
 const router = useRouter()
 const routineStore = useRoutineStore()
 const alertStore = useAlertStore()
+const key = ref(parseInt(page))
 
-const routinesData = ref(await routineStore.getCurrentUserRoutines())
+const routinesData = ref(await routineStore.getCurrentUserRoutines(`?page=${page}`))
 
 const routines = computed(()=>{
     return routinesData.value.content
@@ -44,8 +57,15 @@ function addRoutine(){
     alertStore.sendNotification("No implementado!")
 }
 
+function nextPage(){
+    router.push({name: 'myRoutines', params: {page : key.value+1}})
+    key.value = key.value+1
+}
 
-
+function lastPage(){
+    router.push({name: 'myRoutines', params: {page : key.value-1}})
+    key.value = key.value-1
+}
 </script>
 
 <style scoped>

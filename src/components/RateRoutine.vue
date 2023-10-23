@@ -31,7 +31,7 @@
         text-align: center;
         align-items: center;
         width: 30%;
-        border: 3px solid green;
+        border: 3px solid #4CAF50;
         background-color: whitesmoke;
         margin-left: 35%;
         padding: 1%;

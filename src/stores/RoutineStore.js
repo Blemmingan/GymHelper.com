@@ -13,8 +13,8 @@ export const useRoutineStore = defineStore('routine', ()=>{
         return await RoutineApi.getAll()
     }
 
-    async function getCurrentUserRoutines(){
-        return await UserApi.getRoutines()
+    async function getCurrentUserRoutines(page = '?page=0'){
+        return await UserApi.getRoutines(page)
     }
 
     async function getUserRoutines(userId){

@@ -39,8 +39,8 @@ class UserApi {
         return await Api.delete(UserApi.getUrl('current'), true)
     }
 
-    static async getRoutines(){
-        return await Api.get(UserApi.getUrl('current/routines'), true)
+    static async getRoutines(page){
+        return await Api.get(UserApi.getUrl(`current/routines${page}`), true)
     }
 
     static async getUserRoutines(userId){

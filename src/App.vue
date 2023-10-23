@@ -6,7 +6,7 @@
       </suspense>
       <suspense>
         <v-container class="main" fluid>
-          <RouterView/>
+          <RouterView :key="route.fullPath"/>
         </v-container>
       </suspense>
       <v-snackbar 
@@ -34,12 +34,12 @@
 import {computed, onBeforeMount} from 'vue'
 import { useUserStore } from '@/stores/UserStore'
 import NavigationBar from './components/NavigationBar.vue'
-import { RouterView} from 'vue-router'
+import { RouterView, useRoute} from 'vue-router'
 import {useBackgroundStore} from '@/stores/BackgroundStore'
 import {useAlertStore} from '@/stores/AlertStore'
 
 const backgroundStore = useBackgroundStore()
-
+const route = useRoute()
   
 const alertStore = useAlertStore()
 
