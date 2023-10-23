@@ -29,7 +29,7 @@
                         </v-btn>
                     </template>
                     <v-list>
-                        <v-list-item @click="router.push('profile')">Mi perfil</v-list-item>
+                        <v-list-item @click="router.push('/profile')">Mi perfil</v-list-item>
                         <v-list-item @click="router.push({name:'myExercises', params: {page: 0}})">Mis ejercicios</v-list-item>
                         <v-list-item @click="router.push({name: 'myRoutines', params: {page : 0}})">Mis rutinas</v-list-item>
                         <v-divider ></v-divider>  
