@@ -1,7 +1,6 @@
 <template>
     <v-main>
         <v-card elevation="10" class="formBox" height="40%">
-            <v-btn @click="router.push('/validate')" icon="mdi-arrow-left" class="ma-2 d-flex justify-left" color="secondary"/>
             <h1 class="mb-2">Reenviar código</h1>
             <p>Ingrese el correo con el que se registró. Le reenviaremos el código de verificación.</p>
             <v-divider></v-divider>
