@@ -46,7 +46,28 @@
                 Volver
             </v-btn>
         <v-col>
-            <v-btn v-if="true" class="mt-2 bg-accent text-black" @click="deleteRoutine()" :disabled="disable" :loading="disable"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
+            <v-btn  @click="dialogue = true" class="mt-2 bg-accent text-black">
+                    <v-icon>mdi-delete</v-icon>
+                    Borrar</v-btn>
+        <v-dialog elevation="20" v-model="dialogue" persistent>
+          <v-card title="¿Seguro?" class="infoBox">
+            <v-card-text>
+              Esta acción no se puede revertir!
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn class="mt-2 bg-secondary text-black"
+                text="Cancelar"
+                @click="dialogue = false"
+              ></v-btn>
+              <v-btn class="mt-2 bg-accent text-black"
+                text="Borrar"
+                @click="deleteRoutine()"
+              ></v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+            
         </v-col>
     </v-card-actions>
     </v-card>
@@ -69,6 +90,8 @@ const router = useRouter()
 const routineStore = useRoutineStore()
 const CategoryStore = useCategoryStore()
 const userStore=useUserStore()
+
+const dialogue = ref(false)
 
 const alertStore = useAlertStore()
 
@@ -116,6 +139,16 @@ async function deleteRoutine(){
     }
     .rowCont{
         margin-bottom: 1%;
+    }
+
+    .infoBox{
+        border: 3px solid #4CAF50;
+        background-color: whitesmoke;
+        
+        
+        display: block;
+        margin-left: auto;
+        margin-right: auto ;
     }
 
 

@@ -13,7 +13,29 @@
                                   <v-card-actions>
                                     <v-spacer></v-spacer>
                                         <v-btn class="mt-2 bg-secondary text-black" @click="goToView()">Mas información</v-btn>
-                                        <v-btn v-if="!noDelete" class="mt-2 bg-accent text-black" @click="deleteRoutine"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
+                                        
+                <v-btn  v-if="!noDelete" @click="dialogue = true" class="mt-2 bg-accent text-black">
+                    <v-icon>mdi-delete</v-icon>
+                    Borrar</v-btn>
+        <v-dialog elevation="20" v-model="dialogue" persistent>
+          <v-card title="¿Seguro?" class="infoBox">
+            <v-card-text>
+              Esta acción no se puede revertir!
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn class="mt-2 bg-secondary text-black"
+                text="Cancelar"
+                @click="dialogue = false"
+              ></v-btn>
+              <v-btn class="mt-2 bg-accent text-black"
+                text="Borrar"
+                @click="deleteRoutine()"
+              ></v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
+                              
                                    </v-card-actions>
                            </v-card-item>
                        </v-col>
@@ -30,7 +52,7 @@
 
 <script setup>
 import { useRouter } from 'vue-router';
-import {defineProps, defineEmits} from 'vue';
+import {defineProps, ref, defineEmits} from 'vue';
 import { useAlertStore } from '@/stores/AlertStore';
 import { useRoutineStore } from '@/stores/RoutineStore';
 
@@ -40,6 +62,8 @@ const emit = defineEmits(['delete'])
 const alertStore = useAlertStore()
 const routineStore = useRoutineStore()
 const router = useRouter()
+
+const dialogue = ref(false)
 
 
 async function goToView(){
@@ -81,5 +105,15 @@ async function deleteRoutine(){
         margin: 0%;
         padding: 0%;
         border: 6px solid black;
+    }
+
+    .infoBox{
+        border: 3px solid #4CAF50;
+        background-color: whitesmoke;
+        
+        
+        display: block;
+        margin-left: auto;
+        margin-right: auto ;
     }
 </style>

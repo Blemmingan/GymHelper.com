@@ -12,7 +12,27 @@
 
     <v-card-actions >
         <v-btn class="mt-2 bg-secondary text-black" @click="goToEdit()"><v-icon>mdi-pencil</v-icon>Editar</v-btn>
-        <v-btn class="mt-2 bg-accent text-black" @click="deleteExercise()"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
+        <v-btn  @click="dialogue = true" class="mt-2 bg-accent text-black">
+                    <v-icon>mdi-delete</v-icon>
+                    Borrar</v-btn>
+        <v-dialog elevation="20" v-model="dialogue" persistent>
+          <v-card title="¿Seguro?" class="infoBox">
+            <v-card-text>
+              Esta acción no se puede revertir!
+            </v-card-text>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn class="mt-2 bg-secondary text-black"
+                text="Cancelar"
+                @click="dialogue = false"
+              ></v-btn>
+              <v-btn class="mt-2 bg-accent text-black"
+                text="Borrar"
+                @click="deleteExercise()"
+              ></v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
     </v-card-actions>
 </div>
 
@@ -21,7 +41,7 @@
 <script setup>
 import { useAlertStore } from '@/stores/AlertStore';
 import { useExerciseStore } from '@/stores/ExerciseStore';
-import {defineProps, defineEmits} from 'vue'
+import {defineProps, ref, defineEmits} from 'vue'
 import { useRouter } from 'vue-router';
 
 
@@ -32,6 +52,8 @@ const emit = defineEmits(['delete'])
 const alertStore = useAlertStore()
 const exerciseStore = useExerciseStore()
 const router = useRouter()
+
+const dialogue = ref(false)
 
 async function deleteExercise(){
     try{
@@ -66,5 +88,16 @@ function toSpanish(type){
         min-height: 90px;
     }
 
+
+
+    .infoBox{
+        border: 3px solid #4CAF50;
+        background-color: whitesmoke;
+        
+        
+        display: block;
+        margin-left: auto;
+        margin-right: auto ;
+    }
 
 </style>
