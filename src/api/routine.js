@@ -3,12 +3,16 @@ import { Api } from "./api"
 export {RoutineApi, Routine}
 
 class RoutineApi{
-    static getUrl(slug){
+    static getUrl(slug, params){
+        if ( params){
+            return `${Api.baseUrl}/routines${slug}`
+        } else {
         return `${Api.baseUrl}/routines${slug ? `/${slug}`:''}`
+        }
     }
 
-    static async getAll(){
-        return await Api.get(RoutineApi.getUrl(), false)
+    static async getAll(slug){
+        return await Api.get(RoutineApi.getUrl(slug, true), false)
     }
 
     static async post(routine){

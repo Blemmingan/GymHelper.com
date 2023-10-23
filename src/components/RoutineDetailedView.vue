@@ -46,7 +46,7 @@
                 Volver
             </v-btn>
         <v-col>
-            <v-btn class="mt-2 bg-accent text-black" @click="deleteRoutine()" :disabled="disable" :loading="disable"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
+            <v-btn v-if="true" class="mt-2 bg-accent text-black" @click="deleteRoutine()" :disabled="disable" :loading="disable"><v-icon>mdi-delete</v-icon>Borrar</v-btn>
         </v-col>
     </v-card-actions>
     </v-card>
@@ -61,17 +61,19 @@ import { useRoutineStore } from '@/stores/RoutineStore';
 import { useAlertStore } from '@/stores/AlertStore';
 import { useCategoryStore } from '@/stores/CategoryStore';
 import { RoutineCycle } from '@/api/routineCycle';
+import { useUserStore } from '@/stores/UserStore';
 
 const {id} = defineProps(['id'])
 
 const router = useRouter()
 const routineStore = useRoutineStore()
 const CategoryStore = useCategoryStore()
+const userStore=useUserStore()
 
 const alertStore = useAlertStore()
 
 const routine = ref(await getRoutine())
-const category = ref(await CategoryStore.get( routine.value.category.id))
+
 const cycles = ref(await getCycles())
 
 const disable = ref(false)
@@ -86,7 +88,7 @@ async function getRoutine(){
         const index = result.content.findIndex((e)=> e.id==id)
         return result.content[index]
 }
-
+const category = ref(await CategoryStore.get( routine.value.category.id))
 
 function back(){
     router.go(-1);

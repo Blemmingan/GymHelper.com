@@ -1,5 +1,5 @@
 <template>
-<div>
+<div :key="userStore.isLoggedIn">
     <v-app-bar color="primary" app>
             <v-app-bar-title class="logo" @click="router.push('/')">
                 <v-icon>mdi-weight-lifter</v-icon>GymHelper.com
@@ -7,7 +7,7 @@
             <v-tabs v-if="userStore.isLoggedIn">
                 <v-spacer></v-spacer>
                 <v-tab to="/">Inicio</v-tab>
-                <v-tab to="/explore" @click=notImplementedError()>Explorar rutinas</v-tab>
+                <v-tab to="/explore/0">Explorar rutinas</v-tab>
                 <v-tab to="/create" @click="notImplementedError()">Crear</v-tab>
 
             </v-tabs>
@@ -48,7 +48,7 @@
     import { useUserStore } from '@/stores/UserStore'
     import {useRouter} from 'vue-router'
     import { useBackgroundStore } from '@/stores/BackgroundStore';
-    import {ref, onMounted} from 'vue'
+    import {ref, onMounted, onUpdated} from 'vue'
 
     const userStore = useUserStore()
     const alertStore = useAlertStore()
@@ -56,11 +56,32 @@
     const router = useRouter()
     const logoutLoading = ref(false)
 
-    const user= ref(await userStore.getCurrentUser())
+    const user= ref(await getUser())
     const profilePicture = ref('');
 
+    async function getUser(){
+        try{
+        const result = await userStore.getCurrentUser()
+        if (result.code){
+            throw result
+        }
+        return result
+        } catch(e){
+            return {username: 'usuario', avatarUrl: toImageUrl('../../defaultAvatar.jpg')}
+        }
+
+    }
+
+
+
+
     onMounted(async () => {
+        if (userStore.isLoggedIn){
+        user.value = await getUser()
         profilePicture.value = await getProfilePicture();
+        } else {
+            user.value = {username: 'usuario', avatarUrl: toImageUrl('../../defaultAvatar.jpg')}
+        }
     });
     
     async function logout(){
@@ -78,9 +99,8 @@
     }
 
     async function getProfilePicture(){
-        const user = await userStore.getCurrentUser()
-        if (user.avatarUrl){
-            return user.avatarUrl
+        if (user.value.avatarUrl){
+            return user.value.avatarUrl
         }
         return toImageUrl('../../defaultAvatar.jpg')
     }

@@ -15,6 +15,7 @@ import NotFound from '../views/NotFound.vue'
 import ExcerciseCard from '@/components/CreateExcerciseCard.vue'
 import UserHome from '@/components/UserHome.vue'
 
+import CommmunityRoutines from '@/views/CommunityRoutines.vue'
 
 import RoutineDetailedView from '@/components/RoutineDetailedView.vue'
 import EditExerciseCard from '@/components/EditExerciseCard.vue'
@@ -146,6 +147,25 @@ const routes = [
     }
   },
 
+  {
+    path: '/explore/:page',
+    name: 'explore',
+    component: CommmunityRoutines,
+    props: true, 
+    meta: {requiresAuth: true},
+    beforeEnter: async (to, from) =>{
+      const routineStore = useRoutineStore()
+      try{
+        const query = `?page=${to.params.page}`
+        const exist  = await routineStore.getAll(query)
+        if (exist.content.length==0 && exist.page>0){
+          throw error
+        }
+      } catch (e){
+        return {name: 'NotFound'}
+      }
+    }
+  },
   {
     path: '/:pathMatch(.*)*',
     name: 'NotFound',

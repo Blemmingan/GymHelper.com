@@ -9,8 +9,8 @@ import { ReviewApi } from "@/api/review.js"
 
 export const useRoutineStore = defineStore('routine', ()=>{
 
-    async function getAll(){
-        return await RoutineApi.getAll()
+    async function getAll(page = '?page=0'){
+        return await RoutineApi.getAll(page)
     }
 
     async function getCurrentUserRoutines(page = '?page=0'){
