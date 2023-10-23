@@ -7,8 +7,9 @@
       </v-btn>
     </div>
 
-    <v-row v-if="items.length != 0">
-      <v-col  v-for="exercise in items" :key="exercise.id" cols="12" sm="6" md="4">
+    <v-row v-if="excercises.length != 0">
+      <v-container v-if="!editing">
+        <v-col  v-for="exercise in excercises" :key="exercise.id" cols="12" sm="6" md="4">
         <v-card>
           <!-- Image -->
           
@@ -19,7 +20,7 @@
 
           <!-- Text Content -->
           <v-card-text>
-            {{ `${exercise.details}` }}
+            {{ `${exercise.detail}` }}
             {{ `${exercise.type}` }}
           </v-card-text>
 
@@ -30,7 +31,35 @@
           </v-card-actions>
         </v-card>
       </v-col>
+      </v-container>
+      <v-container v-else>
+        <v-card elevation="10" class="infoBox" width="50%">
+        <v-card-actions>
+            <v-form>
+                <h2 class="title">Editar ejercicio</h2>
+                <v-text-field v-model="newName" label="Nombre"></v-text-field>
+                <v-text-field v-model="newDetail" label="Descripcion"></v-text-field>
+                <v-text-field v-model="newType" label="Tipo"></v-text-field>
+            </v-form>
+        </v-card-actions>
+        <v-divider></v-divider>
+        <v-card-actions>
+            <v-row class="d-flex justify-center text-center">
+                <v-btn class="mt-2 bg-secondary text-black" @click="endExerciseUpdate()">
+                    Cancelar
+                </v-btn>
+                <v-btn class="mt-2 bg-secondary text-black" @click="updateExercise()">
+                    Guardar cambios
+                </v-btn>
+            </v-row>
+        </v-card-actions>
+    </v-card>
+      </v-container>
     </v-row>
+    
+      
+
+    
     <v-row v-else class="error-msg">
       <p>Parece que no tienes ningun ejercicio. Clickea el + para crear uno.</p>
     </v-row> 
@@ -38,17 +67,26 @@
 </template>
 
 <script setup>
-import { ref, onBeforeMount } from 'vue'
+import { ref, onBeforeMount, computed} from 'vue'
 import { useExerciseStore } from '@/stores/ExerciseStore'
 import { useRouter } from 'vue-router'
+import { Exercise } from '@/api/exercise.js'
+
 
 const router = useRouter()
 const exerciseStore = useExerciseStore()
-var items = ref()
-exerciseStore.getAll()
-items = exerciseStore.items
-console.log(items)
-
+const ExData = ref(await exerciseStore.getAll())
+const excercises = computed(()=>{
+    return ExData.value.content
+})
+var editing = ref(false)
+const newName = ref()
+const newDetail = ref()
+const newType = ref()
+var chosenId = ref(0)
+const oldName = ref()
+const oldDetail = ref()
+const oldType = ref()
 function getImageUrl(exercise){
     return exerciseStore.getImage(exercise.id).url
 }
@@ -64,8 +102,24 @@ function deleteExercise(exercise){
 }
 
 function editExercise(exercise){
-    router.push({ name: 'edit', params: { exercise } })
+   // router.push({ name: 'editExercise', params: { exercise } })
+   editing.value = !editing.value
+    chosenId = exercise.id
 }
+
+function endExerciseUpdate(){
+    newName.value = oldName.value
+    newDetail.value = oldDetail.value
+    newType.value = oldType.value
+}
+
+async function updateExercise(){
+    await exerciseStore.modify(chosenId, new Exercise( newName.value,
+                                                            newDetail.value,
+                                                            newType.value,
+                                                            ))
+}
+
 
 // onBeforeMount(() => {
 //     items = exerciseStore.getAll()
