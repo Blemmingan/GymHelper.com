@@ -67,13 +67,15 @@ const radioRules = [
 
 const ExNameRules = [
     value => Boolean(value) || 'Debe ingresar un nombre de ejercicio',
-    value => value.length <= 50 || 'El nombre del ejercicio no puede superar los 100 carácteres'
+    value => value.length <= 50 || 'El nombre del ejercicio no puede superar los 100 carácteres',
+    value => value.length >= 3 || 'El nombre debe superar los 2 caracteres.'
 ]   
 
 const ExDescriptionRules = [
         value => Boolean(value) || 'Debe ingresar una descripcion.',
         value => value.length <= 200 || 'La descripción no puede superar los 200 carácteres',
-]
+        value => value.length >= 3 || 'La descripcion debe superar los 2 caracteres.']
+
 
 
 async function saveExercise(){
