@@ -1,9 +1,10 @@
 <template>
-   <v-container class="container">
+   <v-container class="dataBox">
       <v-row
         align="start"
-        no-gutters>
-        <v-col cols="5">
+        no-gutters
+        >
+        <v-col cols="5" >
         <h1 class="sheet">TUS RUTINAS</h1>
         <v-sheet class="sheet" v-if="myRoutines.length>0">
               <span v-for="routine in myRoutines" :key="routine.id">
@@ -11,7 +12,7 @@
               </span>
         </v-sheet>
         <v-sheet v-else class="d-flex flex-column justify-center text-center">
-        <h3>Aún no has creado ninguna rutina. Cuando las crees, apareceran aqui</h3>
+        <h3 class="text">Aún no has creado ninguna rutina. Cuando las crees, apareceran aqui</h3>
         </v-sheet>
           <span class="d-flex justify-center text-center">
             <v-btn class="mt-2 bg-secondary text-black" @click="router.push('/myRoutines')">Ver Todas</v-btn> 
@@ -28,10 +29,10 @@
         </v-col>
         <v-col>
         </v-col>
-        <v-col cols="6">
-            <v-sheet class="sheet">
-            <h1>RUTINAS POPULARES</h1>
-            <img src="/weightlifter.png" alt="logo">
+        <v-col cols="6" >
+            <v-sheet class="otherCol">
+            <h1 >RUTINAS POPULARES</h1>
+            <img src="/weightlifter.png" alt="logo" class="otherCol">
             </v-sheet>
         </v-col>
       </v-row>
@@ -66,9 +67,9 @@ import {ref} from 'vue'
 </script>
 
 <style scoped>
-  .container{
-    margin-top: 25px;
-
+  .otherCol{
+    background-color: whitesmoke;
+    text-align: center;
   }
   .sheet{
     text-align: center;
@@ -76,5 +77,16 @@ import {ref} from 'vue'
   }
   .containerEx{
     margin-top: 10%;
+    background-color: whitesmoke;
+  }
+
+  .dataBox{
+    margin-top: 25px;
+    background-color: whitesmoke;
+    border: 3px solid green;
+    border-radius: 25px;
+  }
+  .text{
+    background-color: whitesmoke;
   }
 </style>
